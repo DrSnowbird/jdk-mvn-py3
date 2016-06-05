@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Java 8 (1.8.0_92) JRE server + Maven 3.3.9 + PyDev 3
 
 [![](https://imagelayers.io/badge/openkbs/jre-mvn-py3:latest.svg)](https://imagelayers.io/?images=openkbs/jre-mvn-py3:latest 'Get your own badge on imagelayers.io')
@@ -50,6 +49,3 @@ docker run -d --name some-jre-mvn-py3 -v /data:/data -i -t my/jre-mvn-py3
 docker exec -it some-jre-mvn-py3 /bin/bash
 
 ```
-=======
-# jre-mvn-py3
->>>>>>> b92f56ccae27ae83a83868b2f7c0166238b7d853
