@@ -60,15 +60,20 @@ To run Python code
 
 ```bash
 docker run --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
+```
 
 or,
 
+```bash
 docker run --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
+```
 
 or,
 
+```bash
 alias dpy3='docker run --rm openkbs/jre-mvn-py3 python3'
 dpy3 -c 'print("Hello World")'
 dpy3 < myPyScript.py
+```
 ```
 
