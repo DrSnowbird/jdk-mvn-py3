@@ -75,5 +75,4 @@ alias dpy3='docker run --rm openkbs/jre-mvn-py3 python3'
 dpy3 -c 'print("Hello World")'
 dpy3 < myPyScript.py
 ```
-```
 
