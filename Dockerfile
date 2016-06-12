@@ -38,8 +38,13 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binarie
 RUN apt-get clean
 
 #### define working directory.
+RUN mkdir -p /data
+COPY . /data
+
+VOLUME "/data"
+
 WORKDIR /data
 
 #### Define default command.
-CMD ["bash"]
+#CMD ["bash"]
 
