@@ -15,7 +15,7 @@ RUN apt-get update \
 
 #### Install Java 8
 # define JAVA_HOME variable
-ENV JAVA_HOME /usr/jdk1.8.0_92
+ENV JAVA_HOME /usr/jdk1.8.0_102
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
