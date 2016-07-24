@@ -6,7 +6,7 @@ echo "Usage: "
 echo "  ${0} <repo-name/repo-tag>"
 echo
 imageTag=${1:-openkbs/jre-mvn-py3}
-imageVersion=1.0.0
+#imageVersion=1.0.0
 
 docker ps -a
 

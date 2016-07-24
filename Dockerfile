@@ -19,7 +19,7 @@ ENV JAVA_HOME /usr/jdk1.8.0_92
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/8u92-b14/server-jre-8u92-linux-x64.tar.gz" \
+  "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/server-jre-8u102-linux-x64.tar.gz" \
   | gunzip \
   | tar x -C /usr/ \
   && ln -s $JAVA_HOME /usr/java \
