@@ -1,12 +1,12 @@
-# Java 8 (1.8.0_92) JRE server + Maven 3.3.9 + Python 3.5.1
+# Java 8 (1.8.0_102) JRE server + Maven 3.3.9 + Python 3.5.1
 
 [![](https://imagelayers.io/badge/openkbs/jre-mvn-py:latest.svg)](https://imagelayers.io/?images=openkbs/jre-mvn-py:latest 'Get your own badge on imagelayers.io')
 
 Components:
 
-* Oracle Java "1.8.0_92" JRE Runtime Environment for Server
-  Java(TM) SE Runtime Environment (build 1.8.0_92-b14)
-  Java HotSpot(TM) 64-Bit Server VM (build 25.92-b14, mixed mode)
+* java version "1.8.0_102"
+  Java(TM) SE Runtime Environment (build 1.8.0_102-b14)
+  Java HotSpot(TM) 64-Bit Server VM (build 25.102-b14, mixed mode)
 * Apache Maven 3.3.9
 * Python 3.5.1+
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
