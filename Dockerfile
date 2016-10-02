@@ -15,13 +15,39 @@ RUN apt-get update \
 
 #### Install Java 8
 # define JAVA_HOME variable
+
+#http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jdk-8u102-linux-x64.rpm
+#http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jre-8u102-linux-x64.rpm
+#http://download.oracle.com/otn-pub/java/jdk/8u102-b14/server-jre-8u102-linux-x64.rpm
+
+## -- Change these three lines for Java version upgrade --
+ENV JAVA_VERSION 8u102
+ENV BUILD_VERSION b14
 ENV JAVA_HOME /usr/jdk1.8.0_102
+ENV JAVA_OS linux-x64
+ENV JAVA_PACKAGE_FORMAT tar.gz
+
+## -- Choose your Java Type: jdk, jre, server-jre
+#ENV JAVA_PACKAGE_TYPE jdk
+#ENV JAVA_PACKAGE_TYPE jre
+ENV JAVA_PACKAGE_TYPE server-jre
+
+## -- No need to change these lines below unless Java/Oracle change URL --
 ENV PATH $PATH:$JAVA_HOME/bin
+
+## -- Java Download site and path --
+#ENV JAVA_PACKAGE_PATH $JAVA_VERSION-$BUILD_VERSION/$JAVA_PACKAGE_TYPE-$JAVA_VERSION-$JAVA_OS.$JAVA_PACKAGE_FORMAT
+#ENV JAVA_DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/$JAVA_PACKAGE_PATH
+
+## -- For RPM package, you need to change to use rpm or yum command correspondingly --
+ENV INSTALL_DIR /usr/
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/server-jre-8u102-linux-x64.tar.gz" \
+  #"http://download.oracle.com/otn-pub/java/jdk/8u102-b14/server-jre-8u102-linux-x64.tar.gz" \
+  "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/$JAVA_PACKAGE_TYPE-$JAVA_VERSION-$JAVA_OS.$JAVA_PACKAGE_FORMAT" \
+  #"$JAVA_DOWNLOAD_URL" \
   | gunzip \
-  | tar x -C /usr/ \
+  | tar x -C $INSTALL_DIR \
   && ln -s $JAVA_HOME /usr/java \
   && rm -rf $JAVA_HOME/man
 
@@ -46,5 +72,5 @@ VOLUME "/data"
 WORKDIR /data
 
 #### Define default command.
-#CMD ["bash"]
+ENTRYPOINT ["/bin/bash"]
 
