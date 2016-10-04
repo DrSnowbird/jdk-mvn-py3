@@ -59,13 +59,13 @@ docker exec -it some-jre-mvn-py3 /bin/bash
 To run Python code 
 
 ```bash
-docker run --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
+docker run -it --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
 ```
 
 or,
 
 ```bash
-docker run --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
+docker run -it --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
 ```
 
 or,
