@@ -15,13 +15,15 @@ if [ ! "$version" == "" ]; then
     echo "---> To run in interactive mode: "
     echo "docker run --name <some-name> -it ${imageTag}:$version /bin/bash"
     echo "e.g."
-    echo "docker run --name "my:${imageTag}" it ${imageTag}:$version /bin/bash"
+    echo "docker run it ${imageTag}:$version "
+    echo "docker run --name "my-$(basename $imageTag)" it ${imageTag}:$version "
 else
     docker build -t ${imageTag} .
     echo "---> To run in interactive mode: "
     echo "docker run --name <some-name> -it ${imageTag} /bin/bash"
     echo "e.g."
-    echo "docker run --name "my:${imageTag}" -it ${imageTag} /bin/bash"
+    echo "docker run -it ${imageTag} "
+    echo "docker run --name "my-$(basename $imageTag)" -it ${imageTag} "
 fi
 
 echo ">>> Docker Images"

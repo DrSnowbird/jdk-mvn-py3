@@ -17,11 +17,18 @@ RUN apt-get update \
 # define JAVA_HOME variable
 ENV JAVA_HOME /usr/jdk1.8.0_112
 ENV PATH $PATH:$JAVA_HOME/bin
+
+## -- Java Download site and path --
+#ENV JAVA_PACKAGE_PATH $JAVA_VERSION-$BUILD_VERSION/$JAVA_PACKAGE_TYPE-$JAVA_VERSION-$JAVA_OS.$JAVA_PACKAGE_FORMAT
+#ENV JAVA_DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/$JAVA_PACKAGE_PATH
+
+## -- For RPM package, you need to change to use rpm or yum command correspondingly --
+ENV INSTALL_DIR /usr/
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
   "http://download.oracle.com/otn-pub/java/jdk/8u112-b15/server-jre-8u112-linux-x64.tar.gz" \
   | gunzip \
-  | tar x -C /usr/ \
+  | tar x -C $INSTALL_DIR \
   && ln -s $JAVA_HOME /usr/java \
   && rm -rf $JAVA_HOME/man
 
@@ -46,5 +53,5 @@ VOLUME "/data"
 WORKDIR /data
 
 #### Define default command.
-#CMD ["bash"]
+#ENTRYPOINT ["/bin/bash"]
 

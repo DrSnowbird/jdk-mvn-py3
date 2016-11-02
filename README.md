@@ -10,7 +10,6 @@ Java home: /usr/jdk1.8.0_112/jre
 * Apache Maven 3.3.9 
 Maven home: /usr/apache-maven-3.3.9
 * Python 3.5.2
-```
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 ## Pull the image from Docker Repository
@@ -61,13 +60,13 @@ docker exec -it some-jre-mvn-py3 /bin/bash
 To run Python code 
 
 ```bash
-docker run --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
+docker run -it --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
 ```
 
 or,
 
 ```bash
-docker run --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
+docker run -it --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
 ```
 
 or,
