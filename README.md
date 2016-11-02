@@ -1,14 +1,16 @@
-# Java 8 (1.8.0_92) JRE server + Maven 3.3.9 + Python 3.5.1
+# Java 8 (1.8.0_112) JRE server + Maven 3.3.9 + Python 3.5.2
 
 [![](https://imagelayers.io/badge/openkbs/jre-mvn-py:latest.svg)](https://imagelayers.io/?images=openkbs/jre-mvn-py:latest 'Get your own badge on imagelayers.io')
 
-Components:
-
-* Oracle Java "1.8.0_92" JRE Runtime Environment for Server
-  Java(TM) SE Runtime Environment (build 1.8.0_92-b14)
-  Java HotSpot(TM) 64-Bit Server VM (build 25.92-b14, mixed mode)
-* Apache Maven 3.3.9
-* Python 3.5.1+
+##Components:
+* java version "1.8.0_112"
+Java(TM) SE Runtime Environment (build 1.8.0_112-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.112-b15, mixed mode)
+Java home: /usr/jdk1.8.0_112/jre
+* Apache Maven 3.3.9 
+Maven home: /usr/apache-maven-3.3.9
+* Python 3.5.2
+```
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 ## Pull the image from Docker Repository
