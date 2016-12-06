@@ -84,3 +84,30 @@ alias dpy3='docker run --rm openkbs/jre-mvn-py3 python3'
 dpy3 -c 'print("Hello World")'
 ```
 
+## Compile or Run java while no local installation needed
+
+```java
+#!/bin/bash -x
+mkdir ./data
+cat >./data/HelloWorld.java <<-EOF
+public class HelloWorld {
+   public static void main(String[] args) {
+      System.out.println("Hello, World");
+   }
+}
+EOF
+cat ./data/HelloWorld.java
+alias djavac='docker run -it --rm --name some-jre-mvn-py3 -v '$PWD'/data:/data openkbs/jre-mvn-py3 javac'
+alias djava='docker run -it --rm --name some-jre-mvn-py3 -v '$PWD'/data:/data openkbs/jre-mvn-py3 java'
+
+djavac HelloWorld.java
+djava HelloWorld
+```
+And, the output:
+````
+Hello, World`
+```
+
+
+
+```
