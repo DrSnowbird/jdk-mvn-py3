@@ -85,6 +85,9 @@ dpy3 -c 'print("Hello World")'
 ```
 
 ## Compile or Run java while no local installation needed
+Remember, the default working directory, /data, inside the docker container -- treat is as "/".
+So, if you create subdirectory, "./data/workspace", in the host machine and 
+the docker container will have it as "/data/workspace".
 
 ```java
 #!/bin/bash -x
