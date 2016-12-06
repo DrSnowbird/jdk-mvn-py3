@@ -115,3 +115,5 @@ it will work the same way as your local installed Java's "javac" and "java" comm
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
 For example, try this docker-scala-ide:
 [Scala IDE in Docker](https://github.com/stevenalexander/docker-scala-ide)
+See also,
+[Java Development in Docker](https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
