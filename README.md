@@ -106,8 +106,5 @@ djava HelloWorld
 And, the output:
 ````
 Hello, World`
-```
-
-
 
 ```
