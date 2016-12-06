@@ -112,4 +112,9 @@ Hello, World
 
 ```
 Hence, the alias above, "djavac" and "djava" is your docker-based "javac" and "java" commands and 
-it will work the same way as your local installed Java's "javac" and "java" commands.
+it will work the same way as your local installed Java's "javac" and "java" commands. 
+However, for larger complex projects, you might want to consider to use Docker-based IDE. 
+For example, try this docker-scala-ide:
+```
+https://github.com/stevenalexander/docker-scala-ide
+```
