@@ -14,22 +14,21 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 #### Install Java 8
-# define JAVA_HOME variable
-ENV JAVA_HOME /usr/jdk1.8.0_112
+
+ARG JAVA_MAJOR_VERSION=8
+ARG JAVA_UPDATE_VERSION=121
+ARG JAVA_BUILD_NUMBER=13
+
+ENV JAVA_HOME /usr/jdk1.${JAVA_MAJOR_VERSION}.0_${JAVA_UPDATE_VERSION}
 ENV PATH $PATH:$JAVA_HOME/bin
 
-## -- Java Download site and path --
-#ENV JAVA_PACKAGE_PATH $JAVA_VERSION-$BUILD_VERSION/$JAVA_PACKAGE_TYPE-$JAVA_VERSION-$JAVA_OS.$JAVA_PACKAGE_FORMAT
-#ENV JAVA_DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/$JAVA_PACKAGE_PATH
-
-## -- For RPM package, you need to change to use rpm or yum command correspondingly --
-ENV INSTALL_DIR /usr/
+ENV INSTALL_DIR /usr
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/8u112-b15/server-jre-8u112-linux-x64.tar.gz" \
+  "http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/server-jre-8u121-linux-x64.tar.gz" \
   | gunzip \
-  | tar x -C $INSTALL_DIR \
-  && ln -s $JAVA_HOME /usr/java \
+  | tar x -C $INSTALL_DIR/ \
+  && ln -s $JAVA_HOME $INSTALL_DIR/java \
   && rm -rf $JAVA_HOME/man
 
 #### Install Maven 3
