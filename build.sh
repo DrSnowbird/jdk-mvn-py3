@@ -8,7 +8,7 @@
 #  docker build -t openkbs/jre-mvn-py3:1.0.0 -t openkbs/jre-mvn-py3:latest .
 
 imageTag=openkbs/jre-mvn-py3
-#version=1.0.0
+version=1.2.1
 
 if [ ! "$version" == "" ]; then
     docker build -t ${imageTag}:$version -t ${imageTag}:latest .

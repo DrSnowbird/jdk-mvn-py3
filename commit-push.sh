@@ -11,7 +11,7 @@ echo
 
 comment=${1:-Update JVM}
 imageTag=${2:-openkbs/jre-mvn-py3}
-#imageVersion=1.0.0
+imageVersion=1.2.1
 
 docker ps -a
 
@@ -19,6 +19,7 @@ containerID=`docker ps |grep "${imageTag} "|awk '{print $1}'`
 echo "containerID=$containerID"
 
 docker commit -m "$comment" ${containerID} ${imageTag}:latest
-
 docker push ${imageTag}:latest
 
+docker commit -m "$comment" ${containerID} ${imageTag}:${imageVersion}
+docker push ${imageTag}:${imageVersion}
