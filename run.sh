@@ -6,7 +6,7 @@ echo "Usage: "
 echo "  ${0} <repo-name/repo-tag>"
 echo
 imageTag=${1:-openkbs/jre-mvn-py3}
-version=1.2.1
+version=
 
 #instanceName=my-${2:-${imageTag%/*}}_$RANDOM
 instanceName=my-${2:-${imageTag##*/}}

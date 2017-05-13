@@ -30,6 +30,6 @@ echo ">>> Docker Images"
 echo "To build again: "
 echo "  docker build -t ${imageTag} -t openkbs/${imageTag}:latest . "
 echo
-docker images 
+docker images |grep $(basename $imageTag)
 
 
