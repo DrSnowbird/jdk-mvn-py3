@@ -67,7 +67,7 @@ docker run -it --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
 or,
 
 ```bash
-docker run -it --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
+docker run -i --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
 ```
 
 or,
