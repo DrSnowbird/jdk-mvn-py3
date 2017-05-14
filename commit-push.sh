@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 
 # Reference: https://docs.docker.com/engine/userguide/containers/dockerimages/
 
@@ -17,6 +17,8 @@ docker ps -a
 
 containerID=`docker ps |grep "${imageTag} "|awk '{print $1}'`
 echo "containerID=$containerID"
+
+#docker tag ${imageTag} openkbs/${imageTag}:latest
 
 docker commit -m "$comment" ${containerID} ${imageTag}:latest
 docker push ${imageTag}:latest
