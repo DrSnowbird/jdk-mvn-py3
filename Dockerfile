@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ##### update ubuntu and Install Python 3
 RUN apt-get update \
+  && apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev \
   && apt-get install -y curl net-tools build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-numpy python3-scipy python3-pandas python3-matplotlib \
   && ln -s /usr/bin/python3 /usr/bin/python \
   && apt-get clean \
