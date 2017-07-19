@@ -4,7 +4,7 @@
 
 ##Components:
 Components:
-* Oracle Java "1.8.0_141" JRE Runtime Environment for Server
+* Oracle Java "1.8.0_141" JDK environment
   Java(TM) SE Runtime Environment (build 1.8.0_141-b15)
 * Apache Maven 3.5.0
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
