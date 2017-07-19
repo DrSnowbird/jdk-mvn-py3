@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 mkdir ./data
 cat >./data/HelloWorld.java <<-EOF
 public class HelloWorld {
