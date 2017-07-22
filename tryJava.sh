@@ -1,5 +1,5 @@
 #!/bin/bash 
-mkdir ./data
+mkdir -p ./data
 cat >./data/HelloWorld.java <<-EOF
 public class HelloWorld {
    public static void main(String[] args) {
