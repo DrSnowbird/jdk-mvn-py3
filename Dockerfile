@@ -26,10 +26,15 @@ RUN apt-get update \
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
+#ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
 ARG JAVA_MAJOR_VERSION=8
-ARG JAVA_UPDATE_VERSION=144
-ARG JAVA_BUILD_NUMBER=01
-ARG JAVA_TOKEN=090f390dda5b47b9b721c7dfaa008135
+ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-152}
+ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-16}
+ARG JAVA_TOKEN=aa0333dd3019491ca4f6ddbe78cdb6d0
+
+# http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz
+# #http://download.oracle.com/otn-pub/java/jdk/8u152-b16/aa0333dd3019491ca4f6ddbe78cdb6d0/jdk-8u152-linux-x64.tar.gz
+# http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
 
 #### ---------------------------------------------------------------
 #### ---- Don't change below unless you know what you are doing ----
