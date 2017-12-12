@@ -5,7 +5,10 @@
 echo "Usage: "
 echo "  ${0} <repo-name/repo-tag>"
 echo
-imageTag=${1:-openkbs/jre-mvn-py3}
+
+DOCKER_IMAGE_REPO="$(basename `pwd`)"
+imageTag=openkbs/${DOCKER_IMAGE_REPO}
+
 version=
 
 #instanceName=my-${2:-${imageTag%/*}}_$RANDOM
