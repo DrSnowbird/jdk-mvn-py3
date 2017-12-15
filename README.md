@@ -1,6 +1,6 @@
 # Java 8 (1.8.0_152) JRE server + Maven 3.5.0 + Python 3.5.2
 
-[![](https://imagelayers.io/badge/openkbs/jre-mvn-py3:latest.svg)](https://imagelayers.io/?images=openkbs/jre-mvn-py3:latest 'Get your own badge on imagelayers.io')
+[![](https://imagelayers.io/badge/openkbs/jdk-mvn-py3:latest.svg)](https://imagelayers.io/?images=openkbs/jdk-mvn-py3:latest 'Get your own badge on imagelayers.io')
 
 ##Components:
 Components:
@@ -12,13 +12,13 @@ Components:
 ## Pull the image from Docker Repository
 
 ```bash
-docker pull openkbs/jre-mvn-py3
+docker pull openkbs/jdk-mvn-py3
 ```
 
 ## Base the image to build add-on components
 
 ```Dockerfile
-FROM openkbs/jre-mvn-py3
+FROM openkbs/jdk-mvn-py3
 ```
 
 ## Run the image
@@ -28,27 +28,27 @@ Then, you're ready to run:
 
 ```bash
 mkdir ./data
-docker run -d --name my-jre-mvn-py3 -v $PWD/data:/data -i -t openkbs/jre-mvn-py3
+docker run -d --name my-jdk-mvn-py3 -v $PWD/data:/data -i -t openkbs/jdk-mvn-py3
 ```
 
 ## Build and Run your own image
-Say, you will build the image "my/jre-mvn-py3".
+Say, you will build the image "my/jdk-mvn-py3".
 
 ```bash
-docker build -t my/jre-mvn-py3 .
+docker build -t my/jdk-mvn-py3 .
 ```
 
-To run your own image, say, with some-jre-mvn-py3:
+To run your own image, say, with some-jdk-mvn-py3:
 
 ```bash
 mkdir ./data
-docker run -d --name some-jre-mvn-py3 -v $PWD/data:/data -i -t my/jre-mvn-py3
+docker run -d --name some-jdk-mvn-py3 -v $PWD/data:/data -i -t my/jdk-mvn-py3
 ```
 
 ## Shell into the Docker instance
 
 ```bash
-docker exec -it some-jre-mvn-py3 /bin/bash
+docker exec -it some-jdk-mvn-py3 /bin/bash
 ```
 
 ## Run Python code
@@ -56,13 +56,13 @@ docker exec -it some-jre-mvn-py3 /bin/bash
 To run Python code 
 
 ```bash
-docker run -it --rm openkbs/jre-mvn-py3 python3 -c 'print("Hello World")'
+docker run -it --rm openkbs/jdk-mvn-py3 python3 -c 'print("Hello World")'
 ```
 
 or,
 
 ```bash
-docker run -i --rm openkbs/jre-mvn-py3 python3 < myPyScript.py 
+docker run -i --rm openkbs/jdk-mvn-py3 python3 < myPyScript.py 
 ```
 
 or,
@@ -70,13 +70,13 @@ or,
 ```bash
 mkdir ./data
 echo "print('Hello World')" > ./data/myPyScript.py
-docker run -it --rm --name some-jre-mvn-py3 -v "$PWD"/data:/data openkbs/jre-mvn-py3 python3 myPyScript.py
+docker run -it --rm --name some-jdk-mvn-py3 -v "$PWD"/data:/data openkbs/jdk-mvn-py3 python3 myPyScript.py
 ```
 
 or,
 
 ```bash
-alias dpy3='docker run --rm openkbs/jre-mvn-py3 python3'
+alias dpy3='docker run --rm openkbs/jdk-mvn-py3 python3'
 dpy3 -c 'print("Hello World")'
 ```
 
@@ -96,8 +96,8 @@ public class HelloWorld {
 }
 EOF
 cat ./data/HelloWorld.java
-alias djavac='docker run -it --rm --name some-jre-mvn-py3 -v '$PWD'/data:/data openkbs/jre-mvn-py3 javac'
-alias djava='docker run -it --rm --name some-jre-mvn-py3 -v '$PWD'/data:/data openkbs/jre-mvn-py3 java'
+alias djavac='docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 javac'
+alias djava='docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 java'
 
 djavac HelloWorld.java
 djava HelloWorld
