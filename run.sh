@@ -5,7 +5,18 @@
 echo "Usage: "
 echo "  ${0} <repo-name/repo-tag>"
 echo
-imageTag=${1:-openkbs/jre-mvn-py3}
+
+###################################################
+#### ---- Change this only if want to use your own
+###################################################
+ORGANIZATION=openkbs
+
+###################################################
+#### ---- Container package information ----
+###################################################
+DOCKER_IMAGE_REPO=`echo $(basename $PWD)|tr '[:upper:]' '[:lower:]'|tr "/: " "_" `
+imageTag=${1:-"${ORGANIZATION}/${DOCKER_IMAGE_REPO}"}
+
 version=
 
 #instanceName=my-${2:-${imageTag%/*}}_$RANDOM
