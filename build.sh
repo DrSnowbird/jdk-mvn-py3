@@ -5,9 +5,11 @@
 # - https://github.com/dockerfile/java/blob/master/oracle-java8/Dockerfile
 
 # example:
-#  docker build -t openkbs/jre-mvn-py3:1.0.0 -t openkbs/jre-mvn-py3:latest .
+#  docker build -t openkbs/jdk-mvn-py3:1.0.0 -t openkbs/jdk-mvn-py3:latest .
 
-imageTag=openkbs/jre-mvn-py3
+DOCKER_IMAGE_REPO="$(basename `pwd`)"
+imageTag=openkbs/${DOCKER_IMAGE_REPO}
+
 version=
 
 if [ ! "$version" == "" ]; then
