@@ -19,14 +19,12 @@ RUN apt-get update \
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
-#ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
-ARG JAVA_MAJOR_VERSION=8
-ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-152}
-ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-16}
-ARG JAVA_TOKEN=aa0333dd3019491ca4f6ddbe78cdb6d0
+ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
+ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-162}
+ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-12}
+ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-0da788060d494f5095bf8624735fa2f1}
 
-# http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_linux-x64_bin.tar.gz
-# #http://download.oracle.com/otn-pub/java/jdk/8u152-b16/aa0333dd3019491ca4f6ddbe78cdb6d0/jdk-8u152-linux-x64.tar.gz
+## http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.tar.gz
 
 #### ---------------------------------------------------------------
 #### ---- Don't change below unless you know what you are doing ----
@@ -40,7 +38,7 @@ ENV INSTALL_DIR /usr
 
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/${UPDATE_VERSION}-${BUILD_VERSION}/${JAVA_TOKEN}/jdk-${UPDATE_VERSION}-linux-x64.tar.gz" \
+  "http://download.oracle.com/otn-pub/java/jdk/${UPDATE_VERSION}-${BUILD_VERSION}/${JAVA_DOWNLOAD_TOKEN}/jdk-${UPDATE_VERSION}-linux-x64.tar.gz" \
   | gunzip \
   | tar x -C $INSTALL_DIR/ \
   && ln -s $JAVA_HOME $INSTALL_DIR/java \
