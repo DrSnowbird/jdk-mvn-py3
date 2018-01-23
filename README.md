@@ -1,10 +1,10 @@
-# Java 8 (1.8.0_162) JRE server + Maven 3.5.0 + Python 3.5.2
+# Java 8 (1.8.0_162) JDK + Maven 3.5.0 + Python 3.5.2
 
 [![](https://imagelayers.io/badge/openkbs/jdk-mvn-py3:latest.svg)](https://imagelayers.io/?images=openkbs/jdk-mvn-py3:latest 'Get your own badge on imagelayers.io')
 
 ##Components:
 Components:
-* java version "1.8.0_162"
+* Java version "1.8.0_162"
   Java(TM) SE Runtime Environment (build 1.8.0_162-b12)
   Java HotSpot(TM) 64-Bit Server VM (build 25.162-b12, mixed mode)
 * Apache Maven 3.5.0

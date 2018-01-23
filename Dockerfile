@@ -3,7 +3,7 @@
 # use the latest LTS Ubuntu
 FROM ubuntu:xenial
 
-MAINTAINER openkbs
+MAINTAINER openkbs.org@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
