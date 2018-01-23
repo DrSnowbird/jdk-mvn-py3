@@ -112,7 +112,8 @@ it will work the same way as your local installed Java's "javac" and "java" comm
 
 ## To run specialty Java/Scala IDE alternatives
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
-For example, try this docker-scala-ide:
+For example, try the following docker-scala-ide:
+[Intellij-Docker](https://github.com/DrSnowbird/intellij-docker)
 [Eclipse-Oxygen-Docker](https://github.com/DrSnowbird/eclipse-oxygen-docker)
 [Scala-Ide-Docker](https://github.com/DrSnowbird/scala-ide-docker)
 [Scala IDE in Docker](https://github.com/stevenalexander/docker-scala-ide)
