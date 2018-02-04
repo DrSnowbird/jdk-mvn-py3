@@ -128,7 +128,7 @@ function generatePrivilegedString() {
     OS_VER=`which yum`
     if [ "$OS_VER" == "" ]; then
         # Ubuntu
-        echo "Ubuntu ... not SE-Lunix ... no privileged needed"
+        echo "... Ubuntu (Host OS) ... not SE-Lunix ... no privileged needed"
     else
         # CentOS/RHEL
         privilegedString="--privileged"
@@ -151,7 +151,9 @@ echo "---------------------------------------------"
 echo "---- Starting a Container for ${imageTag}"
 echo "---------------------------------------------"
 
-docker rm -f ${instanceName}
+if [ `docker ps | grep -i ${instanceName}` ]; then
+    docker rm -f ${instanceName}
+fi
 
 docker run -it \
     --name=${instanceName} \
@@ -160,7 +162,7 @@ docker run -it \
     ${PORT_MAP} \
     ${imageTag}
 
-docker rm -f ${instanceName}
+docker rm -f ${instanceName} 2>&1 >> /dev/null
 
 #echo ${DISPLAY}
 #xhost +SI:localuser:$(id -un) 

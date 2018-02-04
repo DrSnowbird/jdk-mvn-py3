@@ -1,0 +1,11 @@
+pkgconfig
+ipykernel
+jupyter
+Pillow
+numpy
+scipy
+panda
+pandasql
+matplotlib
+scikit_learn
+Flask

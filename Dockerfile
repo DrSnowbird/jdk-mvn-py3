@@ -53,6 +53,13 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binarie
   | tar x -C /usr/ \
   && ln -s $MAVEN_HOME /usr/maven
 
+###################################
+#### ---- Pip install packages ----
+###################################
+COPY requirements.txt ./
+RUN pip3 install --upgrade pip \
+    && pip3 install -r ./requirements.txt
+
 #### define working directory.
 RUN mkdir -p /data
 COPY . /data
