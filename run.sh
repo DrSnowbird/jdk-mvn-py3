@@ -151,7 +151,7 @@ echo "---------------------------------------------"
 echo "---- Starting a Container for ${imageTag}"
 echo "---------------------------------------------"
 
-if [ `docker ps | grep -i ${instanceName}` ]; then
+if [ ! "`docker ps | grep -i ${instanceName}`" == "" ]; then
     docker rm -f ${instanceName}
 fi
 
