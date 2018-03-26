@@ -1,8 +1,7 @@
 # Java 8 (1.8.0_162) JDK + Maven 3.5.0 + Python 3.5.2
 
-[![](https://imagelayers.io/badge/openkbs/jdk-mvn-py3:latest.svg)](https://imagelayers.io/?images=openkbs/jdk-mvn-py3:latest 'Get your own badge on imagelayers.io')
-
-##Components:
+[![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
+## Components:
 Components:
 * Java version "1.8.0_162"
   Java(TM) SE Runtime Environment (build 1.8.0_162-b12)
@@ -112,7 +111,7 @@ it will work the same way as your local installed Java's "javac" and "java" comm
 
 ## To run specialty Java/Scala IDE alternatives
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
-For example, try the following docker-scala-ide:
+For example, try the following Docker-based IDEs:
 [Intellij-Docker](https://github.com/DrSnowbird/intellij-docker)
 [Eclipse-Oxygen-Docker](https://github.com/DrSnowbird/eclipse-oxygen-docker)
 [Scala-Ide-Docker](https://github.com/DrSnowbird/scala-ide-docker)
