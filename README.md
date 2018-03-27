@@ -15,6 +15,16 @@ Components:
 docker pull openkbs/jdk-mvn-py3
 ```
 
+## Default Build
+```
+./build.sh
+```
+
+## Default Run (test) - No app
+```
+./run.sh
+```
+
 ## Base the image to build add-on components
 
 ```Dockerfile
@@ -112,9 +122,9 @@ it will work the same way as your local installed Java's "javac" and "java" comm
 ## To run specialty Java/Scala IDE alternatives
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
 For example, try the following Docker-based IDEs:
-[Intellij-Docker](https://github.com/DrSnowbird/intellij-docker)
-[Eclipse-Oxygen-Docker](https://github.com/DrSnowbird/eclipse-oxygen-docker)
-[Scala-Ide-Docker](https://github.com/DrSnowbird/scala-ide-docker)
-[Scala IDE in Docker](https://github.com/stevenalexander/docker-scala-ide)
+* [Intellij-Docker](https://github.com/DrSnowbird/intellij-docker)
+* [Eclipse-Oxygen-Docker](https://github.com/DrSnowbird/eclipse-oxygen-docker)
+* [Scala-Ide-Docker](https://github.com/DrSnowbird/scala-ide-docker)
+* [Scala IDE in Docker](https://github.com/stevenalexander/docker-scala-ide)
 See also,
-[Java Development in Docker](https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
+* [Java Development in Docker] (https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
