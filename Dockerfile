@@ -20,10 +20,11 @@ RUN apt-get update \
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
 ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
-ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-162}
-ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-12}
-ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-0da788060d494f5095bf8624735fa2f1}
+ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-172}
+ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-11}
+ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-a58eab1ec242421181065cdc37240b08}
 
+## http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.tar.gz
 ## http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.tar.gz
 
 #### ---------------------------------------------------------------
@@ -45,7 +46,7 @@ RUN curl -sL --retry 3 --insecure \
   && rm -rf $JAVA_HOME/man
 
 #### Install Maven 3
-ENV MAVEN_VERSION 3.5.0
+ENV MAVEN_VERSION 3.5.3
 ENV MAVEN_HOME /usr/apache-maven-$MAVEN_VERSION
 ENV PATH $PATH:$MAVEN_HOME/bin
 RUN curl -sL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
@@ -57,8 +58,21 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binarie
 #### ---- Pip install packages ----
 ###################################
 COPY requirements.txt ./
-RUN pip3 install --upgrade pip \
-    && pip3 install -r ./requirements.txt
+
+## ---------------------------------------------------
+## Don't upgrade pip to 10.0.x version -- it's broken! 
+## Staying with version 8 to avoid the problem
+## ---------------------------------------------------
+## RUN pip3 install --upgrade pip \
+##     && pip3 install -r ./requirements.txt
+RUN pip3 install -r ./requirements.txt
+
+## VERSIONS ##
+RUN echo "JAVA_HOME=$JAVA_HOME" && \
+    java -version && \
+    mvn --version && \
+    python -V && \
+    pip3 --version
 
 #### define working directory.
 RUN mkdir -p /data
