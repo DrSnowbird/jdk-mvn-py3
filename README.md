@@ -132,4 +132,5 @@ For example, try the following Docker-based IDEs:
 * [openkbs/intellj-docker](https://hub.docker.com/r/openkbs/intellij-docker/)
 
 # See also
-* [Java Development in Docker] (https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
+* [Java Development in Docker](https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
+* [Alpine small image JDKs](https://github.com/frol/docker-alpine-oraclejdk8)
