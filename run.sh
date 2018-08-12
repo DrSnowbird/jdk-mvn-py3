@@ -62,6 +62,27 @@ LOCAL_VOLUME_DIR="${baseDataFolder}/${PACKAGE}"
 ## -- Container's internal Volume base DIR
 DOCKER_VOLUME_DIR="/home/developer"
 
+
+###################################################
+#### ---- Detect docker ----
+###################################################
+DOCKER_ENV_FILE="./.env"
+function detectDockerEnvFile() {
+    curr_dir=`pwd`
+    if [ -s "./.env" ]; then
+        echo "--- INFO: ./.env Docker Environment file (.env) FOUND!"
+        DOCKER_ENV_FILE="./.env"
+    else
+        echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
+        if [ -s "./docker.env" ]; then
+            DOCKER_ENV_FILE="./docker.env"
+        else
+            echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
+        fi
+    fi
+}
+detectDockerEnvFile
+
 ###################################################
 #### ---- Function: Generate volume mappings  ----
 ####      (Don't change!)
@@ -82,7 +103,7 @@ function generateVolumeMapping() {
     if [ "$VOLUMES_LIST" == "" ]; then
         ## -- If locally defined in this file, then respect that first.
         ## -- Otherwise, go lookup the docker.env as ride-along source for volume definitions
-        VOLUMES_LIST=`cat docker.env|grep "^#VOLUMES_LIST= *"|sed "s/[#\"]//g"|cut -d'=' -f2-`
+        VOLUMES_LIST=`cat ${DOCKER_ENV_FILE}|grep "^#VOLUMES_LIST= *"|sed "s/[#\"]//g"|cut -d'=' -f2-`
     fi
     for vol in $VOLUMES_LIST; do
         echo "$vol"
@@ -140,8 +161,8 @@ PORT_MAP=""
 function generatePortMapping() {
     if [ "$PORTS" == "" ]; then
         ## -- If locally defined in this file, then respect that first.
-        ## -- Otherwise, go lookup the docker.env as ride-along source for volume definitions
-        PORTS_LIST=`cat docker.env|grep "^#PORTS_LIST= *"|sed "s/[#\"]//g"|cut -d'=' -f2-`
+        ## -- Otherwise, go lookup the ${DOCKER_ENV_FILE} as ride-along source for volume definitions
+        PORTS_LIST=`cat ${DOCKER_ENV_FILE}|grep "^#PORTS_LIST= *"|sed "s/[#\"]//g"|cut -d'=' -f2-`
     fi
     for pp in ${PORTS_LIST}; do
         #echo "$pp"
@@ -197,26 +218,6 @@ function displayURL() {
 }
 
 ###################################################
-#### ---- Detect docker ----
-###################################################
-DOCKER_ENV_FILE="./.env"
-function detectDockerEnvFile() {
-    curr_dir=`pwd`
-    if [ -s "./.env" ]; then
-        echo "--- INFO: ./.env Docker Environment file (.env) FOUND!"
-        DOCKER_ENV_FILE="./.env"
-    else
-        echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
-        if [ -s "./docker.env" ]; then
-            DOCKER_ENV_FILE="./docker.env"
-        else
-            echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
-        fi
-    fi
-}
-detectDockerEnvFile
-
-###################################################
 #### ---- Replace "Key=Value" withe new value ----
 ###################################################
 function replaceKeyValue() {
@@ -255,6 +256,7 @@ docker run -it \
     ${privilegedString} \
     -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --user $(id -u $USER) \
     ${VOLUME_MAP} \
     ${PORT_MAP} \
     ${imageTag} $*
