@@ -79,7 +79,7 @@ RUN echo "JAVA_HOME=${JAVA_HOME}" && \
 RUN mkdir -p /data 
 
 COPY ./data /data
-COPY printVersions.sh .
+COPY ./printVersions.sh .
 
 VOLUME "/data"
 
