@@ -1,29 +1,36 @@
-# Java 8 (1.8.0_181) JDK + Maven 3.5 + Python 3.5 + PIP3
+# Java 8 (1.8.0_181) JDK + Maven 3.5 + Python 3.5 + PIP3 8.1.1
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
+# License Agreement
+By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
+This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
+
 # Components:
-* Java version 1.8.0_181
-openjdk version "1.8.0_181"
-OpenJDK Runtime Environment (build 1.8.0_181-8u181-b13-1~deb9u1-b13)
-OpenJDK 64-Bit Server VM (build 25.181-b13, mixed mode)
-* Apache Maven 3.5.4
-* Python 3.5.3
+* java version "1.8.0_181"
+  Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+  Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+* Apache Maven 3.5.3
+* Python 3.5.2
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
-## Pull the image from Docker Repository
-
-```bash
-docker pull openkbs/jdk-mvn-py3
+# Default Run (test) - Just entering Container
+```
+./run.sh
 ```
 
-## Default Build
+# Test Java and Python3 Runs
+```
+./tryJava.sh
+./tryPython.sh
+```
+# Default Build (locally)
 ```
 ./build.sh
 ```
+# Pull the image from Docker Repository
 
-# Default Run (test) - No app
-```
-./run.sh
+```bash
+docker pull openkbs/jdk-mvn-py3
 ```
 
 # Base the image to build add-on components
@@ -133,3 +140,38 @@ For example, try the following Docker-based IDEs:
 # See also
 * [Java Development in Docker](https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
 * [Alpine small image JDKs](https://github.com/frol/docker-alpine-oraclejdk8)
+
+# Releases information
+```
+root@55c17eb4b4be:/# ./printVersions.sh 
+JAVA_HOME=/usr/jdk1.8.0_181
+java version "1.8.0_181"
+Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
+Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T18:33:14Z)
+Maven home: /usr/apache-maven-3.5.4
+Java version: 1.8.0_181, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_181/jre
+Default locale: en_US, platform encoding: ANSI_X3.4-1968
+OS name: "linux", version: "4.15.0-32-generic", arch: "amd64", family: "unix"
+Python 3.5.2
+Python 3.5.2
+pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
+NAME="Ubuntu"
+VERSION="16.04.3 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.3 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+
+```
+

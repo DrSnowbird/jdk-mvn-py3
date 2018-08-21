@@ -18,8 +18,10 @@ docker run --rm ${imageTag} python3 -c 'print("Hello World")'
 mkdir -p ./data
 echo "print('Hello World')" > ./data/myPyScript.py
 
-docker run -it --rm --name some-jdk-mvn-py3 -v "$PWD"/data:/data ${imageTag} python3 myPyScript.py
+dpython3='docker run -it --rm --name jdk-mvn-py3 -v '$PWD'/data:/data --workdir /data '${imageTag}' python3'
 
-docker run -i --rm ${imageTag} python3 < ./data/myPyScript.py
+docker run -it --rm --name some-jdk-mvn-py3 -v "$PWD"/data:/data --workdir /data ${imageTag} python3 myPyScript.py
+
+docker run -i --rm --workdir /data ${imageTag} python3 < ./data/myPyScript.py
 
 

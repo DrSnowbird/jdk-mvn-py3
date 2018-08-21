@@ -20,13 +20,13 @@ public class HelloWorld {
 }
 EOF
 cat ./data/HelloWorld.java
-djavac='docker run -it --rm --name jdk-mvn-py3 -v '$PWD'/data:/data '${imageTag}' javac'
-djava='docker run -it --rm --name jdk-mvn-py3 -v '$PWD'/data:/data '${imageTag}' java'
+djavac='docker run -it --rm --name jdk-mvn-py3 -v '$PWD'/data:/data --workdir /data '${imageTag}' javac'
+djava='docker run -it --rm --name jdk-mvn-py3 -v '$PWD'/data:/data --workdir /data '${imageTag}' java'
 
-#docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 javac HelloWorld.java
+#docker run -it --rm --name some-jdk-mvn-py3 -v $PWD/data:/data --workdir /data openkbs/jdk-mvn-py3 javac HelloWorld.java
 $djavac HelloWorld.java
 
-#docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 java HelloWorld
+#docker run -it --rm --name some-jdk-mvn-py3 -v $PWD/data:/data --workdir /data openkbs/jdk-mvn-py3 java HelloWorld
 $djava HelloWorld
 
 
