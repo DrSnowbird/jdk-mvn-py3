@@ -1,5 +1,5 @@
 # Java 8 (1.8.0_181) JDK + Maven 3.5 + Python 3.5 + PIP3 8.1.1
-[![](https://images.microbadger.com/badges/image/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jre-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jre-mvn-py3 "Get your own version badge on microbadger.com")
 
 # License Agreement
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
