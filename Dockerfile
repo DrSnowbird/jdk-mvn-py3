@@ -63,9 +63,7 @@ COPY requirements.txt ./
 ## Staying with version 8 to avoid the problem
 ## ---------------------------------------------------
 
-RUN pip3 install -r ./requirements.txt
-
-RUN pip3 install --upgrade pip 
+RUN pip3 install -r ./requirements.txt && pip3 install --upgrade pip  
 
 ## VERSIONS ##
 RUN echo "JAVA_HOME=${JAVA_HOME}" && \
@@ -78,8 +76,7 @@ RUN echo "JAVA_HOME=${JAVA_HOME}" && \
 #### define working directory.
 RUN mkdir -p /data 
 
-COPY ./data /data
-COPY ./printVersions.sh .
+COPY ./printVersions.sh ./
 
 VOLUME "/data"
 
