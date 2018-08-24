@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_181) JDK + Maven 3.5 + Python 3.5 + PIP3 8.1.1
+# Java 8 (1.8.0_181) JDK + Maven 3.5 + Python 3.5 + PIP3 8.1.1 + Gradle 4.9
 [![](https://images.microbadger.com/badges/image/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jre-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jre-mvn-py3.svg)](https://microbadger.com/images/openkbs/jre-mvn-py3 "Get your own version badge on microbadger.com")
 
 # License Agreement
@@ -11,6 +11,7 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
   Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)
 * Apache Maven 3.5.3
 * Python 3.5.2
+* Gradle 4.9
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 # Default Run (test) - Just entering Container
@@ -143,7 +144,7 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@55c17eb4b4be:/# ./printVersions.sh 
+root@17007b83aef8:/# ./printVersions.sh 
 JAVA_HOME=/usr/jdk1.8.0_181
 java version "1.8.0_181"
 Java(TM) SE Runtime Environment (build 1.8.0_181-b13)
@@ -157,6 +158,21 @@ Python 3.5.2
 Python 3.5.2
 pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+
+------------------------------------------------------------
+Gradle 4.9
+------------------------------------------------------------
+
+Build time:   2018-07-16 08:14:03 UTC
+Revision:     efcf8c1cf533b03c70f394f270f46a174c738efc
+
+Kotlin DSL:   0.18.4
+Kotlin:       1.2.41
+Groovy:       2.4.12
+Ant:          Apache Ant(TM) version 1.9.11 compiled on March 23 2018
+JVM:          1.8.0_181 (Oracle Corporation 25.181-b13)
+OS:           Linux 4.15.0-32-generic amd64
+
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
 DISTRIB_CODENAME=xenial
@@ -172,6 +188,5 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
-
 ```
 

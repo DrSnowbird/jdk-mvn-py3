@@ -7,5 +7,6 @@ python -V
 python3 -V
 pip --version
 pip3 --version
+gradle --version
 cat /etc/*-release
 

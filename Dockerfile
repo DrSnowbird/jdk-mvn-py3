@@ -7,7 +7,9 @@ MAINTAINER openkbs.org@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
+########################################
 ##### update ubuntu and Install Python 3
+########################################
 RUN apt-get update \
   && apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev \
   && apt-get install -y curl net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-numpy python3-scipy python3-pandas python3-matplotlib \
@@ -15,7 +17,9 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+###################################
 #### Install Java 8
+###################################
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
@@ -43,7 +47,9 @@ RUN curl -sL --retry 3 --insecure \
   && ln -s ${JAVA_HOME} $INSTALL_DIR/java \
   && rm -rf ${JAVA_HOME}/man
 
+###################################
 #### Install Maven 3
+###################################
 ARG MAVEN_VERSION=${MAVEN_VERSION:-3.5.4}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
@@ -73,10 +79,34 @@ RUN echo "JAVA_HOME=${JAVA_HOME}" && \
     python3 -V && \
     pip3 --version
 
+
+###################################
+#### ---- Install Gradle ----
+###################################
+ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-4.9}
+
+ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
+ENV GRADLE_HOME=${GRADLE_HOME}
+ARG GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
+ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
+# https://services.gradle.org/distributions/gradle-4.9-bin.zip
+RUN \
+    mkdir -p ${GRADLE_INSTALL_BASE} && \
+    cd ${GRADLE_INSTALL_BASE} && \
+    wget -c ${GRADLE_PACKAGE_URL} && \
+    unzip -d ${GRADLE_INSTALL_BASE} ${GRADLE_PACKAGE} && \
+    ls -al ${GRADLE_HOME} && \
+    ln -s ${GRADLE_HOME}/bin/gradle /usr/bin/gradle && \
+    ${GRADLE_HOME}/bin/gradle -v
+
+###################################
 #### define working directory.
+###################################
 RUN mkdir -p /data 
 
 COPY ./printVersions.sh ./
+
 
 VOLUME "/data"
 
