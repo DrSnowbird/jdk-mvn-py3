@@ -47,6 +47,11 @@ RUN curl -sL --retry 3 --insecure \
   && ln -s ${JAVA_HOME} $INSTALL_DIR/java \
   && rm -rf ${JAVA_HOME}/man
 
+############################
+#### --- JAVA_HOME --- #####
+############################
+ENV JAVA_HOME=$INSTALL_DIR/java
+
 ###################################
 #### Install Maven 3
 ###################################
