@@ -4,8 +4,14 @@ jupyter
 Pillow
 numpy
 scipy
-panda
+pandas
 pandasql
 matplotlib
 scikit_learn
-Flask
+flask
+virtualenv
+pyparsing
+future
+ipaddress
+jinja2
+

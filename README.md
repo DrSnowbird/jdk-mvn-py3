@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_191) JDK + Maven 3.5 + Python 3.5 + PIP3 8.1.1 + Gradle 4.9
+# Java 8 (1.8.0_191) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + Gradle 5.1
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -10,9 +10,9 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
 * java version "1.8.0_191"
   Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
   Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
-* Apache Maven 3.5.3
+* Apache Maven 3.6.0
 * Python 3.5.2
-* Gradle 4.9
+* Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 # Default Run (test) - Just entering Container
@@ -145,34 +145,34 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@da05462f60da:/# ./printVersions.sh 
-JAVA_HOME=/usr/jdk1.8.0_191
+root@55cafdff0f58:/usr# ./printVersions.sh 
+JAVA_HOME=/usr/java
 java version "1.8.0_191"
 Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
 Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
-Apache Maven 3.5.4 (1edded0938998edf8bf061f1ceb3cfdeccf443fe; 2018-06-17T18:33:14Z)
-Maven home: /usr/apache-maven-3.5.4
+Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:47Z)
+Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_191, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_191/jre
 Default locale: en_US, platform encoding: ANSI_X3.4-1968
-OS name: "linux", version: "4.15.0-36-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "4.15.0-43-generic", arch: "amd64", family: "unix"
 Python 3.5.2
 Python 3.5.2
 pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 
 ------------------------------------------------------------
-Gradle 4.9
+Gradle 5.1.1
 ------------------------------------------------------------
 
-Build time:   2018-07-16 08:14:03 UTC
-Revision:     efcf8c1cf533b03c70f394f270f46a174c738efc
+Build time:   2019-01-10 23:05:02 UTC
+Revision:     3c9abb645fb83932c44e8610642393ad62116807
 
-Kotlin DSL:   0.18.4
-Kotlin:       1.2.41
-Groovy:       2.4.12
-Ant:          Apache Ant(TM) version 1.9.11 compiled on March 23 2018
+Kotlin DSL:   1.1.1
+Kotlin:       1.3.11
+Groovy:       2.5.4
+Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_191 (Oracle Corporation 25.191-b12)
-OS:           Linux 4.15.0-36-generic amd64
+OS:           Linux 4.15.0-43-generic amd64
 
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
