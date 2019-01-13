@@ -117,6 +117,16 @@ RUN \
     ${GRADLE_HOME}/bin/gradle -v && \
     rm -f ${GRADLE_PACKAGE}
 
+##################################
+#### ---- NodeJS install ---- ####
+##################################
+RUN \
+    apt-get update -y && \
+    apt-get install -y git xz-utils && \
+    apt-get install -y nodejs npm && \
+    npm --version && \
+    apt-get install -y gcc g++ make
+
 ###################################
 #### define working directory. ####
 ###################################

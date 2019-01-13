@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo "JAVA_HOME=$JAVA_HOME"
 java -version
@@ -8,5 +8,7 @@ python3 -V
 pip --version
 pip3 --version
 gradle --version
+npm --version
+node --version
 cat /etc/*-release
 
