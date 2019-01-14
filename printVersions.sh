@@ -9,6 +9,6 @@ pip --version
 pip3 --version
 gradle --version
 npm --version
-node --version
+nodejs --version
 cat /etc/*-release
 

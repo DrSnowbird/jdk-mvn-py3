@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_191) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + Gradle 5.1
+# Java 8 (1.8.0_191) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + + npm 3.5.2 + nodejs v4.2.6 + Gradle 5.1
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -12,6 +12,7 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
   Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 * Apache Maven 3.6.0
 * Python 3.5.2
+* npm 3.5.2 + nodejs v4.2.6
 * Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
@@ -154,7 +155,7 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@6f2f052fa3be:/usr# ./printVersions.sh 
+root@b0002788171b:/usr# ./printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -193,8 +194,8 @@ OS:           Linux 4.15.0-43-generic amd64
 
 + npm --version
 3.5.2
-+ node --version
-./printVersions.sh: line 12: node: command not found
++ nodejs --version
+v4.2.6
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
