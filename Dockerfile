@@ -26,11 +26,11 @@ ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
-## http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz
+## https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz
 ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
-ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-191}
-ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-12}
-ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-2787e4a523244c269598db4e85c51e0c}
+ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-201}
+ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-09}
+ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-42970487e3af4f5aa5bca3f542482c60}
 
 #### ---------------------------------------------------------------
 #### ---- Don't change below unless you know what you are doing ----

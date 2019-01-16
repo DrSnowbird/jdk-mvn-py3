@@ -85,16 +85,21 @@ function detectDockerEnvFile() {
         echo "*** WARNING: Docker Run Environment file '${DOCKER_ENV_FILE}' NOT found!"
         echo "*** WARNING: Searching for .env or docker.env as alternative!"
         echo "*** --->"
-        if [ -s "./.env" ]; then
-            echo "--- INFO: ./.env FOUND to use as Docker Run Environment file!"
-            DOCKER_ENV_FILE="./.env"
+        if [ -s "./docker-run.env" ]; then
+            echo "--- INFO: ./docker-run.env FOUND to use as Docker Run Environment file!"
+            DOCKER_ENV_FILE="./docker-run.env"
         else
-            echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
-            if [ -s "./docker.env" ]; then
-                echo "--- INFO: ./docker.env FOUND to use as Docker Run Environment file!"
-                DOCKER_ENV_FILE="./docker.env"
+            if [ -s "./.env" ]; then
+                echo "--- INFO: ./.env FOUND to use as Docker Run Environment file!"
+                DOCKER_ENV_FILE="./.env"
             else
-                echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
+                echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
+                if [ -s "./docker.env" ]; then
+                    echo "--- INFO: ./docker.env FOUND to use as Docker Run Environment file!"
+                    DOCKER_ENV_FILE="./docker.env"
+                else
+                    echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
+                fi
             fi
         fi
     fi
@@ -376,5 +381,4 @@ docker run -it \
     ${VOLUME_MAP} \
     ${PORT_MAP} \
     ${imageTag} $*
-
 
