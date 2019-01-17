@@ -77,7 +77,7 @@ DOCKER_VOLUME_DIR="/home/developer"
 #### ---- Detect Docker Run Env files ----
 ###################################################
 
-function detectDockerEnvFile() {
+function detectDockerRunEnvFile() {
     curr_dir=`pwd`
     if [ -s "${DOCKER_ENV_FILE}" ]; then
         echo "--- INFO: Docker Run Environment file '${DOCKER_ENV_FILE}' FOUND!"
@@ -373,12 +373,26 @@ fi
 #########################
 set -x
 
+#docker run -it \
+#    --name=${instanceName} \
+#    --restart=${RESTART_OPTION} \
+#    ${privilegedString} \
+#    ${ENV_VARS} \
+#    ${VOLUME_MAP} \
+#    ${PORT_MAP} \
+#    ${imageTag} $*
+
+echo ${DISPLAY}
+xhost +SI:localuser:$(id -un) 
+DISPLAY=${MY_IP}:0 \
 docker run -it \
     --name=${instanceName} \
     --restart=${RESTART_OPTION} \
     ${privilegedString} \
+    -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --user $(id -u $USER) \
     ${ENV_VARS} \
     ${VOLUME_MAP} \
     ${PORT_MAP} \
     ${imageTag} $*
-

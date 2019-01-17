@@ -35,24 +35,37 @@ fi
 ORGANIZATION=openkbs
 
 ###################################################
-#### ---- Detect docker ----
+#### ---- Detect Docker Run Env files ----
 ###################################################
-DOCKER_ENV_FILE="./.env"
-function detectDockerEnvFile() {
+
+function detectDockerBuildEnvFile() {
     curr_dir=`pwd`
-    if [ -s "./.env" ]; then
-        echo "--- INFO: ./.env Docker Environment file (.env) FOUND!"
-        DOCKER_ENV_FILE="./.env"
+    if [ -s "${DOCKER_ENV_FILE}" ]; then
+        echo "--- INFO: Docker Build Environment file '${DOCKER_ENV_FILE}' FOUND!"
     else
-        echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
-        if [ -s "./docker.env" ]; then
-            DOCKER_ENV_FILE="./docker.env"
+        echo "*** WARNING: Docker Build Environment file '${DOCKER_ENV_FILE}' NOT found!"
+        echo "*** WARNING: Searching for .env or docker.env as alternative!"
+        echo "*** --->"
+        if [ -s "./docker-build.env" ]; then
+            echo "--- INFO: ./docker-build.env FOUND to use as Docker Run Environment file!"
+            DOCKER_ENV_FILE="./docker-build.env"
         else
-            echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
+            if [ -s "./.env" ]; then
+                echo "--- INFO: ./.env FOUND to use as Docker Run Environment file!"
+                DOCKER_ENV_FILE="./.env"
+            else
+                echo "--- INFO: ./.env Docker Environment file (.env) NOT found!"
+                if [ -s "./docker.env" ]; then
+                    echo "--- INFO: ./docker.env FOUND to use as Docker Run Environment file!"
+                    DOCKER_ENV_FILE="./docker.env"
+                else
+                    echo "*** WARNING: Docker Environment file (.env) or (docker.env) NOT found!"
+                fi
+            fi
         fi
     fi
 }
-detectDockerEnvFile
+detectDockerBuildEnvFile
 
 ###################################################
 #### ---- Container package information ----
