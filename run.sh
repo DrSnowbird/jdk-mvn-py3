@@ -391,7 +391,6 @@ docker run -it \
     ${privilegedString} \
     -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    --user $(id -u $USER) \
     ${ENV_VARS} \
     ${VOLUME_MAP} \
     ${PORT_MAP} \

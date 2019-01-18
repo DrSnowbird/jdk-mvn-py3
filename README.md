@@ -119,7 +119,6 @@ EOF
 cat ./data/HelloWorld.java
 alias djavac='docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 javac'
 alias djava='docker run -it --rm --name some-jdk-mvn-py3 -v '$PWD'/data:/data openkbs/jdk-mvn-py3 java'
-
 djavac HelloWorld.java
 djava HelloWorld
 ```
@@ -129,6 +128,13 @@ Hello, World
 ```
 Hence, the alias above, "djavac" and "djava" is your docker-based "javac" and "java" commands and 
 it will work the same way as your local installed Java's "javac" and "java" commands. 
+
+# JavaScript Runner while no local installation needed
+Run the NodeJS mini-server script:
+```
+./tryNodeJS.sh
+```
+Then, open web browser to go to http://0.0.0.0:3000/ to NodeJS mini-web server test.
 
 # To run specialty Java/Scala IDE alternatives
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
