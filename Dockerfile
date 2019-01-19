@@ -107,8 +107,7 @@ ENV GRADLE_HOME=${GRADLE_HOME}
 ARG GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
 ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
 # https://services.gradle.org/distributions/gradle-5.1.1-bin.zip
-RUN \
-    mkdir -p ${GRADLE_INSTALL_BASE} && \
+RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
     wget -c ${GRADLE_PACKAGE_URL} && \
     unzip -d ${GRADLE_INSTALL_BASE} ${GRADLE_PACKAGE} && \
@@ -120,8 +119,7 @@ RUN \
 ######################################
 #### ---- NodeJS from Ubuntu ---- ####
 ######################################
-#RUN \
-#    apt-get update -y && \
+#RUN apt-get update -y && \
 #    apt-get install -y git xz-utils && \
 #    apt-get install -y nodejs npm && \
 #    npm --version && \
@@ -130,15 +128,14 @@ RUN \
 #########################################
 #### ---- Node from NODESOURCES ---- ####
 #########################################
-ARG NODE_VERSION=${NODE_VERSION:-10}
+# Ref: https://github.com/nodesource/distributions
+ARG NODE_VERSION=${NODE_VERSION:-11}
 ENV NODE_VERSION=${NODE_VERSION}
-RUN \
-    apt-get update -y && \
+RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get install -y gcc g++ make && \
     apt-get install -y nodejs && \
-    sudo npm install -g grunt-cli && \
     node -v && npm --version
 
 ###################################

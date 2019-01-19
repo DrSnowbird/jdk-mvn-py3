@@ -1,0 +1,120 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome",
+    "definitions": {
+        "Welcome": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "packages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Package"
+                    }
+                }
+            },
+            "required": [
+                "packages"
+            ],
+            "title": "Welcome"
+        },
+        "Package": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "@context": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".jsonld"
+                    ]
+                },
+                "@type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "operatingSystem": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "build": {
+                    "type": "string"
+                },
+                "dateReleased": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "packageFormat": {
+                    "type": "string"
+                },
+                "urlChecksum": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".html"
+                    ]
+                },
+                "checksum_md5": {
+                    "type": "string"
+                },
+                "checksum_sha256": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".html"
+                    ]
+                },
+                "urlPackageDownload": {
+                    "type": "string",
+                    "qt-uri-protocols": [
+                        "https"
+                    ],
+                    "qt-uri-extensions": [
+                        ".gz"
+                    ]
+                },
+                "urlReleaseLatest": {
+                    "type": "string",
+                    "qt-uri-protocols": [
+                        "https"
+                    ]
+                },
+                "packageName": {
+                    "type": "string"
+                },
+                "install_commands": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "@context",
+                "@type",
+                "category",
+                "dateReleased",
+                "name",
+                "operatingSystem",
+                "packageFormat",
+                "urlPackageDownload",
+                "version"
+            ],
+            "title": "Package"
+        }
+    }
+}
+
