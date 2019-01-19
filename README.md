@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_201) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + + npm 3.5.2 + nodejs v4.2.6 + Gradle 5.1
+# Java 8 (1.8.0_201) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + npm 6.4.1 + node v10.15.0 + Gradle 5.1
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -12,7 +12,7 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
   Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 * Apache Maven 3.6.0
 * Python 3.5.2
-* npm 3.5.2 + nodejs v4.2.6
+* npm 6.4.1 + node v10.15.0 (from NodeSource official Node Distribution)
 * Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
@@ -161,7 +161,7 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@c3fd448b277c:/usr# ./printVersions.sh 
+root@1b69cb491038:/usr# ./printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -198,10 +198,10 @@ Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_201 (Oracle Corporation 25.201-b09)
 OS:           Linux 4.15.0-43-generic amd64
 
-+ npm --version
-3.5.2
-+ nodejs --version
-v4.2.6
++ npm -v
+6.4.1
++ node -v
+v10.15.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
@@ -218,5 +218,6 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
+
 ```
 

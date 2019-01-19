@@ -117,15 +117,29 @@ RUN \
     ${GRADLE_HOME}/bin/gradle -v && \
     rm -f ${GRADLE_PACKAGE}
 
-##################################
-#### ---- NodeJS install ---- ####
-##################################
+######################################
+#### ---- NodeJS from Ubuntu ---- ####
+######################################
+#RUN \
+#    apt-get update -y && \
+#    apt-get install -y git xz-utils && \
+#    apt-get install -y nodejs npm && \
+#    npm --version && \
+#    apt-get install -y gcc g++ make
+
+#########################################
+#### ---- Node from NODESOURCES ---- ####
+#########################################
+ARG NODE_VERSION=${NODE_VERSION:-10}
+ENV NODE_VERSION=${NODE_VERSION}
 RUN \
     apt-get update -y && \
-    apt-get install -y git xz-utils && \
-    apt-get install -y nodejs npm && \
-    npm --version && \
-    apt-get install -y gcc g++ make
+    apt-get install -y sudo curl git xz-utils && \
+    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
+    apt-get install -y gcc g++ make && \
+    apt-get install -y nodejs && \
+    sudo npm install -g grunt-cli && \
+    node -v && npm --version
 
 ###################################
 #### define working directory. ####
@@ -133,6 +147,7 @@ RUN \
 RUN mkdir -p /data 
 
 COPY ./printVersions.sh ./
+COPY ./examples /data/examples
 
 VOLUME "/data"
 

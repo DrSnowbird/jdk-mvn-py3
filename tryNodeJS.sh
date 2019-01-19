@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 ###################################################
 #### ---- Change this only if want to use your own
@@ -10,6 +10,17 @@ ORGANIZATION=openkbs
 ###################################################
 DOCKER_IMAGE_REPO=`echo $(basename $PWD)|tr '[:upper:]' '[:lower:]'|tr "/: " "_" `
 imageTag=${1:-"${ORGANIZATION}/${DOCKER_IMAGE_REPO}"}
+
+###################################################
+#### ---- Mostly, you don't need change below ----
+###################################################
+instanceName=some-jdk-mvn-py3
+function cleanup() {
+    if [ ! "`docker ps -a|grep ${instanceName}`" == "" ]; then
+         docker rm -f ${instanceName}
+    fi
+}
+cleanup
 
 mkdir -p ./data
 
@@ -34,11 +45,36 @@ server.listen(port, hostname, () => {
 });
 EOF
 
-cat ./data/SimpleServer.js
+# cat ./data/SimpleServer.js
 
-echo "Open your browser to : http://0.0.0.0:3000/"
+TIMEOUT_SEC=20
+HOST_PORT=3300
+echo
+echo "----------------------------------------------------------------------"
+echo "Starting JavaScript NodeJS mini-webserver:"
+echo "You have $TIMEOUT_SEC to test this NodeJS mini-server."
+echo "... then, it will destroy itself (like 007 Bond's movie - self-clean up :-) "
+echo "----------------------------------------------------------------------"
+echo "---> Open your browser to : http://127.0.0.1:${HOST_PORT}/"
+echo "---> Or, command line:"
+echo "        curl http://localhost:${HOST_PORT}/"
+echo "        curl http://127.0.0.1:${HOST_PORT}/"
+echo
+docker run -d --rm --name ${instanceName} -v $PWD/data:/data -p 3300:3000 --workdir /data openkbs/jdk-mvn-py3 nodejs /data/SimpleServer.js
 
-docker run -d --name some-jdk-mvn-py3 -v $PWD/data:/data -p 3000:3000 --workdir /data openkbs/jdk-mvn-py3 nodejs /data/SimpleServer.js
+echo "---> Testing the mini-server by the SimpleServer.js script:"
+echo
+echo "---> 1.) curl GET http://127.0.0.1:${HOST_PORT}/"
+curl -s GET http://127.0.0.1:3300/
+echo
+echo "---> 2.) curl http://127.0.0.1:${HOST_PORT}/"
+curl -s http://127.0.0.1:${HOST_PORT}/
+echo
+echo "---> 3.) curl http://localhost:${HOST_PORT}/"
+curl -s http://localhost:${HOST_PORT}/
 
+sleep $TIMEOUT_SEC
+
+cleanup
 
 

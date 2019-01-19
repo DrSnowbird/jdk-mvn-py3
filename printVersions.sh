@@ -8,7 +8,7 @@ python3 -V
 pip --version
 pip3 --version
 gradle --version
-npm --version
-nodejs --version
+npm -v
+node -v
 cat /etc/*-release
 

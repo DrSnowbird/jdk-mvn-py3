@@ -5,13 +5,13 @@
 //
 const http = require('http');
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+  res.end('Hello World from openkbs/jdk-mvn-py3 \n See more: \n https://github.com/DrSnowbird/3 \n https://cloud.docker.com/u/openkbs');
 });
 
 server.listen(port, hostname, () => {
