@@ -1,5 +1,4 @@
 FROM ubuntu:xenial
-# use the latest LTS Ubuntu
 
 MAINTAINER openkbs.org@gmail.com
 
@@ -145,11 +144,14 @@ RUN mkdir -p /data
 
 COPY ./printVersions.sh ./
 COPY ./examples /data/examples
+COPY ./docker-entrypoint.sh /
 
 VOLUME "/data"
 
 WORKDIR /data
 
 #### Define default command.
+ENTRYPOINT ["/docker-entrypoint.sh"]
+#CMD ["/sbin/init"]
 CMD ["/bin/bash"]
 
