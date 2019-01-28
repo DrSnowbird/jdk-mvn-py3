@@ -15,3 +15,4 @@ future
 ipaddress
 jinja2
 httpie
+j2cli
