@@ -151,7 +151,6 @@ VOLUME "/data"
 WORKDIR /data
 
 #### Define default command.
-ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["/sbin/init"]
+#ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
 
