@@ -140,13 +140,13 @@ function generateProxyArgs() {
         PROXY_PARAM="${PROXY_PARAM} --build-arg NO_PROXY=\"${NO_PROXY}\""
     fi
     if [ "${http_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} --build-arg HTTP_PROXY=${http_proxy}"
+        PROXY_PARAM="${PROXY_PARAM} --build-arg http_proxy=${http_proxy}"
     fi
     if [ "${https_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} --build-arg HTTPS_PROXY=${https_proxy}"
+        PROXY_PARAM="${PROXY_PARAM} --build-arg https_proxy=${https_proxy}"
     fi
     if [ "${no_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} --build-arg NO_PROXY=\"${no_proxy}\""
+        PROXY_PARAM="${PROXY_PARAM} --build-arg no_proxy=\"${no_proxy}\""
     fi
     BUILD_ARGS="${BUILD_ARGS} ${PROXY_PARAM}"
 }
