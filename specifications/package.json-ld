@@ -2,7 +2,7 @@
 {
   "packages": [
     {
-      "@context": "https://openkbs.org/contexts/gradle.jsonld",
+      "@context": "https://openkbs.org/contexts/java.jsonld",
       "@type": "package",
       "name": "java",
       "category": "language",

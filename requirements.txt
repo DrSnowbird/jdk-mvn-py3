@@ -1,7 +1,7 @@
 pkgconfig
 ipykernel
 jupyter
-Pillow
+pillow
 numpy
 scipy
 pandas
@@ -16,3 +16,6 @@ ipaddress
 jinja2
 httpie
 j2cli
+requests
+nltk
+keras
