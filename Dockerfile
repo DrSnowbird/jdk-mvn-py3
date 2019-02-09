@@ -11,6 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ##############################################
 #### ---- Transfer setup ---- ####
 COPY ./script ${SCRIPT_DIR}
+RUN chmod +x ${SCRIPT_DIR}/*.sh
 
 #### ---- Apt Proxy & NPM Proxy & NPM Permission setup if detected: ---- ####
 RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_apt_proxy.sh

@@ -161,7 +161,7 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@6dc0b2859b9d:~# /usr/printVersions.sh 
+root@cb9f39f3bd74:/data# /usr/printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -173,15 +173,15 @@ Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:4
 Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_201, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_201/jre
 Default locale: en_US, platform encoding: ANSI_X3.4-1968
-OS name: "linux", version: "4.15.0-43-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "4.15.0-45-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
 + python3 -V
 Python 3.5.2
 + pip --version
-pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.2 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + pip3 --version
-pip 18.1 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.2 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + gradle --version
 
 ------------------------------------------------------------
@@ -196,12 +196,12 @@ Kotlin:       1.3.11
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_201 (Oracle Corporation 25.201-b09)
-OS:           Linux 4.15.0-43-generic amd64
+OS:           Linux 4.15.0-45-generic amd64
 
 + npm -v
 6.5.0
 + node -v
-v11.7.0
+v11.9.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
