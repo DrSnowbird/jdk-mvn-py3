@@ -14,9 +14,7 @@ COPY ./script ${SCRIPT_DIR}
 RUN chmod +x ${SCRIPT_DIR}/*.sh
 
 #### ---- Apt Proxy & NPM Proxy & NPM Permission setup if detected: ---- ####
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_apt_proxy.sh
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_with_no_sudo.sh
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 
 ########################################
 #### update ubuntu and Install Python 3
@@ -29,6 +27,11 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+ENV LANG en_US.utf8
+
 ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
 
 ###################################
@@ -37,11 +40,11 @@ ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
 #### ---------------------------------------------------------------
-## https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz
+## https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-x64.tar.gz
 ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
-ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-201}
-ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-09}
-ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-42970487e3af4f5aa5bca3f542482c60}
+ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-202}
+ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-08}
+ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-1961070e4c9b4e26a04e7f5a083f551e}
 
 #### ---------------------------------------------------------------
 #### ---- Don't change below unless you know what you are doing ----
@@ -111,13 +114,13 @@ RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
 #### ---- Install Gradle ---- #####
 ###################################
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-5.1.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-5.2.1}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
 ARG GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
 ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
-# https://services.gradle.org/distributions/gradle-5.1.1-bin.zip
+# https://services.gradle.org/distributions/gradle-5.2.1-bin.zip
 RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
     wget -c ${GRADLE_PACKAGE_URL} && \

@@ -4,3 +4,8 @@
 data/
 .fuse*
 *.zip*
+
+*.log
+npm-debug.log*
+node_modules
+.env

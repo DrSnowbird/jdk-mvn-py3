@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_201) JDK + Maven 3.6 + Python 3.5 + PIP3 18.1 + node 11.7.0 + npm 6.5.0 + Gradle 5.1
+# Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5 + pip 19.0 + node 11.9 + npm 6.5 + Gradle 5.2
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -7,12 +7,12 @@ By using this image, you agree the [Oracle Java JDK License](http://www.oracle.c
 This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
 
 # Components:
-* java version "1.8.0_201"
-  Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-  Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+* java version "1.8.0_202"
+  Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
+  Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
 * Apache Maven 3.6.0
-* Python 3.5.2
-* node v11.7.0 + npm 6.5.0 (from NodeSource official Node Distribution)
+* Python 3.5.2 / Python 2.7.12 + pip 19.0.2
+* Node v11.9.0 + npm 6.5.0 (from NodeSource official Node Distribution)
 * Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
@@ -161,18 +161,43 @@ For example, try the following Docker-based IDEs:
 
 # Releases information
 ```
-root@cb9f39f3bd74:/data# /usr/printVersions.sh 
+RUN_TYPE=0
+RUN_OPTION= -it 
+RESTART_OPTION=no
+REMOVE_OPTION= --rm 
+--- INFO: Docker Run Environment file './docker-run.env' FOUND!
+-v /home/user1/data-docker/jdk-mvn-py3/data:/home/developer/data -v /home/user1/data-docker/jdk-mvn-py3/workspace:/home/developer/workspace
+PORT_MAP=
+ENV_VARS=
+... Setup Docker Run Proxy: ...
+ENV_VARS= 
+Ubuntu ... not SE-Lunix ... no privileged needed
+
+
+---------------------------------------------
+---- Starting a Container for openkbs/jdk-mvn-py3
+---------------------------------------------
+--------------------------------------------------------
+==> Commands to manage Container:
+--------------------------------------------------------
+  ./shell.sh : to shell into the container
+  ./stop.sh  : to stop the container
+  ./log.sh   : to show the docker run log
+  ./build.sh : to build the container
+  ./commit.sh: to push the container image to docker hub
+--------------------------------------------------------
++ docker run --rm -it --name=jdk-mvn-py3 --restart=no -v /home/user1/data-docker/jdk-mvn-py3/data:/home/developer/data -v /home/user1/data-docker/jdk-mvn-py3/workspace:/home/developer/workspace openkbs/jdk-mvn-py3 /usr/printVersions.sh
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
-java version "1.8.0_201"
-Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
-Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
+java version "1.8.0_202"
+Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
+Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
 + mvn --version
 Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:47Z)
 Maven home: /usr/apache-maven-3.6.0
-Java version: 1.8.0_201, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_201/jre
-Default locale: en_US, platform encoding: ANSI_X3.4-1968
+Java version: 1.8.0_202, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_202/jre
+Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "4.15.0-45-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
@@ -185,17 +210,17 @@ pip 19.0.2 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + gradle --version
 
 ------------------------------------------------------------
-Gradle 5.1.1
+Gradle 5.2.1
 ------------------------------------------------------------
 
-Build time:   2019-01-10 23:05:02 UTC
-Revision:     3c9abb645fb83932c44e8610642393ad62116807
+Build time:   2019-02-08 19:00:10 UTC
+Revision:     f02764e074c32ee8851a4e1877dd1fea8ffb7183
 
-Kotlin DSL:   1.1.1
-Kotlin:       1.3.11
+Kotlin DSL:   1.1.3
+Kotlin:       1.3.20
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
-JVM:          1.8.0_201 (Oracle Corporation 25.201-b09)
+JVM:          1.8.0_202 (Oracle Corporation 25.202-b08)
 OS:           Linux 4.15.0-45-generic amd64
 
 + npm -v
@@ -218,4 +243,5 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
++ set +x
 ```
