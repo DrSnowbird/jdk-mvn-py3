@@ -54,8 +54,8 @@ RESTART_OPTION=no
 ## More optional values:
 ##   Add any additional options here
 ## ------------------------------------------------------------------------
-#MORE_OPTIONS="--privileged=true"
-MORE_OPTIONS=""
+# MORE_OPTIONS="--privileged=true"
+MORE_OPTIONS=
 
 ###############################################################################
 ###############################################################################
@@ -388,13 +388,13 @@ function generateProxyEnv() {
         PROXY_PARAM="${PROXY_PARAM} -e NO_PROXY=\"${NO_PROXY}\""
     fi
     if [ "${http_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} -e HTTP_PROXY=${http_proxy}"
+        PROXY_PARAM="${PROXY_PARAM} -e http_proxy=${http_proxy}"
     fi
     if [ "${https_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} -e HTTPS_PROXY=${https_proxy}"
+        PROXY_PARAM="${PROXY_PARAM} -e https_proxy=${https_proxy}"
     fi
     if [ "${no_proxy}" != "" ]; then
-        PROXY_PARAM="${PROXY_PARAM} -e NO_PROXY=\"${no_proxy}\""
+        PROXY_PARAM="${PROXY_PARAM} -e no_proxy=\"${no_proxy}\""
     fi
     ENV_VARS="${ENV_VARS} ${PROXY_PARAM}"
 }

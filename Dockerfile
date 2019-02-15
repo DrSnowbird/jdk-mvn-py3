@@ -6,6 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # ref: https://github.com/dockerfile/java/tree/master/oracle-java8
 
+ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
+
+ENV SCRIPT_DIR=${SCRIPT_DIR:-$INSTALL_DIR/scripts}
+
 ##############################################
 #### ---- Corporate Proxy Auto Setup ---- ####
 ##############################################
@@ -21,9 +25,9 @@ RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 ########################################
 RUN apt-get update -y && \
     apt-get install -y apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && \
-    apt-get install -y curl net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-numpy python3-scipy python3-pandas python3-matplotlib && \
+    apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-numpy python3-scipy python3-pandas python3-matplotlib && \
     apt-get install -y git xz-utils && \
-    ln -s /usr/bin/python3 /usr/bin/python && \
+    apt-get install -y sudo && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -31,8 +35,6 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG en_US.utf8
-
-ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
 
 ###################################
 #### Install Java 8
@@ -123,7 +125,7 @@ ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAG
 # https://services.gradle.org/distributions/gradle-5.2.1-bin.zip
 RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
-    wget -c ${GRADLE_PACKAGE_URL} && \
+    wget -q --no-check-certificate -c ${GRADLE_PACKAGE_URL} && \
     unzip -d ${GRADLE_INSTALL_BASE} ${GRADLE_PACKAGE} && \
     ls -al ${GRADLE_HOME} && \
     ln -s ${GRADLE_HOME}/bin/gradle /usr/bin/gradle && \
@@ -148,9 +150,13 @@ ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
-    apt-get install -y gcc g++ make && \
-    apt-get install -y nodejs && \
-    node -v && npm --version
+    apt-get install -y nodejs npm && \
+    apt-get install -y gcc g++ make
+    
+RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
+
+RUN ( [ -s /usr/bin/node ] || sudo ln -s /usr/bin/nodejs /usr/bin/node ) && \
+    /usr/bin/node -v && /usr/bin/npm --version
 
 ###################################
 #### ---- working directory ---- ####

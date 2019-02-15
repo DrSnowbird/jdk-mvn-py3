@@ -52,7 +52,7 @@ REMOVE_CACHE=0
 ##########################################################
 REMOVE_CACHE_OPTION=""
 if [ ${REMOVE_CACHE} -gt 0 ]; then
-    REMOVE_CACHE_OPTION="--rm"
+    REMOVE_CACHE_OPTION="--no-cache --rm"
 fi
 
 ###################################################
