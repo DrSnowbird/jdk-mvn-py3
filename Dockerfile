@@ -150,17 +150,13 @@ ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
-    apt-get install -y nodejs npm && \
-    apt-get install -y gcc g++ make
+    apt-get install -y nodejs
     
 RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
 
-RUN ( [ -s /usr/bin/node ] || sudo ln -s /usr/bin/nodejs /usr/bin/node ) && \
-    /usr/bin/node -v && /usr/bin/npm --version
-
-###################################
+#####################################
 #### ---- working directory ---- ####
-###################################
+#####################################
 RUN mkdir -p /data 
 
 COPY ./printVersions.sh ./
