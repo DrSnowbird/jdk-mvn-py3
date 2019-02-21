@@ -50,7 +50,6 @@ function detectOS() {
     esac
 }
 
-
 HAS_PROXY=0
 function detectProxySetup() {
     proxy_vars="`env | grep -i proxy`"
@@ -76,7 +75,8 @@ ftp_proxy=${ftp_proxy//\"/}
 #    sudo apt-get -o Acquire::http::proxy=http://proxy.openkbs.org:80/ <update/install> 
 function addProxyToAptConf() {
     echo "================= Setup apt/yum Proxy ===================="
-    if [ ${HAS_PROXY} -gt 0 ]; then
+    proxy_already="`cat ${REPO_CONF}|grep -i proxy`"
+    if [ "${proxy_already}" = "" ] && [ ${HAS_PROXY} -gt 0 ]; then
         [ ! -z "${http_proxy}" ] && echo "Acquire::http::Proxy \"${http_proxy}\";" | tee -a ${REPO_CONF}
         [ ! -z "${https_proxy}" ] && echo "Acquire::https::Proxy \"${https_proxy}\";" | tee -a ${REPO_CONF}
         [ ! -z "${ftp_proxy}" ] && echo "Acquire::ftp::Proxy \"${ftp_proxy}\";" | tee -a ${REPO_CONF}
@@ -86,7 +86,8 @@ addProxyToAptConf ${http_proxy}
 
 function addProxyToEtcEnv() {
     echo "================= Setup System /etc/environment Proxy ===================="
-    if [ ${HAS_PROXY} -gt 0 ]; then
+    etc_proxy_already="`cat ${ETC_ENV}|grep -i proxy`"
+    if [ "${etc_proxy_already}" = "" ] && [ ${HAS_PROXY} -gt 0 ]; then
         [ ! -z "${http_proxy}" ] && echo "http_proxy=${http_proxy}" | tee -a ${ETC_ENV}
         [ ! -z "${https_proxy}" ] && echo "https_proxy=${https_proxy}" | tee -a ${ETC_ENV}
         [ ! -z "${ftp_proxy}" ] && echo "ftp_proxy=${ftp_proxy}" | tee -a ${ETC_ENV}
