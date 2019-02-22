@@ -25,8 +25,8 @@ imageTag="${ORGANIZATION}/${DOCKER_IMAGE_REPO}"
 #### ---- Mostly, you don't need change below ----
 ###################################################
 function cleanup() {
-    if [ ! "`docker ps -a|grep ${instanceName}`" == "" ]; then
-         echo "docker rm -f ${instanceName}"
+    if [ ! "`sudo docker ps -a|grep ${instanceName}`" == "" ]; then
+         echo "sudo docker rm -f ${instanceName}"
     fi
 }
 

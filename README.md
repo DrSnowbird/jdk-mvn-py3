@@ -16,14 +16,29 @@ This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase
 * Gradle 5.1
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
+# Quick commands
+* build.sh - build local image
+* logs.sh - see logs of container
+* run.sh - run the container
+* shell.sh - shell into the container
+* stop.sh - stop the container
+* tryJava.sh : test Java
+* tryNodeJS.sh : test NodeJS
+* tryPython.sh : test Python
+
+# How to use and quick start running?
+1. git clone https://github.com/DrSnowbird/jdk-mvn-py3.git
+2. cd jdk-mvn-py3
+3. ./run.sh
 # Default Run (test) - Just entering Container
 ```
 ./run.sh
 ```
 
-# Test Java and Python3 Runs
+# Test Java, NodeJS, and Python3 Runs
 ```
 ./tryJava.sh
+./tryNodeJS.sh
 ./tryPython.sh
 ```
 # Default Build (locally)
@@ -40,9 +55,10 @@ docker pull openkbs/jdk-mvn-py3
 
 ```Dockerfile
 FROM openkbs/jdk-mvn-py3
+... (then your customization Dockerfile code here)
 ```
 
-# Run the image
+# Manually setup to Run the image
 
 Then, you're ready to run:
 - make sure you create your work directory, e.g., ./data
