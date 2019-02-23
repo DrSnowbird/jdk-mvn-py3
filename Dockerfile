@@ -6,15 +6,17 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # ref: https://github.com/dockerfile/java/tree/master/oracle-java8
 
+##############################################
+#### ---- Installation Directories   ---- ####
+##############################################
 ENV INSTALL_DIR=${INSTALL_DIR:-/usr}
-
 ENV SCRIPT_DIR=${SCRIPT_DIR:-$INSTALL_DIR/scripts}
 
 ##############################################
 #### ---- Corporate Proxy Auto Setup ---- ####
 ##############################################
 #### ---- Transfer setup ---- ####
-COPY ./script ${SCRIPT_DIR}
+COPY ./scripts ${SCRIPT_DIR}
 RUN chmod +x ${SCRIPT_DIR}/*.sh
 
 #### ---- Apt Proxy & NPM Proxy & NPM Permission setup if detected: ---- ####
@@ -37,7 +39,7 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
 ENV LANG en_US.utf8
 
 ###################################
-#### Install Java 8
+#### ---- Install Java 8 ----  ####
 ###################################
 #### ---------------------------------------------------------------
 #### ---- Change below when upgrading version ----
@@ -70,13 +72,13 @@ RUN ls -al ${INSTALL_DIR} && \
   ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
   rm -rf ${JAVA_HOME}/man
 
-############################
-#### --- JAVA_HOME --- #####
-############################
+#############################
+#### ---- JAVA_HOME --- #####
+#############################
 ENV JAVA_HOME=$INSTALL_DIR/java
 
 ###################################
-#### Install Maven 3
+#### ---- Install Maven 3 ---- ####
 ###################################
 ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.0}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
@@ -87,9 +89,9 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
   | tar x -C /usr/ \
   && ln -s ${MAVEN_HOME} /usr/maven
 
-###################################
-#### ---- Pip install packages ----
-###################################
+########################################
+#### ---- Pip install packages ---- ####
+########################################
 COPY requirements.txt ./
 
 ## ---------------------------------------------------
@@ -154,19 +156,48 @@ RUN apt-get update -y && \
     
 RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
 
-#####################################
-#### ---- working directory ---- ####
-#####################################
-RUN mkdir -p /data 
+###################################
+#### ---- user: developer ---- ####
+###################################
+ENV USER_ID=${USER_ID:-1000}
+ENV GROUP_ID=${GROUP_ID:-1000}
+ENV USER=${USER:-developer}
+ENV HOME=/home/${USER}
 
-COPY ./printVersions.sh ./
-COPY ./examples /data/examples
-COPY ./docker-entrypoint.sh /
+RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} && \
+    ## -- Ubuntu -- \
+    usermod -aG sudo ${USER} && \
+    ## -- Centos -- \
+    #usermod -aG wheel ${USER} && \
+    #echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
+    echo "USER =======> ${USER}"
 
-VOLUME "/data"
+RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts
 
-WORKDIR /data
+##############################
+#### ---- entrypoint ---- ####
+##############################
+RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
+
+############################################
+#### ---- Set up user environments ---- ####
+############################################
+ENV WORKSPACE=${HOME}/workspace
+ENV DATA=${HOME}/data
+USER ${USER}
+WORKDIR ${HOME}
+
+RUN mkdir -p ${WORKSPACE} ${DATA}
+COPY ./examples ${DATA}/examples
+VOLUME ${DATA}
+VOLUME ${WORKSPACE}
+
+#########################
+#### ---- Entry ---- ####
+#########################
+USER ${USER}
+WORKDIR ${HOME}
 #### Define default command.
 #ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/bin/bash"]
