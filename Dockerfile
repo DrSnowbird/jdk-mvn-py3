@@ -134,15 +134,6 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     ${GRADLE_HOME}/bin/gradle -v && \
     rm -f ${GRADLE_PACKAGE}
 
-######################################
-#### ---- NodeJS from Ubuntu ---- ####
-######################################
-#RUN apt-get update -y && \
-#    apt-get install -y git xz-utils && \
-#    apt-get install -y nodejs npm && \
-#    npm --version && \
-#    apt-get install -y gcc g++ make
-
 #########################################
 #### ---- Node from NODESOURCES ---- ####
 #########################################
@@ -169,16 +160,26 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
     usermod -aG sudo ${USER} && \
     ## -- Centos -- \
     #usermod -aG wheel ${USER} && \
-    #echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
-    echo "USER =======> ${USER}"
-
-RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts
+    echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
+    echo "USER =======> ${USER}" && ls -al ${HOME}
 
 ##############################
-#### ---- entrypoint ---- ####
+#### ---- NPM PREFIX ---- ####
 ##############################
+ENV NPM_CONFIG_PREFIX=${NPM_CONFIG_PREFIX:-${HOME}/.npm-global}
+RUN mkdir -p ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
+    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm 
+#    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} 
+
+###########################################
+#### ---- entrypoint script setup ---- ####
+###########################################
 RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
+#############################################
+#### ---- USER as Owner for scripts ---- ####
+#############################################
+RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts /docker-entrypoint.sh
 
 ############################################
 #### ---- Set up user environments ---- ####
@@ -188,6 +189,9 @@ ENV DATA=${HOME}/data
 USER ${USER}
 WORKDIR ${HOME}
 
+############################################
+#### ---- Volumes: data, workspace ---- ####
+############################################
 RUN mkdir -p ${WORKSPACE} ${DATA}
 COPY ./examples ${DATA}/examples
 VOLUME ${DATA}

@@ -174,6 +174,7 @@ For example, try the following Docker-based IDEs:
 # See also
 * [Java Development in Docker](https://blog.giantswarm.io/getting-started-with-java-development-on-docker/)
 * [Alpine small image JDKs](https://github.com/frol/docker-alpine-oraclejdk8)
+* [NPM Prefix for not using SUDO NPM](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
 # Releases information
 ```
