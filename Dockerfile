@@ -168,8 +168,10 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
 ##############################
 ENV NPM_CONFIG_PREFIX=${NPM_CONFIG_PREFIX:-${HOME}/.npm-global}
 RUN mkdir -p ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm 
-#    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} 
+    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
+    ${SCRIPT_DIR}/install-npm-packages.sh
+
+ENV PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
 
 ###########################################
 #### ---- entrypoint script setup ---- ####
