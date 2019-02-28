@@ -253,6 +253,7 @@ function generateVolumeMapping() {
             left=`echo $vol|cut -d':' -f1`
             right=`echo $vol|cut -d':' -f2`
             leftHasDot=`echo $left|grep "\./"`
+            leftHasAbsPath=`echo $left|grep "^/"`
             if [ "$leftHasDot" != "" ]; then
                 ## has "./data" on the left
                 if [[ ${right} == "/"* ]]; then
@@ -268,17 +269,33 @@ function generateVolumeMapping() {
                 if [ $DEBUG -gt 0 ]; then ls -al `pwd`/${left}; fi
             else
                 ## No "./data" on the left
-                if [[ ${right} == "/"* ]]; then
-                    ## -- pattern like: "data:/containerPath/data"
-                    debug "-- pattern like ./data:/data --"
-                    VOLUME_MAP="${VOLUME_MAP} -v ${LOCAL_VOLUME_DIR}/${left}:${right}"
+                if [ "$leftHasAbsPath" != "" ]; then
+                    ## Has pattern like "/data" on the left
+                    if [[ ${right} == "/"* ]]; then
+                        ## -- pattern like: "/data:/containerPath/data"
+                        debug "-- pattern like /data:/containerPath/data --"
+                        VOLUME_MAP="${VOLUME_MAP} -v ${left}:${right}"
+                    else
+                        ## -- pattern like: "/data:data"
+                        debug "-- pattern like /data:data --"
+                        VOLUME_MAP="${VOLUME_MAP} -v ${left}:${DOCKER_VOLUME_DIR}/${right}"
+                    fi
+                    mkdir -p ${LOCAL_VOLUME_DIR}/${left}
+                    if [ $DEBUG -gt 0 ]; then ls -al ${LOCAL_VOLUME_DIR}/${left}; fi
                 else
-                    ## -- pattern like: "data:data"
-                    debug "-- pattern like data:data --"
-                    VOLUME_MAP="${VOLUME_MAP} -v ${LOCAL_VOLUME_DIR}/${left}:${DOCKER_VOLUME_DIR}/${right}"
+                    ## No pattern like "/data" on the left
+                    if [[ ${right} == "/"* ]]; then
+                        ## -- pattern like: "data:/containerPath/data"
+                        debug "-- pattern like ./data:/data --"
+                        VOLUME_MAP="${VOLUME_MAP} -v ${LOCAL_VOLUME_DIR}/${left}:${right}"
+                    else
+                        ## -- pattern like: "data:data"
+                        debug "-- pattern like data:data --"
+                        VOLUME_MAP="${VOLUME_MAP} -v ${LOCAL_VOLUME_DIR}/${left}:${DOCKER_VOLUME_DIR}/${right}"
+                    fi
+                    mkdir -p ${LOCAL_VOLUME_DIR}/${left}
+                    if [ $DEBUG -gt 0 ]; then ls -al ${LOCAL_VOLUME_DIR}/${left}; fi
                 fi
-                mkdir -p ${LOCAL_VOLUME_DIR}/${left}
-                if [ $DEBUG -gt 0 ]; then ls -al ${LOCAL_VOLUME_DIR}/${left}; fi
             fi
         else
             ## -- pattern like: "data"
@@ -423,8 +440,8 @@ echo ${privilegedString}
 #### ---- Mostly, you don't need change below ----
 ###################################################
 function cleanup() {
-    if [ ! "`sudo docker ps -a|grep ${instanceName}`" == "" ]; then
-         sudo docker rm -f ${instanceName}
+    if [ ! "`docker ps -a|grep ${instanceName}`" == "" ]; then
+         docker rm -f ${instanceName}
     fi
 }
 
@@ -518,7 +535,7 @@ case "${BUILD_TYPE}" in
     0)
         ## 0: (default) has neither X11 nor VNC/noVNC container build image type 
         set -x 
-        sudo docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
+        docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
             --name=${instanceName} \
             --restart=${RESTART_OPTION} \
             ${privilegedString} \
@@ -535,7 +552,7 @@ case "${BUILD_TYPE}" in
         xhost +SI:localuser:$(id -un) 
         set -x 
         DISPLAY=${MY_IP}:0 \
-        sudo docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
+        docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
             --name=${instanceName} \
             --restart=${RESTART_OPTION} \
             -e DISPLAY=$DISPLAY \
@@ -558,7 +575,7 @@ case "${BUILD_TYPE}" in
             ENV_VARS="${ENV_VARS} -e VNC_RESOLUTION=${VNC_RESOLUTION}" 
         fi
         set -x 
-        sudo docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
+        docker run ${REMOVE_OPTION} ${MORE_OPTIONS} ${RUN_OPTION} \
             --name=${instanceName} \
             --restart=${RESTART_OPTION} \
             ${privilegedString} \
