@@ -176,6 +176,22 @@ For example, try the following Docker-based IDEs:
 * [Alpine small image JDKs](https://github.com/frol/docker-alpine-oraclejdk8)
 * [NPM Prefix for not using SUDO NPM](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
 
+# Proxy & Certificate Setup
+* [Setup System and Browsers Root Certificate](https://thomas-leister.de/en/how-to-import-ca-root-certificate/)
+
+# Corporate Proxy Root and Intemediate Certificates setup for System and Web Browsers (FireFox, Chrome, etc)
+1. Save your corporate's Certificates in the currnet GIT directory, `./certificates`
+2. During Docker run command, 
+```
+   -v `pwd`/certificates:/certificates ... (the rest parameters)
+```
+If you want to map to different directory for certificates, e.g., /home/developer/certificates, then
+```
+   -v `pwd`/certificates:/home/developer/certificates -e SOURCE_CERTIFICATES_DIR=/home/developer/certificates ... (the rest parameters)
+```
+3. And, inside the Docker startup script to invoke the `~/scripts/setup_system_certificates.sh`. Note that the script assumes the certficates are in `/certificates` directory.
+4. The script `~/scripts/setup_system_certificates.sh` will automatic copy to target directory and setup certificates for both System commands (wget, curl, etc) to use and Web Browsers'.
+
 # Releases information
 ```
 RUN_TYPE=0

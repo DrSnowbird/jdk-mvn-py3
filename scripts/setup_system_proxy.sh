@@ -88,10 +88,12 @@ function addProxyToEtcEnv() {
     echo "================= Setup System /etc/environment Proxy ===================="
     etc_proxy_already="`cat ${ETC_ENV}|grep -i proxy`"
     if [ "${etc_proxy_already}" = "" ] && [ ${HAS_PROXY} -gt 0 ]; then
+        no_proxy=${no_proxy//[[:blank:]]/}
+        no_proxy=${no_proxy//\"/}
         [ ! -z "${http_proxy}" ] && echo "http_proxy=${http_proxy}" | sudo tee -a ${ETC_ENV}
         [ ! -z "${https_proxy}" ] && echo "https_proxy=${https_proxy}" | sudo tee -a ${ETC_ENV}
         [ ! -z "${ftp_proxy}" ] && echo "ftp_proxy=${ftp_proxy}" | sudo tee -a ${ETC_ENV}
-        [ ! -z "${no_proxy}" ] && echo "no_proxy=\"${no_proxy}\"" | sudo tee -a ${ETC_ENV}
+        [ ! -z "${no_proxy}" ] && echo "no_proxy=${no_proxy}" | sudo tee -a ${ETC_ENV}
     fi
 }
 addProxyToEtcEnv
