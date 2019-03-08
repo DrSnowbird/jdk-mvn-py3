@@ -90,17 +90,14 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
   && ln -s ${MAVEN_HOME} /usr/maven
 
 ########################################
-#### ---- Pip install packages ---- ####
+#### ---- PIP install packages ---- ####
 ########################################
 COPY requirements.txt ./
 
-## ---------------------------------------------------
-## Don't upgrade pip to 10.0.x version -- it's broken! 
-## Staying with version 8 to avoid the problem
-## ---------------------------------------------------
-
-RUN pip3 install --upgrade pip 
-RUN pip3 install -r ./requirements.txt 
+## -- if pkg-resources error occurs, then do this! -- ##
+# pip3 uninstall pkg-resources==0.0.0
+RUN pip3 --no-cache-dir install --upgrade pip 
+RUN pip3 --no-cache-dir install --ignore-installed -U -r requirements.txt
 
 ## VERSIONS ##
 ENV PATH=${PATH}:${JAVA_HOME}/bin
@@ -167,11 +164,10 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
 #### ---- NPM PREFIX ---- ####
 ##############################
 ENV NPM_CONFIG_PREFIX=${NPM_CONFIG_PREFIX:-${HOME}/.npm-global}
+ENV PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
 RUN mkdir -p ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
     chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    ${SCRIPT_DIR}/install-npm-packages.sh
-
-ENV PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
+    export PATH=$PATH && ${SCRIPT_DIR}/install-npm-packages.sh
 
 ###########################################
 #### ---- entrypoint script setup ---- ####

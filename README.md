@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5 + pip 19.0 + node 11.9 + npm 6.5 + Gradle 5.2
+# Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.2
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -194,32 +194,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-RUN_TYPE=0
-RUN_OPTION= -it 
-RESTART_OPTION=no
-REMOVE_OPTION= --rm 
---- INFO: Docker Run Environment file './docker-run.env' FOUND!
--v /home/user1/data-docker/jdk-mvn-py3/data:/home/developer/data -v /home/user1/data-docker/jdk-mvn-py3/workspace:/home/developer/workspace
-PORT_MAP=
-ENV_VARS=
-... Setup Docker Run Proxy: ...
-ENV_VARS= 
-Ubuntu ... not SE-Lunix ... no privileged needed
-
-
----------------------------------------------
----- Starting a Container for openkbs/jdk-mvn-py3
----------------------------------------------
---------------------------------------------------------
-==> Commands to manage Container:
---------------------------------------------------------
-  ./shell.sh : to shell into the container
-  ./stop.sh  : to stop the container
-  ./log.sh   : to show the docker run log
-  ./build.sh : to build the container
-  ./commit.sh: to push the container image to docker hub
---------------------------------------------------------
-+ docker run --rm -it --name=jdk-mvn-py3 --restart=no -v /home/user1/data-docker/jdk-mvn-py3/data:/home/developer/data -v /home/user1/data-docker/jdk-mvn-py3/workspace:/home/developer/workspace openkbs/jdk-mvn-py3 /usr/printVersions.sh
+developer@f0bacf2c7458:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -231,16 +206,27 @@ Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:4
 Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_202, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_202/jre
 Default locale: en_US, platform encoding: UTF-8
-OS name: "linux", version: "4.15.0-45-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "4.15.0-46-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
 + python3 -V
 Python 3.5.2
 + pip --version
-pip 19.0.2 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + pip3 --version
-pip 19.0.2 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + gradle --version
+
+Welcome to Gradle 5.2.1!
+
+Here are the highlights of this release:
+ - Define sets of dependencies that work together with Java Platform plugin
+ - New C++ plugins with dependency management built-in
+ - New C++ project types for gradle init
+ - Service injection into plugins and project extensions
+
+For more details see https://docs.gradle.org/5.2.1/release-notes.html
+
 
 ------------------------------------------------------------
 Gradle 5.2.1
@@ -254,12 +240,12 @@ Kotlin:       1.3.20
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_202 (Oracle Corporation 25.202-b08)
-OS:           Linux 4.15.0-45-generic amd64
+OS:           Linux 4.15.0-46-generic amd64
 
 + npm -v
-6.5.0
+6.7.0
 + node -v
-v11.9.0
+v11.11.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
@@ -276,5 +262,4 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
-+ set +x
 ```
