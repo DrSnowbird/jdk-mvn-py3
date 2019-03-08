@@ -6,6 +6,16 @@
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
 This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
 
+# NOTICE: ''Change to Non-Root implementation''
+This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
+Here are some of the things you can do if your images requiring "Root" acccess - you `really` want to do it:
+1. For Docker build: Use "sudo" or "sudo -H" prefix to you Dockerfile's command which requiring "sudo" access to install packages.
+2. For Docker container (access via shell): Use "sudo" command when you need to access root privilges to install packages.
+3. Or, you can use older version of this kind of base images which use "root" in Dockerfile.
+4. Yet, you can also modify the Dockerfile at the very bottom to remove/comment out the "USER ${USER}" line so that your child images can have root as USER.
+5. Finally, you can also, add a new line at the very top of your child image's Dockerfile to include "USER 0" so that your Docker images built will be using "root".
+We like to promote the use of "Non-Root" images as better Docker security practice. And, whenever possible, you also want to further confine the use of "root" privilges in your Docker image so that it can prevent the "rooting hacking into your Host system".
+
 # Components:
 * java version "1.8.0_202"
   Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
@@ -117,7 +127,7 @@ alias dpy3='docker run --rm openkbs/jdk-mvn-py3 python3'
 dpy3 -c 'print("Hello World")'
 ```
 
-# Compile or Run java while no local installation needed
+# Compile or Run java -- while no local installation needed
 Remember, the default working directory, /data, inside the docker container -- treat is as "/".
 So, if you create subdirectory, "./data/workspace", in the host machine and 
 the docker container will have it as "/data/workspace".
@@ -145,7 +155,7 @@ Hello, World
 Hence, the alias above, "djavac" and "djava" is your docker-based "javac" and "java" commands and 
 it will work the same way as your local installed Java's "javac" and "java" commands. 
 
-# JavaScript Runner while no local installation needed
+# Run JavaScript -- while no local installation needed
 Run the NodeJS mini-server script:
 ```
 ./tryNodeJS.sh

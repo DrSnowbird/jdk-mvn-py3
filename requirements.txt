@@ -27,3 +27,4 @@ gensim
 pyLDAvis
 ipykernel
 jupyter
+virtualenvwrapper

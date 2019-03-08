@@ -99,6 +99,9 @@ COPY requirements.txt ./
 RUN pip3 --no-cache-dir install --upgrade pip 
 RUN pip3 --no-cache-dir install --ignore-installed -U -r requirements.txt
 
+## -- added Local PIP installation bin to PATH
+ENV PATH=${PATH}:${HOME}/.local/bin
+
 ## VERSIONS ##
 ENV PATH=${PATH}:${JAVA_HOME}/bin
 
