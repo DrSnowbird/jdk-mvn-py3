@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
   ide:
-    image: psharkey/intellij:latest
-#    image: psharkey/netbeans-8.1:latest
+    image: openkbs/intellij-docker
+#    image: openkbs/netbeans10-docker
     environment:
       - DISPLAY=novnc:0.0
     depends_on:
