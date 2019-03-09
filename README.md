@@ -6,15 +6,25 @@
 By using this image, you agree the [Oracle Java JDK License](http://www.oracle.com/technetwork/java/javase/terms/license/index.html).
 This image contains [Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html). You must accept the [Oracle Binary Code License Agreement for Java SE](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) to use this image.
 
-# NOTICE: ''Change to Non-Root implementation''
+# NOTICE: ''Change to use Non-Root implementation''
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
 Here are some of the things you can do if your images requiring "Root" acccess - you `really` want to do it:
-1. For Docker build: Use "sudo" or "sudo -H" prefix to you Dockerfile's command which requiring "sudo" access to install packages.
-2. For Docker container (access via shell): Use "sudo" command when you need to access root privilges to install packages.
+1. For Docker build: Use "sudo" or "sudo -H" prefix to your Dockerfile's command which requiring "sudo" access to install packages.
+2. For Docker container (access via shell): Use "sudo" command when you need to access root privilges to install packages or change configurations.
 3. Or, you can use older version of this kind of base images which use "root" in Dockerfile.
 4. Yet, you can also modify the Dockerfile at the very bottom to remove/comment out the "USER ${USER}" line so that your child images can have root as USER.
-5. Finally, you can also, add a new line at the very top of your child image's Dockerfile to include "USER 0" so that your Docker images built will be using "root".
-We like to promote the use of "Non-Root" images as better Docker security practice. And, whenever possible, you also want to further confine the use of "root" privilges in your Docker image so that it can prevent the "rooting hacking into your Host system".
+5. Finally, you can also, add a new line at the very top of your child Docker image's Dockerfile to include "USER root" so that your Docker images built will be using "root".
+
+We like to promote the use of "Non-Root" images as better Docker security practice. And, whenever possible, you also want to further confine the use of "root" privilges in your Docker implementation so that it can prevent the "rooting hacking into your Host system". To lock down your docker images and/or this base image, you will add the following line at the very end to remove sudo: `(Notice that this might break some of your run-time code if you use sudo during run-time)`
+```
+sudo agt-get remove -y sudo
+```
+After that, combining with other Docker security practice (see below references), you just re-build your local images and re-deploy it as non-development quality of docker container. However, there are many other practices to secure your Docker containes. See below:
+
+* [Docker security | Docker Documentation](https://docs.docker.com/engine/security/security/)
+* [5 tips for securing your Docker containers - TechRepublic](https://www.techrepublic.com/article/5-tips-for-securing-your-docker-containers/)
+* [Docker Security - 6 Ways to Secure Your Docker Containers](https://www.sumologic.com/blog/security/securing-docker-containers/)
+* [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components:
 * java version "1.8.0_202"
@@ -273,3 +283,4 @@ BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
 ```
+
