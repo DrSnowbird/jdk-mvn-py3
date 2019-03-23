@@ -27,13 +27,14 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components:
+* Eclipse Phonto JEE version (you can change if by change Dockerfile)
 * java version "1.8.0_202"
   Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
   Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
 * Apache Maven 3.6.0
-* Python 3.5.2 / Python 2.7.12 + pip 19.0.2
-* Node v11.9.0 + npm 6.5.0 (from NodeSource official Node Distribution)
-* Gradle 5.1
+* Python 3.5.2 / Python 2.7.12 + pip 19.0.3
+* Node v11.11.0 + npm 6.7.0 (from NodeSource official Node Distribution)
+* Gradle 5.2
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 # Quick commands
