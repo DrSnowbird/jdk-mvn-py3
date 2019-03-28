@@ -27,7 +27,6 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components:
-* Eclipse Phonto JEE version (you can change if by change Dockerfile)
 * java version "1.8.0_202"
   Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
   Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
