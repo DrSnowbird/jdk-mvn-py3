@@ -73,6 +73,7 @@ echo
 echo "---> 3.) curl http://localhost:${HOST_PORT}/"
 curl -s http://localhost:${HOST_PORT}/
 
+echo "... You have $TIMEOUT_SEC seconds to try out the above URL provided by JavaScript as Web Servers."
 sleep $TIMEOUT_SEC
 
 cleanup

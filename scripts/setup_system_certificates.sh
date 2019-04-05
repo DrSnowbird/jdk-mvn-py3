@@ -139,7 +139,7 @@ if [ $OS_TYPE -eq 1 ]; then
 else
     if [ $OS_TYPE -eq 1 ]; then
         # CentOS
-        CERT_COMMAND=`which update-ca-trust extract`
+        CERT_COMMAND=`which update-ca-trust`
         TARGET_CERTIFICATES_DIR=/etc/pki/ca-trust/source/anchors
         CMD_OPT=extract
     else

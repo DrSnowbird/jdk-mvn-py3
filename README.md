@@ -1,4 +1,4 @@
-# Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.2
+# Java 8 (1.8.0_202) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.3
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -31,9 +31,9 @@ After that, combining with other Docker security practice (see below references)
   Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
   Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
 * Apache Maven 3.6.0
-* Python 3.5.2 / Python 2.7.12 + pip 19.0.3
+* Python 3.5.2 / Python 2.7.12 + pip 19.0.3 + Python3 virtual environments
 * Node v11.11.0 + npm 6.7.0 (from NodeSource official Node Distribution)
-* Gradle 5.2
+* Gradle 5.3
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
 
 # Quick commands
@@ -214,7 +214,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@f0bacf2c7458:~$ /usr/scripts/printVersions.sh 
+developer@4923deb8689d:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/java
 JAVA_HOME=/usr/java
 + java -version
@@ -226,7 +226,7 @@ Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:4
 Maven home: /usr/apache-maven-3.6.0
 Java version: 1.8.0_202, vendor: Oracle Corporation, runtime: /usr/jdk1.8.0_202/jre
 Default locale: en_US, platform encoding: UTF-8
-OS name: "linux", version: "4.15.0-46-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "4.18.0-17-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.12
 + python3 -V
@@ -237,45 +237,43 @@ pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 pip 19.0.3 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
 + gradle --version
 
-Welcome to Gradle 5.2.1!
+Welcome to Gradle 5.3.1!
 
 Here are the highlights of this release:
- - Define sets of dependencies that work together with Java Platform plugin
- - New C++ plugins with dependency management built-in
- - New C++ project types for gradle init
- - Service injection into plugins and project extensions
+ - Feature variants AKA "optional dependencies"
+ - Type-safe accessors in Kotlin precompiled script plugins
+ - Gradle Module Metadata 1.0
 
-For more details see https://docs.gradle.org/5.2.1/release-notes.html
+For more details see https://docs.gradle.org/5.3.1/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 5.2.1
+Gradle 5.3.1
 ------------------------------------------------------------
 
-Build time:   2019-02-08 19:00:10 UTC
-Revision:     f02764e074c32ee8851a4e1877dd1fea8ffb7183
+Build time:   2019-03-28 09:09:23 UTC
+Revision:     f2fae6ba563cfb772c8bc35d31e43c59a5b620c3
 
-Kotlin DSL:   1.1.3
-Kotlin:       1.3.20
+Kotlin:       1.3.21
 Groovy:       2.5.4
 Ant:          Apache Ant(TM) version 1.9.13 compiled on July 10 2018
 JVM:          1.8.0_202 (Oracle Corporation 25.202-b08)
-OS:           Linux 4.15.0-46-generic amd64
+OS:           Linux 4.18.0-17-generic amd64
 
 + npm -v
 6.7.0
 + node -v
-v11.11.0
+v11.13.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
 DISTRIB_CODENAME=xenial
-DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
+DISTRIB_DESCRIPTION="Ubuntu 16.04.6 LTS"
 NAME="Ubuntu"
-VERSION="16.04.3 LTS (Xenial Xerus)"
+VERSION="16.04.6 LTS (Xenial Xerus)"
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.3 LTS"
+PRETTY_NAME="Ubuntu 16.04.6 LTS"
 VERSION_ID="16.04"
 HOME_URL="http://www.ubuntu.com/"
 SUPPORT_URL="http://help.ubuntu.com/"

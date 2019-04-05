@@ -27,7 +27,7 @@ RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 ########################################
 RUN apt-get update -y && \
     apt-get install -y apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && \
-    apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-numpy python3-scipy python3-pandas python3-matplotlib && \
+    apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
     apt-get install -y git xz-utils && \
     apt-get install -y sudo && \
     apt-get clean && \
@@ -118,13 +118,13 @@ RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
 #### ---- Install Gradle ---- #####
 ###################################
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-5.2.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-5.3.1}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
 ARG GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
 ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
-# https://services.gradle.org/distributions/gradle-5.2.1-bin.zip
+# https://services.gradle.org/distributions/gradle-5.3.1-bin.zip
 RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
     wget -q --no-check-certificate -c ${GRADLE_PACKAGE_URL} && \
