@@ -1,4 +1,7 @@
-FROM ubuntu:xenial
+#FROM ubuntu:xenial
+# FROM debian
+FROM ubuntu
+#FROM buildpack-deps:stretch-scm
 
 MAINTAINER openkbs.org@gmail.com
 
@@ -33,49 +36,82 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+########################################
+#### ------- OpenJDK Installation ------
+########################################
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG en_US.utf8
 
-###################################
-#### ---- Install Java 8 ----  ####
-###################################
-#### ---------------------------------------------------------------
-#### ---- Change below when upgrading version ----
-#### ---------------------------------------------------------------
-## https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jdk-8u202-linux-x64.tar.gz
-ARG JAVA_MAJOR_VERSION=${JAVA_MAJOR_VERSION:-8}
-ARG JAVA_UPDATE_VERSION=${JAVA_UPDATE_VERSION:-202}
-ARG JAVA_BUILD_NUMBER=${JAVA_BUILD_NUMBER:-08}
-ARG JAVA_DOWNLOAD_TOKEN=${JAVA_DOWNLOAD_TOKEN:-1961070e4c9b4e26a04e7f5a083f551e}
+# A few reasons for installing distribution-provided OpenJDK:
+#
+#  1. Oracle.  Licensing prevents us from redistributing the official JDK.
+#
+#  2. Compiling OpenJDK also requires the JDK to be installed, and it gets
+#     really hairy.
+#
+#     For some sample build times, see Debian's buildd logs:
+#       https://buildd.debian.org/status/logs.php?pkg=openjdk-8
 
-#### ---------------------------------------------------------------
-#### ---- Don't change below unless you know what you are doing ----
-#### ---------------------------------------------------------------
-ARG UPDATE_VERSION=${JAVA_MAJOR_VERSION}u${JAVA_UPDATE_VERSION}
-ARG BUILD_VERSION=b${JAVA_BUILD_NUMBER}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		bzip2 \
+		unzip \
+		xz-utils \
+	&& rm -rf /var/lib/apt/lists/*
 
-ENV JAVA_HOME_ACTUAL=${INSTALL_DIR}/jdk1.${JAVA_MAJOR_VERSION}.0_${JAVA_UPDATE_VERSION}
-ENV JAVA_HOME=${INSTALL_DIR}/java
+# Default to UTF-8 file.encoding
+ENV LANG C.UTF-8
 
-ENV PATH=$PATH:${JAVA_HOME}/bin
+# add a simple script that can auto-detect the appropriate JAVA_HOME value
+# based on whether the JDK or only the JRE is installed
+RUN { \
+		echo '#!/bin/sh'; \
+		echo 'set -e'; \
+		echo; \
+		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
+	} > /usr/local/bin/docker-java-home \
+	&& chmod +x /usr/local/bin/docker-java-home
 
-WORKDIR ${INSTALL_DIR}
+# do some fancy footwork to create a JAVA_HOME that's cross-architecture-safe
+RUN ln -svT "/usr/lib/jvm/java-8-openjdk-$(dpkg --print-architecture)" /docker-java-home
+ENV JAVA_HOME /docker-java-home
 
-RUN curl -sL --retry 3 --insecure \
-  --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
-  "http://download.oracle.com/otn-pub/java/jdk/${UPDATE_VERSION}-${BUILD_VERSION}/${JAVA_DOWNLOAD_TOKEN}/jdk-${UPDATE_VERSION}-linux-x64.tar.gz" \
-  | gunzip \
-  | tar x -C ${INSTALL_DIR}
-RUN ls -al ${INSTALL_DIR} && \
-  ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
-  rm -rf ${JAVA_HOME}/man
+ENV JAVA_VERSION 8u212
+# ENV JAVA_DEBIAN_VERSION 8u212-b01-1~deb9u1
+ENV JAVA_DEBIAN_VERSION=8u212-b03-0ubuntu1.18.04.1-b03
+#ENV JAVA_DEBIAN_VERSION 8u212-b01-1
 
-#############################
-#### ---- JAVA_HOME --- #####
-#############################
-ENV JAVA_HOME=$INSTALL_DIR/java
+RUN set -ex; \
+	\
+# deal with slim variants not having man page directories (which causes "update-alternatives" to fail)
+	if [ ! -d /usr/share/man/man1 ]; then \
+		mkdir -p /usr/share/man/man1; \
+	fi; \
+	\
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
+#		openjdk-8-jdk="$JAVA_DEBIAN_VERSION" \
+		openjdk-8-jdk \
+	; \
+	rm -rf /var/lib/apt/lists/*; \
+	\
+# verify that "docker-java-home" returns what we expect
+	[ "$(readlink -f "$JAVA_HOME")" = "$(docker-java-home)" ]; \
+	\
+# update-alternatives so that future installs of other OpenJDK versions don't change /usr/bin/java
+	update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOME")" 'index($3, home) == 1 { $2 = "manual"; print | "update-alternatives --set-selections" }'; \
+# ... and verify that it actually worked for one of the alternatives we care about
+	update-alternatives --query java | grep -q 'Status: manual'
+
+# If you're reading this and have any feedback on how this image could be
+# improved, please open an issue or a pull request so we can discuss it!
+#
+#   https://github.com/docker-library/openjdk/issues
+
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
 
 ###################################
 #### ---- Install Maven 3 ---- ####

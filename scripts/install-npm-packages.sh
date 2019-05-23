@@ -8,6 +8,6 @@ id
 
 env
 
-for pkg in `cat ${SCRIPT_DIR}/requirements-npm.txt`; do
-    npm install -g $pkg
+for pkg in `cat ${SCRIPT_DIR}/requirements-npm.txt | grep -v '^#'`; do
+    npm install $pkg
 done

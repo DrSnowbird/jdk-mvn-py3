@@ -9,6 +9,7 @@ requests
 j2cli
 jinja2
 hyperopt
+json-lines
 
 # Math / Algebra Libs
 numpy

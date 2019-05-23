@@ -1,8 +1,7 @@
 #!/bin/bash
 
-SCRIPT_FILE=SimpleServer.js
-HOST_PORT=3000
-SERVER_PORT=3000
+SCRIPT_FILE=WebSocketServer.js
+HOST_PORT=8080
 
 ###################################################
 #### ---- Change this only if want to use your own
@@ -28,28 +27,41 @@ cleanup
 
 mkdir -p ./data
 
-# To run: nodejs ./SimpleServer.js
-# Then => Open http://localhost:3000/
+# To run: nodejs ./WebSocketServer.js
+# Then => Open http://localhost:8080/
 # To see: Hello World!
 
 cat > ./data/${SCRIPT_FILE} <<'EOF'
-const http = require('http');
+const WebSocket = require('ws');
+ 
+const wss = new WebSocket.Server({ port: 8080 , host : '0.0.0.0'});
+ 
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+ 
+  ws.send('something');
+});
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({ port: 8080, host : '0.0.0.0' });
 
-const hostname = '0.0.0.0';
-const port = 3000;
+wss.on('connection', function connection(ws) {
+    console.log('Server WebSocket was connected.');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World from openkbs/jdk-mvn-py3 with NodeJS supports! \n See https://github.com/DrSnowbird/jdk-mvn-py3 \n');
+    ws.on('message', function incoming(message) {
+        console.log('received: %s', message);
+    });
+
+    ws.send('Hello World from openkbs/jdk-mvn-py3 with WebSocket in NodeJS supports! \n See https://github.com/DrSnowbird/jdk-mvn-py3 \n');
+    
+    ws.on('close', function () {
+        console.log('websocket connection closed!');
+    });
+
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
 EOF
-
-# cat ./data/${SCRIPT_FILE}
 
 TIMEOUT_SEC=20
 
@@ -64,9 +76,9 @@ echo "---> Or, command line:"
 echo "        curl http://localhost:${HOST_PORT}/"
 echo "        curl http://127.0.0.1:${HOST_PORT}/"
 echo
-docker run -d --rm --name ${instanceName} -v $PWD/data:/data -p ${HOST_PORT}:${SERVER_PORT} --workdir /data openkbs/jdk-mvn-py3 nodejs /data/${SCRIPT_FILE}
+docker run -d --rm --name ${instanceName} -v $PWD/data:/data -p ${HOST_PORT}:3000 --workdir /data openkbs/jdk-mvn-py3 nodejs /data/${SCRIPT_FILE}
 
-echo "---> Testing the mini-server by the ${SCRIPT_FILE} script:"
+echo "---> Testing the mini-server by the WebSocketServer.js script:"
 echo
 echo "---> 1.) curl GET http://127.0.0.1:${HOST_PORT}/"
 curl -s GET http://127.0.0.1:${HOST_PORT}/
