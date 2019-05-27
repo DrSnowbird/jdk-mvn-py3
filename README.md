@@ -1,9 +1,9 @@
-# OpenJDK Java 8 (1.8.0_212) JDK + Maven 3.6 + Python 3.5/2.7 + pip 19.0 + node 11.11 + npm 6.7 + Gradle 5.3
+# OpenJDK Java 8 (1.8.0_212) JDK + Maven 3.6 + Python 3.6/2.7 + pip 19 + node 11 + npm 6 + Gradle 5.3
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
 # ** UPDATE **
-Change to OpenJDK from now on!!
+Use OpenJDK from now on!!
 
 # NOTICE: ''Change to use Non-Root implementation''
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -30,10 +30,10 @@ After that, combining with other Docker security practice (see below references)
   OpenJDK Runtime Environment (build 1.8.0_212-8u212-b01-1~deb9u1-b01)
   OpenJDK 64-Bit Server VM (build 25.212-b01, mixed mode)
 * Apache Maven 3.6.0
-* Python 3.5.2 / Python 2.7.12 + pip 19.0.3 + Python3 virtual environments
-* Node v11.11.0 + npm 6.7.0 (from NodeSource official Node Distribution)
+* Python 3.6 / Python 2.7 + pip 19.1 + Python3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
+* Node v11.15.0 + npm 6.7.0 (from NodeSource official Node Distribution)
 * Gradle 5.3
-* Other tools: git wget unzip vim python python-setuptools python-dev python-numpy 
+* Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 
 # Quick commands
 * build.sh - build local image
@@ -50,6 +50,7 @@ After that, combining with other Docker security practice (see below references)
 1. git clone https://github.com/DrSnowbird/jdk-mvn-py3.git
 2. cd jdk-mvn-py3
 3. ./run.sh
+
 # Default Run (test) - Just entering Container
 ```
 ./run.sh
@@ -60,6 +61,7 @@ After that, combining with other Docker security practice (see below references)
 ./tryJava.sh
 ./tryNodeJS.sh
 ./tryPython.sh
+./tryWebSockerServer.sh
 ```
 # Default Build (locally)
 ```
@@ -171,6 +173,29 @@ Run the NodeJS mini-server script:
 ./tryNodeJS.sh
 ```
 Then, open web browser to go to http://0.0.0.0:3000/ to NodeJS mini-web server test.
+
+# Python Virtual Environments
+There are various ways to run Python virtual envrionments, for example,
+
+### Setup virtualenvwrapper in $HOME/.bashrc profile
+Add the following code to the end of ~/.bashrc
+```
+#########################################################################
+#### ---- Customization for multiple virtual python environment ---- ####
+#########################################################################
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=~/Envs
+if [ ! -d $WORKON_HOME ]; then
+    mkdir -p $WORKON_HOME
+fi
+```
+
+### To create & activate your default venv environment, say, "my-venv":
+```
+mkvirtualenv my-venv
+workon my-venv
+```
 
 # To run specialty Java/Scala IDE alternatives
 However, for larger complex projects, you might want to consider to use Docker-based IDE. 
