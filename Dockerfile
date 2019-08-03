@@ -77,10 +77,9 @@ RUN { \
 RUN ln -svT "/usr/lib/jvm/java-8-openjdk-$(dpkg --print-architecture)" /docker-java-home
 ENV JAVA_HOME /docker-java-home
 
-ENV JAVA_VERSION 8u212
-# ENV JAVA_DEBIAN_VERSION 8u212-b01-1~deb9u1
-ENV JAVA_DEBIAN_VERSION=8u212-b03-0ubuntu1.18.04.1-b03
-#ENV JAVA_DEBIAN_VERSION 8u212-b01-1
+# source: https://packages.debian.org/sid/openjdk-8-jdk
+#ENV JAVA_DEBIAN_VERSION=8u212-b03-0ubuntu1.18.04.1-b03
+ENV JAVA_DEBIAN_VERSION=8u222-b10-0ubuntu1.18.04.1-b10
 
 RUN set -ex; \
 	\
@@ -112,11 +111,10 @@ RUN set -ex; \
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-
 ###################################
 #### ---- Install Maven 3 ---- ####
 ###################################
-ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.0}
+ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.1}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
 ENV PATH=${PATH}:${MAVEN_HOME}/bin
@@ -154,7 +152,7 @@ RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
 #### ---- Install Gradle ---- #####
 ###################################
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-5.3.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-5.5.1}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
