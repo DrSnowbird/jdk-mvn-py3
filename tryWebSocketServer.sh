@@ -84,7 +84,7 @@ echo "---> Or, command line:"
 echo "        curl http://localhost:${HOST_PORT}/"
 echo "        curl http://127.0.0.1:${HOST_PORT}/"
 echo
-docker run -it --rm --name ${instanceName} -v $PWD/data:/data -p ${HOST_PORT}:${SERVER_PORT} --workdir /data openkbs/jdk-mvn-py3 nodejs /data/${SCRIPT_FILE}
+docker run -d --rm --name ${instanceName} -v $PWD/data:/data -p ${HOST_PORT}:${SERVER_PORT} --workdir /data openkbs/jdk-mvn-py3 nodejs /data/${SCRIPT_FILE}
 
 echo "---> Testing the mini-server by the ${SCRIPT_FILE} script:"
 echo "Use Web Socket Client, e.g., Chrome plugins, WebSocketTestClient, SimpleWebSocketClient in brwoser to test:"
