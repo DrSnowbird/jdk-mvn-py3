@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 
 echo "JAVA_HOME=$JAVA_HOME"
 java -version

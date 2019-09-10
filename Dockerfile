@@ -114,7 +114,7 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 ###################################
 #### ---- Install Maven 3 ---- ####
 ###################################
-ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.1}
+ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.2}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
 ENV PATH=${PATH}:${MAVEN_HOME}/bin
@@ -151,14 +151,16 @@ RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
 ###################################
 #### ---- Install Gradle ---- #####
 ###################################
+# Ref: https://gradle.org/releases/
+
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-5.5.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-5.6.2}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
 ARG GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
 ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
-# https://services.gradle.org/distributions/gradle-5.3.1-bin.zip
+
 RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
     wget -q --no-check-certificate -c ${GRADLE_PACKAGE_URL} && \
@@ -172,7 +174,8 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-11}
+
+ARG NODE_VERSION=${NODE_VERSION:-12}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
