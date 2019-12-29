@@ -4,8 +4,8 @@ MAINTAINER openkbs.org@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV JAVA_VERSION=8
-#ENV JAVA_VERSION=11
+#ENV JAVA_VERSION=8
+ENV JAVA_VERSION=11
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -62,8 +62,7 @@ ENV LANG C.UTF-8
 
 # source: https://packages.debian.org/source/sid/openjdk-8
 # source: https://packages.debian.org/source/sid/openjdk-11
-# http://archive.ubuntu.com/ubuntu/pool/universe/o/openjdk-8/openjdk-8-jdk_8u232-b09-0ubuntu1~18.04.1_amd64.deb
-ENV JAVA_DEBIAN_VERSION=8u232-b09-0ubuntu1~18.04.1
+## # ENV JAVA_DEBIAN_VERSION=8u222-b10-0ubuntu1.18.04.1-b10
 
 ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
@@ -77,8 +76,8 @@ RUN set -ex; \
 	\
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		openjdk-${JAVA_VERSION}-jdk="$JAVA_DEBIAN_VERSION" \
-#		openjdk-${JAVA_VERSION}-jdk \
+#		openjdk-${JAVA_VERSION}-jdk="$JAVA_DEBIAN_VERSION" \
+		openjdk-${JAVA_VERSION}-jdk \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\

@@ -1,9 +1,9 @@
-# OpenJDK Java 8 (1.8.0_232) JDK + Maven 3.6 + Python 3.6/2.7 + pip 19 + node 12 + npm 6 + Gradle 6
+# OpenJDK Java 11 (1.11.04) JDK + Maven 3.6 + Python 3.6/2.7 + pip 19 + node 12 + npm 6 + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
 # ** UPDATE **
-Use OpenJDK from now on!!
+Use OpenJDK 11 from now on!!
 
 # NOTICE: ''Change to use Non-Root implementation''
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -26,10 +26,9 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components:
-* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 on 2020-04-15 as LTS Docker base image.
-* openjdk version "1.8.0_232"
-  OpenJDK Runtime Environment (build 1.8.0_232-8u232-b09-0ubuntu1~18.04.1-b09)
-  OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)
+* openjdk version "11.0.4" 2019-07-16
+  OpenJDK Runtime Environment (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
+  OpenJDK 64-Bit Server VM (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3, mixed mode, sharing)
 * Apache Maven 3.6
 * Python 3.6 / Python 2.7 + pip 19.2 + Python3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
 * Node v12.10.0 + npm 6.10.2 (from NodeSource official Node Distribution)
@@ -240,19 +239,19 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@4a89617f1947:~$ /usr/scripts/printVersions.sh 
-+ echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+developer@6cf4b4f32aad:~$ /usr/scripts/printVersions.sh 
++ echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 + java -version
-openjdk version "1.8.0_232"
-OpenJDK Runtime Environment (build 1.8.0_232-8u232-b09-0ubuntu1~18.04.1-b09)
-OpenJDK 64-Bit Server VM (build 25.232-b09, mixed mode)
+openjdk version "11.0.4" 2019-07-16
+OpenJDK Runtime Environment (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
+OpenJDK 64-Bit Server VM (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3, mixed mode, sharing)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_232, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 11.0.4, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.0.0-37-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.0.0-36-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.15+
 + python3 -V
@@ -290,13 +289,13 @@ Revision:     fad121066a68c4701acd362daf4287a7c309a0f5
 Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM:          1.8.0_232 (Private Build 25.232-b09)
-OS:           Linux 5.0.0-37-generic amd64
+JVM:          11.0.4 (Ubuntu 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
+OS:           Linux 5.0.0-36-generic amd64
 
 + npm -v
-6.13.4
+6.13.1
 + node -v
-v13.5.0
+v13.2.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -315,4 +314,3 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
 ```
-
