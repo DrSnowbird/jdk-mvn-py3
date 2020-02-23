@@ -160,6 +160,11 @@ RUN apt-get update -y && \
 RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
 
 ###################################
+#### ---- Update: all     ---- ####
+###################################
+RUN apt-get update -y
+
+###################################
 #### ---- user: developer ---- ####
 ###################################
 ENV USER_ID=${USER_ID:-1000}

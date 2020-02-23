@@ -240,7 +240,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@4a89617f1947:~$ /usr/scripts/printVersions.sh 
+developer@658108db69bf:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + java -version
@@ -252,7 +252,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_232, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.0.0-37-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.3.0-40-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.15+
 + python3 -V
@@ -291,7 +291,7 @@ Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
 JVM:          1.8.0_232 (Private Build 25.232-b09)
-OS:           Linux 5.0.0-37-generic amd64
+OS:           Linux 5.3.0-40-generic amd64
 
 + npm -v
 6.13.4
