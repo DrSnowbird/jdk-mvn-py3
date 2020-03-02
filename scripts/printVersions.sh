@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
 echo "JAVA_HOME=$JAVA_HOME"
+ls -al /java*
+echo
 java -version
 mvn --version
 python -V

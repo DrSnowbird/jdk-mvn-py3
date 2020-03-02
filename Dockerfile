@@ -4,8 +4,9 @@ MAINTAINER openkbs.org@gmail.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV JAVA_VERSION=8
+#ENV JAVA_VERSION=8
 #ENV JAVA_VERSION=11
+ENV JAVA_VERSION=${JAVA_VERSION:-8}
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -60,32 +61,32 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
-# source: https://packages.debian.org/source/sid/openjdk-8
-# source: https://packages.debian.org/source/sid/openjdk-11
-# http://archive.ubuntu.com/ubuntu/pool/universe/o/openjdk-8/openjdk-8-jdk_8u232-b09-0ubuntu1~18.04.1_amd64.deb
-ENV JAVA_DEBIAN_VERSION=8u232-b09-0ubuntu1~18.04.1
-
 ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-RUN set -ex; \
-	\
-# deal with slim variants not having man page directories (which causes "update-alternatives" to fail)
-	if [ ! -d /usr/share/man/man1 ]; then \
-		mkdir -p /usr/share/man/man1; \
-	fi; \
-	\
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		openjdk-${JAVA_VERSION}-jdk="$JAVA_DEBIAN_VERSION" \
-#		openjdk-${JAVA_VERSION}-jdk \
-	; \
-	rm -rf /var/lib/apt/lists/*; \
-	\
+# ------------------
+# OpenJDK Java:
+# ------------------
+
+#ARG OPENJDK_PACKAGE=default-jdk
+ARG OPENJDK_PACKAGE=${OPENJDK_PACKAGE:-openjdk-${JAVA_VERSION}-jdk}
+
+# -- To install JDK Source (src.zip), uncomment the line below: --
+#ARG OPENJDK_SRC=${OPENJDK_SRC:-openjdk-${JAVA_VERSION}-source}
+
+ARG OPENJDK_INSTALL_LIST="${OPENJDK_PACKAGE} ${OPENJDK_SRC}"
+
+RUN apt-get update -y && \
+    apt-get install -y ${OPENJDK_INSTALL_LIST} && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------------------------------------------
 # update-alternatives so that future installs of other OpenJDK versions don't change /usr/bin/java
-	update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOME")" 'index($3, home) == 1 { $2 = "manual"; print | "update-alternatives --set-selections" }'; \
 # ... and verify that it actually worked for one of the alternatives we care about
+# ------------------------------------------------------------------------------------------------
+RUN update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOME")" 'index($3, home) == 1 { $2 = "manual"; print | "update-alternatives --set-selections" }'; \
 	update-alternatives --query java | grep -q 'Status: manual'
+	
 
 ###################################
 #### ---- Install Maven 3 ---- ####
@@ -105,9 +106,15 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
 COPY requirements.txt ./
 
 ## -- if pkg-resources error occurs, then do this! -- ##
+## -- Warning:
+## WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+## Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+## To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+
 # pip3 uninstall pkg-resources==0.0.0
-RUN pip3 --no-cache-dir install --upgrade pip 
-RUN pip3 --no-cache-dir install --ignore-installed -U -r requirements.txt
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip  --no-cache-dir install --upgrade pip && \
+    python3 -m pip --no-cache-dir install --ignore-installed -U -r requirements.txt
 
 ## -- added Local PIP installation bin to PATH
 ENV PATH=${PATH}:${HOME}/.local/bin
