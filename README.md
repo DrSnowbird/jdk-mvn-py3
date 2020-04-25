@@ -1,4 +1,4 @@
-# OpenJDK Java 8 (1.8.0_242) JDK + Maven 3.6 + Python 3.6/2.7 + pip 20 + node 13 + npm 6 + Gradle 6
+# OpenJDK Java 8 (1.8.0_252) JDK + Maven 3.6 + Python 3.6/2.7 + pip 20 + node 14 + npm 6.14 + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -26,13 +26,13 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components:
-* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 on 2020-04-15 as LTS Docker base image.
-* openjdk version "1.8.0_242"
-  OpenJDK Runtime Environment (build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08)
-  OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)
+* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 on 2020-06-01 as LTS Docker base image (still in testing beta).
+* openjdk version "1.8.0_252" 
+  OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
+  OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 * Apache Maven 3.6
 * Python 3.6 / Python 2.7 + pip 19.2 + Python3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v13 + npm 6 (from NodeSource official Node Distribution)
+* Node v14 + npm 6.14 (from NodeSource official Node Distribution)
 * Gradle 6.0
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 
@@ -240,25 +240,25 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@f5c39ff7b8b2:~$ /usr/scripts/printVersions.sh 
+developer@232a1b151fea:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + ls -al /java-8-openjdk-amd64
-lrwxrwxrwx 1 root root 33 Mar  2 19:49 /java-8-openjdk-amd64 -> /usr/lib/jvm/java-8-openjdk-amd64
+lrwxrwxrwx 1 root root 33 Apr 25 16:32 /java-8-openjdk-amd64 -> /usr/lib/jvm/java-8-openjdk-amd64
 + echo
 
 + java -version
-openjdk version "1.8.0_242"
-OpenJDK Runtime Environment (build 1.8.0_242-8u242-b08-0ubuntu3~18.04-b08)
-OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)
+openjdk version "1.8.0_252"
+OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
+OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_242, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 1.8.0_252, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.3.0-40-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.3.0-46-generic", arch: "amd64", family: "unix"
 + python -V
-Python 2.7.15+
+Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
@@ -266,6 +266,23 @@ pip 20.0.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
 pip 20.0.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
+
+Welcome to Gradle 6.0.1!
+
+Here are the highlights of this release:
+ - Substantial improvements in dependency management, including
+   - Publishing Gradle Module Metadata in addition to pom.xml
+   - Advanced control of transitive versions
+   - Support for optional features and dependencies
+   - Rules to tweak published metadata
+ - Support for Java 13
+ - Faster incremental Java and Groovy compilation
+ - New Zinc compiler for Scala
+ - VS2019 support
+ - Support for Gradle Enterprise plugin 3.0
+
+For more details see https://docs.gradle.org/6.0.1/release-notes.html
+
 
 ------------------------------------------------------------
 Gradle 6.0.1
@@ -277,13 +294,13 @@ Revision:     fad121066a68c4701acd362daf4287a7c309a0f5
 Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM:          1.8.0_242 (Private Build 25.242-b08)
-OS:           Linux 5.3.0-40-generic amd64
+JVM:          1.8.0_252 (Private Build 25.252-b09)
+OS:           Linux 5.3.0-46-generic amd64
 
 + npm -v
-6.13.7
+6.14.4
 + node -v
-v13.9.0
+v14.0.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
