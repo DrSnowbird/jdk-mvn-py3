@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 echo "JAVA_HOME=$JAVA_HOME"
-ls -al /java*
+whereis java
 echo
 java -version
 mvn --version

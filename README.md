@@ -240,11 +240,11 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@232a1b151fea:~$ /usr/scripts/printVersions.sh 
+developer@6d7f72e6ed35:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-+ ls -al /java-8-openjdk-amd64
-lrwxrwxrwx 1 root root 33 Apr 25 16:32 /java-8-openjdk-amd64 -> /usr/lib/jvm/java-8-openjdk-amd64
++ whereis java
+java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 + echo
 
 + java -version

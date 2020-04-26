@@ -78,6 +78,8 @@ ARG OPENJDK_INSTALL_LIST="${OPENJDK_PACKAGE} ${OPENJDK_SRC}"
 
 RUN apt-get update -y && \
     apt-get install -y ${OPENJDK_INSTALL_LIST} && \
+    ls -al ${INSTALL_DIR} ${JAVA_HOME} && \
+    export PATH=$PATH ; echo "PATH=${PATH}" ; export JAVA_HOME=${JAVA_HOME} ; echo "java=`which java`" && \
     rm -rf /var/lib/apt/lists/*
 
 # ------------------------------------------------------------------------------------------------
@@ -121,12 +123,7 @@ ENV PATH=${PATH}:${HOME}/.local/bin
 ## VERSIONS ##
 ENV PATH=${PATH}:${JAVA_HOME}/bin
 
-RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
-    ls -al ${INSTALL_DIR} && \
-    echo "PATH=${PATH}" && export JAVA_HOME=${JAVA_HOME} && export PATH=$PATH && \
-    java -version && \
-    mvn --version && \
-    python -V && \
+RUN mvn --version && \
     python3 -V && \
     pip3 --version
 
