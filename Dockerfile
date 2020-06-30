@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 #ENV JAVA_VERSION=8
 #ENV JAVA_VERSION=11
+#ENV JAVA_VERSION=14
 ENV JAVA_VERSION=${JAVA_VERSION:-8}
 
 ##############################################
@@ -27,9 +28,16 @@ RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 ########################################
 #### update ubuntu and Install Python 3
 ########################################
+ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common "
+ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python-pip python-setuptools python-dev python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
+ARG LIB_TOOL_LIST="libsqlite3-dev sqlite3"
+
+#apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
 RUN apt-get update -y && \
     apt-get install -y apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && \
-    apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
+    apt-get install -y ${LIB_BASIC_LIST} && \
+    apt-get install -y ${LIB_COMMON_LIST} && \
+    apt-get install -y ${LIB_TOOL_LIST} && \
     apt-get install -y git xz-utils && \
     apt-get install -y sudo && \
     apt-get clean && \
