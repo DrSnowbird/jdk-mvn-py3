@@ -1,13 +1,10 @@
 # OpenJDK Java 8 (1.8.0_252) JDK + Maven 3.6 + Python 3.8 + pip 20 + node 14 + npm 6.14 + Gradle 6
 
+
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
-# ** UPDATE on 2020-06-30 (formally updated to Ubuntu 20.04 **
-* '''Ubuntu 20.04 LTS (Focal Fossa)'''
-* Python 3.8.2 is the default!
-  * Users want to Python 3.6 as base Docker image:
-    Please use the Docker Hub image tag "FROM openkbs/jdk-mvn-py3:v1.2.1"
-* Use OpenJDK from now on!!
+# ** This is Ubuntu 18.04 **
+
 
 # NOTICE: ''Change to use Non-Root implementation''
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -244,7 +241,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@641239ddb22c:~$ /usr/scripts/printVersions.sh 
+developer@f05d9788d0f8:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -253,7 +250,7 @@ java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /
 
 + java -version
 openjdk version "1.8.0_252"
-OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1ubuntu1-b09)
+OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
 OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
@@ -262,13 +259,13 @@ Java version: 1.8.0_252, vendor: Private Build, runtime: /usr/lib/jvm/java-8-ope
 Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.3.0-61-generic", arch: "amd64", family: "unix"
 + python -V
-/usr/scripts/printVersions.sh: line 8: python: command not found
+Python 2.7.17
 + python3 -V
-Python 3.8.2
+Python 3.6.9
 + pip --version
-/usr/scripts/printVersions.sh: line 10: pip: command not found
+pip 20.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
+pip 20.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
 Welcome to Gradle 6.0.1!
@@ -302,25 +299,25 @@ JVM:          1.8.0_252 (Private Build 25.252-b09)
 OS:           Linux 5.3.0-61-generic amd64
 
 + npm -v
-6.14.4
+6.14.5
 + node -v
-v14.0.0
+v14.5.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=20.04
-DISTRIB_CODENAME=focal
-DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
+DISTRIB_RELEASE=18.04
+DISTRIB_CODENAME=bionic
+DISTRIB_DESCRIPTION="Ubuntu 18.04.4 LTS"
 NAME="Ubuntu"
-VERSION="20.04 LTS (Focal Fossa)"
+VERSION="18.04.4 LTS (Bionic Beaver)"
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME="Ubuntu 20.04 LTS"
-VERSION_ID="20.04"
+PRETTY_NAME="Ubuntu 18.04.4 LTS"
+VERSION_ID="18.04"
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-VERSION_CODENAME=focal
-UBUNTU_CODENAME=focal
+VERSION_CODENAME=bionic
+UBUNTU_CODENAME=bionic
 ```
 

@@ -1,8 +1,14 @@
-FROM ubuntu
+FROM ${BASE_IMAGE:-ubuntu:18.04}
 
-MAINTAINER openkbs.org@gmail.com
+MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
 ENV DEBIAN_FRONTEND noninteractive
+
+#### ---------------------
+#### ---- USER, GROUP ----
+#### ---------------------
+ENV USER_ID=${USER_ID:-1000}
+ENV GROUP_ID=${GROUP_ID:-1000}
 
 #ENV JAVA_VERSION=8
 #ENV JAVA_VERSION=11
@@ -29,7 +35,7 @@ RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 #### update ubuntu and Install Python 3
 ########################################
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common "
-ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python-pip python-setuptools python-dev python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
+ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="libsqlite3-dev sqlite3"
 
 #apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
@@ -40,8 +46,7 @@ RUN apt-get update -y && \
     apt-get install -y ${LIB_TOOL_LIST} && \
     apt-get install -y git xz-utils && \
     apt-get install -y sudo && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean -y
 
 ########################################
 #### ------- OpenJDK Installation ------

@@ -4,6 +4,9 @@ VERSION := 1.0.0
 
 DOCKER_REPO := openkbs
 
+## == Default is Ubuntu:20.04 as Docker base image ==
+BASE_IMAGE := $(BASE_IMAGE)
+
 ## -- To Check syntax:
 #  cat -e -t -v Makefile
 
@@ -35,6 +38,7 @@ clean :
         --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` .
 build:
 	docker build \
+	    --build-arg BASE_IMAGE="$(BASE_IMAGE)" \
 	    --build-arg CIRCLE_SHA1="$(SHA)" \
 	    --build-arg version=$(VERSION) \
 	    --build-arg VCS_REF=`git rev-parse --short HEAD` \
