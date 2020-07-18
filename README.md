@@ -26,7 +26,7 @@ After that, combining with other Docker security practice (see below references)
 * [Docker Security - 6 Ways to Secure Your Docker Containers](https://www.sumologic.com/blog/security/securing-docker-containers/)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
-# Components:
+# Components
 * Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 on 2020-06-01 as LTS Docker base image (still in testing beta).
 * openjdk version "1.8.0_252" 
   OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
