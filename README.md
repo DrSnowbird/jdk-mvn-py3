@@ -27,7 +27,7 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components
-* Ubuntu Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
+* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
 * openjdk version "1.8.0_252" 
   OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
   OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
