@@ -26,13 +26,13 @@ After that, combining with other Docker security practice (see below references)
 * [Docker Security - 6 Ways to Secure Your Docker Containers](https://www.sumologic.com/blog/security/securing-docker-containers/)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
-# Components:
-* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 on 2020-06-01 as LTS Docker base image (still in testing beta).
+# Components
+* Ubuntu Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
 * openjdk version "1.8.0_252" 
   OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
   OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 * Apache Maven 3.6
-* Python 3.6 / Python 2.7 + pip 19.2 + Python3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
+* Python 3.8 + pip 20.0 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
 * Node v14 + npm 6.14 (from NodeSource official Node Distribution)
 * Gradle 6.0
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
@@ -241,7 +241,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@f05d9788d0f8:~$ /usr/scripts/printVersions.sh 
+developer@1e68257a5774:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -257,7 +257,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_252, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.3.0-61-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.3.0-62-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -296,7 +296,7 @@ Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
 JVM:          1.8.0_252 (Private Build 25.252-b09)
-OS:           Linux 5.3.0-61-generic amd64
+OS:           Linux 5.3.0-62-generic amd64
 
 + npm -v
 6.14.5
