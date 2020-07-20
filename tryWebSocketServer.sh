@@ -90,9 +90,11 @@ echo "---> Testing the mini-server by the ${SCRIPT_FILE} script:"
 echo "Use Web Socket Client, e.g., Chrome plugins, WebSocketTestClient, SimpleWebSocketClient in brwoser to test:"
 echo "For example,"
 echo "   echo \"Some data to be sent\" | websocat ws://127.0.0.1:${HOST_PORT} "
+echo "or,"
+echo "   echo \"Some data to be sent\" | python3-wsdump ws://127.0.0.1:${HOST_PORT} "
 echo ""
 echo "Obviously, there are also alternatives like wscat (golang) or wscat (node)."
-
+echo "To install python3-wsdump package: sudo apt install -y python3-websocket"
 echo "... You have $TIMEOUT_SEC seconds to try out the above URL provided by JavaScript as Web Servers."
 sleep $TIMEOUT_SEC
 

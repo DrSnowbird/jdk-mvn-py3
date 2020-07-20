@@ -1,3 +1,4 @@
+#FROM ${BASE_IMAGE:-ubuntu:20.04}
 FROM ${BASE_IMAGE:-ubuntu:18.04}
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
@@ -10,9 +11,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV USER_ID=${USER_ID:-1000}
 ENV GROUP_ID=${GROUP_ID:-1000}
 
-#ENV JAVA_VERSION=8
-#ENV JAVA_VERSION=11
-#ENV JAVA_VERSION=14
+#ARG JAVA_VERSION=8
+ARG JAVA_VERSION=11
+#ARG JAVA_VERSION=14
 ENV JAVA_VERSION=${JAVA_VERSION:-8}
 
 ##############################################
@@ -215,6 +216,11 @@ RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
 #### ---- USER as Owner for scripts ---- ####
 #############################################
 RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts /docker-entrypoint.sh
+
+#############################################################################
+#### ---- Fix sudo: setrlimit(RLIMIT_CORE): Operation not permitted ---- ####
+#############################################################################
+RUN echo "Set disable_coredump false" | sudo tee -a /etc/sudo.conf
 
 ############################################
 #### ---- Set up user environments ---- ####

@@ -1,10 +1,8 @@
-# OpenJDK Java 8 (1.8.0_252) JDK + Maven 3.6 + Python 3.8 + pip 20 + node 14 + npm 6.14 + Gradle 6
-
+# OpenJDK Java 11 JDK + Maven 3.6 + Python 3.8  + pip 20 + node 14 + npm 6 + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
-# ** This is Ubuntu 18.04 **
-
+# ** This build is based upon Ubuntu 18.04 + OpenJDK Java 11 **
 
 # NOTICE: ''Change to use Non-Root implementation''
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -28,14 +26,15 @@ After that, combining with other Docker security practice (see below references)
 
 # Components
 * Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
-* openjdk version "1.8.0_252" 
-  OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
-  OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+* openjdk version "11.0.7" 2020-04-14
+  OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)
+  OpenJDK 64-Bit Server VM (build 11.0.7+10-post-Ubuntu-2ubuntu218.04, mixed mode, sharing)
 * Apache Maven 3.6
 * Python 3.8 + pip 20.0 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v14 + npm 6.14 (from NodeSource official Node Distribution)
+* Node v14.5 + npm 6.14 (from NodeSource official Node Distribution)
 * Gradle 6.0
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
+* [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
 
 # Quick commands
 * build.sh - build local image
@@ -241,21 +240,21 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@1e68257a5774:~$ /usr/scripts/printVersions.sh 
-+ echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+developer@41e47fa023a8:~$ /usr/scripts/printVersions.sh 
++ echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 + whereis java
-java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
+java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-11-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 + echo
 
 + java -version
-openjdk version "1.8.0_252"
-OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1~18.04-b09)
-OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+openjdk version "11.0.7" 2020-04-14
+OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)
+OpenJDK 64-Bit Server VM (build 11.0.7+10-post-Ubuntu-2ubuntu218.04, mixed mode, sharing)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_252, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 11.0.7, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.3.0-62-generic", arch: "amd64", family: "unix"
 + python -V
@@ -295,7 +294,7 @@ Revision:     fad121066a68c4701acd362daf4287a7c309a0f5
 Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM:          1.8.0_252 (Private Build 25.252-b09)
+JVM:          11.0.7 (Ubuntu 11.0.7+10-post-Ubuntu-2ubuntu218.04)
 OS:           Linux 5.3.0-62-generic amd64
 
 + npm -v
