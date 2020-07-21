@@ -1,4 +1,4 @@
-# OpenJDK Java 11 JDK + Maven 3.6 + Python 3.8  + pip 20 + node 14 + npm 6 + Gradle 6
+# OpenJDK Java 8/11 + Maven 3.6 + Python 3.8  + pip 20 + node 14 + npm 6 + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
