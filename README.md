@@ -240,31 +240,31 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@41e47fa023a8:~$ /usr/scripts/printVersions.sh 
-+ echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+developer@583a0c0ac222:~$ /usr/scripts/printVersions.sh 
++ echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
-java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-11-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
+java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 + echo
 
 + java -version
-openjdk version "11.0.7" 2020-04-14
-OpenJDK Runtime Environment (build 11.0.7+10-post-Ubuntu-2ubuntu218.04)
-OpenJDK 64-Bit Server VM (build 11.0.7+10-post-Ubuntu-2ubuntu218.04, mixed mode, sharing)
+openjdk version "1.8.0_265"
+OpenJDK Runtime Environment (build 1.8.0_265-8u265-b01-0ubuntu2~18.04-b01)
+OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 11.0.7, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Java version: 1.8.0_265, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.3.0-62-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.4.0-42-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
-pip 20.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.2.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 20.1.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.2.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
 Welcome to Gradle 6.0.1!
@@ -294,13 +294,13 @@ Revision:     fad121066a68c4701acd362daf4287a7c309a0f5
 Kotlin:       1.3.50
 Groovy:       2.5.8
 Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM:          11.0.7 (Ubuntu 11.0.7+10-post-Ubuntu-2ubuntu218.04)
-OS:           Linux 5.3.0-62-generic amd64
+JVM:          1.8.0_265 (Private Build 25.265-b01)
+OS:           Linux 5.4.0-42-generic amd64
 
 + npm -v
-6.14.5
+6.14.7
 + node -v
-v14.5.0
+v14.8.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -318,5 +318,6 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
+developer@583a0c0ac222:~$ 
 ```
 

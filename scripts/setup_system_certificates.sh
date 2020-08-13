@@ -2,7 +2,11 @@
 
 echo "####################### Components: $(basename $0) ###########################"
 
-SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-/certificates}
+if [ "$1" != "" ]; then
+    SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-$1}
+else
+    SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-/certificates}
+fi
 
 #### ---------------------------------------------------------------------------------------------------------------------------------- ####
 #### ---- (ref: https://stackoverflow.com/questions/59895/get-the-source-directory-of-a-bash-script-from-within-the-script-itself)
