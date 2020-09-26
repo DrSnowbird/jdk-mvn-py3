@@ -30,9 +30,9 @@ After that, combining with other Docker security practice (see below references)
   OpenJDK Runtime Environment (build 1.8.0_265-8u265-b01-0ubuntu2~18.04-b01)
   OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
 * Apache Maven 3.6
-* Python 3.8 + pip 20.0 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v14.5 + npm 6.14 (from NodeSource official Node Distribution)
-* Gradle 6.0
+* Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
+* Node v14.12 + npm 6.14 (from NodeSource official Node Distribution)
+* Gradle 6.6
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 * [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
 
@@ -240,7 +240,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@583a0c0ac222:~$ /usr/scripts/printVersions.sh 
+developer@ed2ff81217bb:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -256,51 +256,44 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_265, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.4.0-42-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.4.0-48-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
-pip 20.2.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.2.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 20.2.2 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.2.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
-Welcome to Gradle 6.0.1!
+Welcome to Gradle 6.6.1!
 
 Here are the highlights of this release:
- - Substantial improvements in dependency management, including
-   - Publishing Gradle Module Metadata in addition to pom.xml
-   - Advanced control of transitive versions
-   - Support for optional features and dependencies
-   - Rules to tweak published metadata
- - Support for Java 13
- - Faster incremental Java and Groovy compilation
- - New Zinc compiler for Scala
- - VS2019 support
- - Support for Gradle Enterprise plugin 3.0
+ - Experimental build configuration caching
+ - Built-in conventions for handling credentials
+ - Java compilation supports --release flag
 
-For more details see https://docs.gradle.org/6.0.1/release-notes.html
+For more details see https://docs.gradle.org/6.6.1/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 6.0.1
+Gradle 6.6.1
 ------------------------------------------------------------
 
-Build time:   2019-11-18 20:25:01 UTC
-Revision:     fad121066a68c4701acd362daf4287a7c309a0f5
+Build time:   2020-08-25 16:29:12 UTC
+Revision:     f2d1fb54a951d8b11d25748e4711bec8d128d7e3
 
-Kotlin:       1.3.50
-Groovy:       2.5.8
-Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 2019
+Kotlin:       1.3.72
+Groovy:       2.5.12
+Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          1.8.0_265 (Private Build 25.265-b01)
-OS:           Linux 5.4.0-42-generic amd64
+OS:           Linux 5.4.0-48-generic amd64
 
 + npm -v
-6.14.7
+6.14.8
 + node -v
-v14.8.0
+v14.12.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -318,6 +311,128 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
-developer@583a0c0ac222:~$ 
 ```
-
+## Python3 PIP Modules
+```
+developer@ed2ff81217bb:~$ pip freeze
+appdirs==1.4.4
+argon2-cffi==20.1.0
+asn1crypto==0.24.0
+async-generator==1.10
+attrs==20.2.0
+backcall==0.2.0
+beautifulsoup4==4.6.0
+bleach==3.2.1
+certifi==2020.6.20
+cffi==1.14.3
+chardet==3.0.4
+cloudpickle==1.6.0
+cryptography==2.1.4
+cycler==0.10.0
+decorator==4.4.2
+defusedxml==0.6.0
+distlib==0.3.1
+entrypoints==0.3
+filelock==3.0.12
+funcy==1.15
+future==0.18.2
+html5lib==0.999999999
+httpie==2.2.0
+hyperopt==0.2.4
+idna==2.10
+importlib-metadata==1.7.0
+importlib-resources==3.0.0
+iniconfig==1.0.1
+ipaddress==1.0.23
+ipykernel==5.3.4
+ipython==7.16.1
+ipython-genutils==0.2.0
+ipywidgets==7.5.1
+j2cli==0.3.10
+jedi==0.17.2
+Jinja2==2.11.2
+joblib==0.16.0
+json-lines==0.5.0
+jsonschema==3.2.0
+jupyter==1.0.0
+jupyter-client==6.1.7
+jupyter-console==6.2.0
+jupyter-core==4.6.3
+jupyterlab-pygments==0.1.1
+keyring==10.6.0
+keyrings.alt==3.0
+kiwisolver==1.2.0
+lxml==4.2.1
+MarkupSafe==1.1.1
+matplotlib==3.3.2
+mistune==0.8.4
+nbclient==0.5.0
+nbconvert==6.0.6
+nbformat==5.0.7
+nest-asyncio==1.4.0
+networkx==2.5
+notebook==6.1.4
+numexpr==2.7.1
+numpy==1.19.2
+olefile==0.45.1
+packaging==20.4
+panda==0.3.1
+pandas==1.1.2
+pandasql==0.7.3
+pandocfilters==1.4.2
+parso==0.7.1
+pbr==5.5.0
+pexpect==4.8.0
+pickleshare==0.7.5
+Pillow==7.2.0
+pkgconfig==1.5.1
+pluggy==0.13.1
+prometheus-client==0.8.0
+prompt-toolkit==3.0.7
+ptyprocess==0.6.0
+py==1.9.0
+pycparser==2.20
+pycrypto==2.6.1
+Pygments==2.7.1
+pygobject==3.26.1
+pyLDAvis==2.1.2
+pyparsing==2.4.7
+pyrsistent==0.17.3
+pytest==6.1.0
+python-apt==1.6.5+ubuntu0.3
+python-dateutil==2.8.1
+python-git==2018.2.1
+pytz==2020.1
+pyxdg==0.25
+PyYAML==5.3.1
+pyzmq==19.0.2
+qtconsole==4.7.7
+QtPy==1.9.0
+requests==2.24.0
+scikit-learn==0.23.2
+scipy==1.5.2
+seaborn==0.11.0
+SecretStorage==2.3.1
+Send2Trash==1.5.0
+six==1.15.0
+SQLAlchemy==1.3.19
+stevedore==3.2.2
+tables==3.4.2
+terminado==0.9.1
+testpath==0.4.4
+threadpoolctl==2.1.0
+toml==0.10.1
+tornado==6.0.4
+tqdm==4.49.0
+traitlets==4.3.3
+unattended-upgrades==0.1
+urllib3==1.25.10
+virtualenv==20.0.31
+virtualenv-clone==0.5.4
+virtualenvwrapper==4.8.4
+wcwidth==0.2.5
+webencodings==0.5.1
+widgetsnbextension==3.5.1
+yml2json==1.1.3
+zipp==3.2.0
+```
