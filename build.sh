@@ -11,6 +11,7 @@ if [ $# -lt 1 ]; then
     echo "Usage: "
     echo "  ${0} [<Dockerfile> <imageTag> [<some more optional arguments...>] ] "
     echo "e.g."
+    echo "  ./build.sh ./Dockerfile-openjdk11 openkbs/jdk11-mvn-py3 --no-cache "
     echo "  ./build.sh ./centos/Dockerfile.centos.xfce.vnc openkbs/centos-xfce-vnc --no-cache  --build-arg OS_TYPE=centos'"
     echo "  ./build.sh ./Dockerfile.ubuntu.xfce.vnc openkbs/ubuntu-xfce-vnc --no-cache  --build-arg OS_TYPE=centos'"
     echo "-------------------------------------------------------------------------------------------"

@@ -147,7 +147,7 @@ RUN mvn --version && \
 # Ref: https://gradle.org/releases/
 
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-6.6.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-6.7}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
@@ -167,7 +167,7 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-14}
+ARG NODE_VERSION=${NODE_VERSION:-15}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
@@ -197,15 +197,6 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
     #usermod -aG wheel ${USER} && \
     echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
     echo "USER =======> ${USER}" && ls -al ${HOME}
-
-##############################
-#### ---- NPM PREFIX ---- ####
-##############################
-ENV NPM_CONFIG_PREFIX=${NPM_CONFIG_PREFIX:-${HOME}/.npm-global}
-ENV PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
-RUN mkdir -p ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    export PATH=$PATH && ${SCRIPT_DIR}/install-npm-packages.sh
 
 ###########################################
 #### ---- entrypoint script setup ---- ####

@@ -1,4 +1,4 @@
-# OpenJDK Java 8/11 + Maven 3.6 + Python 3.8  + pip 20 + node 14 + npm 6 + Gradle 6
+# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 15 + npm 7 + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -31,7 +31,7 @@ After that, combining with other Docker security practice (see below references)
   OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
 * Apache Maven 3.6
 * Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v14.12 + npm 6.14 (from NodeSource official Node Distribution)
+* Node v15 + npm 7 (from NodeSource official Node Distribution)
 * Gradle 6.6
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 * [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
@@ -240,7 +240,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@a324706a578b:~$ /usr/scripts/printVersions.sh 
+developer@b6acd3055774:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -256,7 +256,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_265, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.4.0-48-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.4.0-52-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -267,33 +267,33 @@ pip 20.2.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 pip 20.2.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
-Welcome to Gradle 6.6.1!
+Welcome to Gradle 6.7!
 
 Here are the highlights of this release:
- - Experimental build configuration caching
- - Built-in conventions for handling credentials
- - Java compilation supports --release flag
+ - File system watching is ready for production use
+ - Declare the version of Java your build requires
+ - Java 15 support
 
-For more details see https://docs.gradle.org/6.6.1/release-notes.html
+For more details see https://docs.gradle.org/6.7/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 6.6.1
+Gradle 6.7
 ------------------------------------------------------------
 
-Build time:   2020-08-25 16:29:12 UTC
-Revision:     f2d1fb54a951d8b11d25748e4711bec8d128d7e3
+Build time:   2020-10-14 16:13:12 UTC
+Revision:     312ba9e0f4f8a02d01854d1ed743b79ed996dfd3
 
 Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          1.8.0_265 (Private Build 25.265-b01)
-OS:           Linux 5.4.0-48-generic amd64
+OS:           Linux 5.4.0-52-generic amd64
 
 + npm -v
-6.14.8
+7.0.8
 + node -v
-v14.13.1
+v15.1.0
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -311,11 +311,10 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
-
 ```
 ## Python3 PIP Modules
 ```
-developer@ed2ff81217bb:~$ pip freeze
+developer@b6acd3055774:~$ pip freeze
 appdirs==1.4.4
 argon2-cffi==20.1.0
 asn1crypto==0.24.0
