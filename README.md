@@ -28,7 +28,7 @@ After that, combining with other Docker security practice (see below references)
 * Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
 * openjdk version "1.8.0_275"
   OpenJDK Runtime Environment (build 1.8.0_275-8u275-b01-0ubuntu1~18.04-b01)
-  penJDK 64-Bit Server VM (build 25.275-b01, mixed mode)
+  OpenJDK 64-Bit Server VM (build 25.275-b01, mixed mode)
 * Apache Maven 3.6
 * Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
 * Node v15 + npm 7 (from NodeSource official Node Distribution)
