@@ -12,5 +12,6 @@ pip3 --version
 gradle --version
 npm -v
 node -v
+yarn -V
 cat /etc/*-release
 

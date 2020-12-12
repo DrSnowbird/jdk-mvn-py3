@@ -1,4 +1,4 @@
-# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 15 + npm 7 + Gradle 6
+# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 15 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -33,8 +33,12 @@ After that, combining with other Docker security practice (see below references)
 * Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
 * Node v15 + npm 7 (from NodeSource official Node Distribution)
 * Gradle 6.6
+* Yarn 1.22
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 * [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
+
+## Note about "Yarn"
+Yarn has now been added since few requests for supporting Yarn. However, at this point, the impact to all child Containers is not assured yet. Please report any issue for child Containers or derivative Containers based upon this base Container image.
 
 # Quick commands
 * build.sh - build local image
@@ -240,7 +244,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@3ee4044afc86:~$ /usr/scripts/printVersions.sh 
+developer@a35f7a2512e8:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -256,15 +260,15 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_275, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.4.0-54-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.4.0-56-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
-pip 20.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 20.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 20.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
 Welcome to Gradle 6.7.1!
@@ -288,12 +292,21 @@ Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          1.8.0_275 (Private Build 25.275-b01)
-OS:           Linux 5.4.0-54-generic amd64
+OS:           Linux 5.4.0-56-generic amd64
 
 + npm -v
-7.0.8
+7.0.15
 + node -v
-v15.2.1
+v15.4.0
++ yarn -V
+yarn install v1.22.5
+info No lockfile found.
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 0.09s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
