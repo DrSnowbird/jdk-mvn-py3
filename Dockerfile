@@ -188,7 +188,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
 ###################################
 #### ---- Update: all     ---- ####
 ###################################
-RUN apt-get update -y
+RUN apt-get update -y && apt upgrade -y
 
 ###################################
 #### ---- user: developer ---- ####
