@@ -244,7 +244,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@f642457ef827:~$ /usr/scripts/printVersions.sh 
+developer@f1ef674c8b5d:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -252,15 +252,15 @@ java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /
 + echo
 
 + java -version
-openjdk version "1.8.0_275"
-OpenJDK Runtime Environment (build 1.8.0_275-8u275-b01-0ubuntu1~18.04-b01)
-OpenJDK 64-Bit Server VM (build 25.275-b01, mixed mode)
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment (build 1.8.0_282-8u282-b08-0ubuntu1~18.04-b08)
+OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_275, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 1.8.0_282, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.8.0-41-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.8.0-53-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -291,13 +291,13 @@ Revision:     2972ff02f3210d2ceed2f1ea880f026acfbab5c0
 Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
-JVM:          1.8.0_275 (Private Build 25.275-b01)
-OS:           Linux 5.8.0-41-generic amd64
+JVM:          1.8.0_282 (Private Build 25.282-b08)
+OS:           Linux 5.8.0-53-generic amd64
 
 + npm -v
-7.4.3
+7.7.6
 + node -v
-v15.7.0
+v15.14.0
 + yarn -V
 yarn install v1.22.5
 info No lockfile found.
@@ -328,7 +328,7 @@ UBUNTU_CODENAME=bionic
 
 ## Python3 PIP Modules
 ```
-developer@c0205f7366a1:~$ pip freeze
+developer@f1ef674c8b5d:~$ pip freeze
 appdirs==1.4.4
 argon2-cffi==20.1.0
 asn1crypto==0.24.0
