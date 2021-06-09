@@ -41,11 +41,13 @@ After that, combining with other Docker security practice (see below references)
 Yarn has now been added since few requests for supporting Yarn. However, at this point, the impact to all child Containers is not assured yet. Please report any issue for child Containers or derivative Containers based upon this base Container image.
 
 # Quick commands
-* build.sh - build local image
-* logs.sh - see logs of container
-* run.sh - run the container
-* shell.sh - shell into the container
-* stop.sh - stop the container
+* build.sh - build local image.
+* logs.sh - see logs of container.
+* run.sh - run the container.
+* shell.sh - shell into the container.
+* save.sh - save a running Container instance into a tgz file for later to restore.
+* restore.sh - restore the previously archived tgz Container instance ready for running again.
+* stop.sh - stop the container.
 * tryJava.sh : test Java
 * tryNodeJS.sh : test NodeJS
 * tryPython.sh : test Python
@@ -244,7 +246,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@f1ef674c8b5d:~$ /usr/scripts/printVersions.sh 
+developer@d1ec2b8650df:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -260,7 +262,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_282, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.8.0-53-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.8.0-55-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -292,7 +294,7 @@ Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          1.8.0_282 (Private Build 25.282-b08)
-OS:           Linux 5.8.0-53-generic amd64
+OS:           Linux 5.8.0-55-generic amd64
 
 + npm -v
 7.7.6
@@ -306,7 +308,7 @@ info No lockfile found.
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 success Saved lockfile.
-Done in 0.09s.
+Done in 0.10s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
