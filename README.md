@@ -1,3 +1,8 @@
+# `Please consider to donate what you can to help UNICEF, WHO, and Red Cross if you like what we provide to you for free. Thanks so much!`
+* [`World Health Organization (WHO) COVID-19 Solidarity Response Fund`](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/donate)
+* [`Help UNICEF’s COVID-19 Response`](https://donate.unicef.org/)
+* [`Help Red Cross`](https://www.redcross.org/donate)
+
 # OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 15 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
