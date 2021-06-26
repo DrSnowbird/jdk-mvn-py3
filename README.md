@@ -251,7 +251,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@d1ec2b8650df:~$ /usr/scripts/printVersions.sh 
+developer@3c07d2618662:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -267,7 +267,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 1.8.0_282, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.8.0-55-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.8.0-59-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -299,7 +299,7 @@ Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          1.8.0_282 (Private Build 25.282-b08)
-OS:           Linux 5.8.0-55-generic amd64
+OS:           Linux 5.8.0-59-generic amd64
 
 + npm -v
 7.7.6
@@ -313,7 +313,7 @@ info No lockfile found.
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 success Saved lockfile.
-Done in 0.10s.
+Done in 0.09s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -335,7 +335,7 @@ UBUNTU_CODENAME=bionic
 
 ## Python3 PIP Modules
 ```
-developer@f1ef674c8b5d:~$ pip freeze
+developer@d14afe4d3b73:~$ pip freeze
 appdirs==1.4.4
 argon2-cffi==20.1.0
 asn1crypto==0.24.0
@@ -459,5 +459,3 @@ widgetsnbextension==3.5.1
 yml2json==1.0.1
 zipp==3.4.0
 ```
-
-
