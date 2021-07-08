@@ -12,4 +12,9 @@ node_modules
 
 *.pem
 *.crt
+**/package-lock.json
+**/package.json
 
+**tmp/
+
+**SAVE*

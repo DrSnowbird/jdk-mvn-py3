@@ -11,10 +11,11 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV USER_ID=${USER_ID:-1000}
 ENV GROUP_ID=${GROUP_ID:-1000}
 
-ARG JAVA_VERSION=8
-#ARG JAVA_VERSION=11
+#ARG JAVA_VERSION=8
+ARG JAVA_VERSION=11
 #ARG JAVA_VERSION=14
-ENV JAVA_VERSION=${JAVA_VERSION:-8}
+#ENV JAVA_VERSION=${JAVA_VERSION:-8}
+ENV JAVA_VERSION=${JAVA_VERSION:-11}
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -30,12 +31,12 @@ COPY ./scripts ${SCRIPT_DIR}
 RUN chmod +x ${SCRIPT_DIR}/*.sh
 
 #### ---- Apt Proxy & NPM Proxy & NPM Permission setup if detected: ---- ####
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
+#RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 
 ########################################
 #### update ubuntu and Install Python 3
 ########################################
-ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common "
+ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common"
 ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="libsqlite3-dev sqlite3"
 
@@ -167,7 +168,7 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-15}
+ARG NODE_VERSION=${NODE_VERSION:-16}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
@@ -188,7 +189,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
 ###################################
 #### ---- Update: all     ---- ####
 ###################################
-RUN apt-get update -y && apt upgrade -y
+RUN apt-get update -y && apt-get upgrade -y
 
 ###################################
 #### ---- user: developer ---- ####
@@ -207,9 +208,9 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
     echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
     echo "USER =======> ${USER}" && ls -al ${HOME}
 
-###########################################
-#### ---- entrypoint script setup ---- ####
-###########################################
+#############################################
+#### ---- entrypoint script setup   ---- ####
+#############################################
 RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
 #############################################
@@ -235,8 +236,14 @@ WORKDIR ${HOME}
 ############################################
 RUN mkdir -p ${WORKSPACE} ${DATA}
 COPY ./examples ${DATA}/examples
+RUN sudo chown -R $USER:$USER ${DATA}
 VOLUME ${DATA}
 VOLUME ${WORKSPACE}
+
+############################################
+#### ---- NPM: websocket           ---- ####
+############################################
+RUN npm install websocket ws
 
 #########################
 #### ---- Entry ---- ####

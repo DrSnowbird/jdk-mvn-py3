@@ -5,7 +5,7 @@ echo "####################### Components: $(basename $0) #######################
 if [ "$1" != "" ]; then
     SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-$1}
 else
-    SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-/certificates}
+    SOURCE_CERTIFICATES_DIR=${SOURCE_CERTIFICATES_DIR:-"/certificates"}
 fi
 
 #### ---------------------------------------------------------------------------------------------------------------------------------- ####

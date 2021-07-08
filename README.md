@@ -3,7 +3,7 @@
 * [`Help UNICEF’s COVID-19 Response`](https://donate.unicef.org/)
 * [`Help Red Cross`](https://www.redcross.org/donate)
 
-# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 15 + npm 7 + Yarn + Gradle 6
+# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 16 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -251,7 +251,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@3c07d2618662:~$ /usr/scripts/printVersions.sh 
+developer@cdec9a451c30:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 + whereis java
@@ -259,13 +259,13 @@ java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /
 + echo
 
 + java -version
-openjdk version "1.8.0_282"
-OpenJDK Runtime Environment (build 1.8.0_282-8u282-b08-0ubuntu1~18.04-b08)
-OpenJDK 64-Bit Server VM (build 25.282-b08, mixed mode)
+openjdk version "1.8.0_292"
+OpenJDK Runtime Environment (build 1.8.0_292-8u292-b10-0ubuntu1~18.04-b10)
+OpenJDK 64-Bit Server VM (build 25.292-b10, mixed mode)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_282, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 1.8.0_292, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
 Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.8.0-59-generic", arch: "amd64", family: "unix"
 + python -V
@@ -273,20 +273,10 @@ Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
-pip 20.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 20.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
-
-Welcome to Gradle 6.7.1!
-
-Here are the highlights of this release:
- - File system watching is ready for production use
- - Declare the version of Java your build requires
- - Java 15 support
-
-For more details see https://docs.gradle.org/6.7.1/release-notes.html
-
 
 ------------------------------------------------------------
 Gradle 6.7.1
@@ -298,22 +288,18 @@ Revision:     2972ff02f3210d2ceed2f1ea880f026acfbab5c0
 Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
-JVM:          1.8.0_282 (Private Build 25.282-b08)
+JVM:          1.8.0_292 (Private Build 25.292-b10)
 OS:           Linux 5.8.0-59-generic amd64
 
 + npm -v
-7.7.6
+7.18.1
 + node -v
-v15.14.0
+v16.4.1
 + yarn -V
 yarn install v1.22.5
-info No lockfile found.
 [1/4] Resolving packages...
-[2/4] Fetching packages...
-[3/4] Linking dependencies...
-[4/4] Building fresh packages...
-success Saved lockfile.
-Done in 0.09s.
+success Already up-to-date.
+Done in 0.05s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04

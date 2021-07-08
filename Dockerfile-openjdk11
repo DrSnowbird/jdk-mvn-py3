@@ -1,11 +1,21 @@
-FROM ubuntu
+#FROM ${BASE_IMAGE:-ubuntu:20.04}
+FROM ${BASE_IMAGE:-ubuntu:18.04}
 
-MAINTAINER openkbs.org@gmail.com
+MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-#ENV JAVA_VERSION=8
-ENV JAVA_VERSION=11
+#### ---------------------
+#### ---- USER, GROUP ----
+#### ---------------------
+ENV USER_ID=${USER_ID:-1000}
+ENV GROUP_ID=${GROUP_ID:-1000}
+
+#ARG JAVA_VERSION=8
+ARG JAVA_VERSION=11
+#ARG JAVA_VERSION=14
+#ENV JAVA_VERSION=${JAVA_VERSION:-8}
+ENV JAVA_VERSION=${JAVA_VERSION:-11}
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -21,18 +31,24 @@ COPY ./scripts ${SCRIPT_DIR}
 RUN chmod +x ${SCRIPT_DIR}/*.sh
 
 #### ---- Apt Proxy & NPM Proxy & NPM Permission setup if detected: ---- ####
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
+#RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_system_proxy.sh
 
 ########################################
 #### update ubuntu and Install Python 3
 ########################################
+ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common"
+ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
+ARG LIB_TOOL_LIST="libsqlite3-dev sqlite3"
+
+#apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
 RUN apt-get update -y && \
     apt-get install -y apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && \
-    apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
+    apt-get install -y ${LIB_BASIC_LIST} && \
+    apt-get install -y ${LIB_COMMON_LIST} && \
+    apt-get install -y ${LIB_TOOL_LIST} && \
     apt-get install -y git xz-utils && \
     apt-get install -y sudo && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean -y
 
 ########################################
 #### ------- OpenJDK Installation ------
@@ -60,30 +76,32 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 
-# source: https://packages.debian.org/source/sid/openjdk-8
-# source: https://packages.debian.org/source/sid/openjdk-11
-## # ENV JAVA_DEBIAN_VERSION=8u222-b10-0ubuntu1.18.04.1-b10
-
 ENV JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-RUN set -ex; \
-	\
-# deal with slim variants not having man page directories (which causes "update-alternatives" to fail)
-	if [ ! -d /usr/share/man/man1 ]; then \
-		mkdir -p /usr/share/man/man1; \
-	fi; \
-	\
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-#		openjdk-${JAVA_VERSION}-jdk="$JAVA_DEBIAN_VERSION" \
-		openjdk-${JAVA_VERSION}-jdk \
-	; \
-	rm -rf /var/lib/apt/lists/*; \
-	\
+# ------------------
+# OpenJDK Java:
+# ------------------
+
+#ARG OPENJDK_PACKAGE=default-jdk
+ARG OPENJDK_PACKAGE=${OPENJDK_PACKAGE:-openjdk-${JAVA_VERSION}-jdk}
+
+# -- To install JDK Source (src.zip), uncomment the line below: --
+#ARG OPENJDK_SRC=${OPENJDK_SRC:-openjdk-${JAVA_VERSION}-source}
+
+ARG OPENJDK_INSTALL_LIST="${OPENJDK_PACKAGE} ${OPENJDK_SRC}"
+
+RUN apt-get update -y && \
+    apt-get install -y ${OPENJDK_INSTALL_LIST} && \
+    ls -al ${INSTALL_DIR} ${JAVA_HOME} && \
+    export PATH=$PATH ; echo "PATH=${PATH}" ; export JAVA_HOME=${JAVA_HOME} ; echo "java=`which java`" && \
+    rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------------------------------------------
 # update-alternatives so that future installs of other OpenJDK versions don't change /usr/bin/java
-	update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOME")" 'index($3, home) == 1 { $2 = "manual"; print | "update-alternatives --set-selections" }'; \
 # ... and verify that it actually worked for one of the alternatives we care about
+# ------------------------------------------------------------------------------------------------
+RUN update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOME")" 'index($3, home) == 1 { $2 = "manual"; print | "update-alternatives --set-selections" }'; \
 	update-alternatives --query java | grep -q 'Status: manual'
 
 ###################################
@@ -104,9 +122,15 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
 COPY requirements.txt ./
 
 ## -- if pkg-resources error occurs, then do this! -- ##
+## -- Warning:
+## WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
+## Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
+## To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
+
 # pip3 uninstall pkg-resources==0.0.0
-RUN pip3 --no-cache-dir install --upgrade pip 
-RUN pip3 --no-cache-dir install --ignore-installed -U -r requirements.txt
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip  --no-cache-dir install --upgrade pip && \
+    python3 -m pip --no-cache-dir install --ignore-installed -U -r requirements.txt
 
 ## -- added Local PIP installation bin to PATH
 ENV PATH=${PATH}:${HOME}/.local/bin
@@ -114,12 +138,7 @@ ENV PATH=${PATH}:${HOME}/.local/bin
 ## VERSIONS ##
 ENV PATH=${PATH}:${JAVA_HOME}/bin
 
-RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
-    ls -al ${INSTALL_DIR} && \
-    echo "PATH=${PATH}" && export JAVA_HOME=${JAVA_HOME} && export PATH=$PATH && \
-    java -version && \
-    mvn --version && \
-    python -V && \
+RUN mvn --version && \
     python3 -V && \
     pip3 --version
 
@@ -129,7 +148,7 @@ RUN ln -s ${JAVA_HOME_ACTUAL} ${JAVA_HOME} && \
 # Ref: https://gradle.org/releases/
 
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-6.0.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-6.7.1}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
@@ -149,7 +168,7 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-13}
+ARG NODE_VERSION=${NODE_VERSION:-16}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     apt-get install -y sudo curl git xz-utils && \
@@ -168,6 +187,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     apt-get install -y yarn
 
 ###################################
+#### ---- Update: all     ---- ####
+###################################
+RUN apt-get update -y && apt-get upgrade -y
+
+###################################
 #### ---- user: developer ---- ####
 ###################################
 ENV USER_ID=${USER_ID:-1000}
@@ -184,24 +208,20 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
     echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
     echo "USER =======> ${USER}" && ls -al ${HOME}
 
-##############################
-#### ---- NPM PREFIX ---- ####
-##############################
-ENV NPM_CONFIG_PREFIX=${NPM_CONFIG_PREFIX:-${HOME}/.npm-global}
-ENV PATH="${NPM_CONFIG_PREFIX}/bin:$PATH"
-RUN mkdir -p ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    chown ${USER}:${USER} -R ${NPM_CONFIG_PREFIX} ${HOME}/.config ${HOME}/.npm && \
-    export PATH=$PATH && ${SCRIPT_DIR}/install-npm-packages.sh
-
-###########################################
-#### ---- entrypoint script setup ---- ####
-###########################################
+#############################################
+#### ---- entrypoint script setup   ---- ####
+#############################################
 RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
 
 #############################################
 #### ---- USER as Owner for scripts ---- ####
 #############################################
 RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts /docker-entrypoint.sh
+
+#############################################################################
+#### ---- Fix sudo: setrlimit(RLIMIT_CORE): Operation not permitted ---- ####
+#############################################################################
+RUN echo "Set disable_coredump false" | sudo tee -a /etc/sudo.conf
 
 ############################################
 #### ---- Set up user environments ---- ####
@@ -216,8 +236,14 @@ WORKDIR ${HOME}
 ############################################
 RUN mkdir -p ${WORKSPACE} ${DATA}
 COPY ./examples ${DATA}/examples
+RUN sudo chown -R $USER:$USER ${DATA}
 VOLUME ${DATA}
 VOLUME ${WORKSPACE}
+
+############################################
+#### ---- NPM: websocket           ---- ####
+############################################
+RUN npm install websocket ws
 
 #########################
 #### ---- Entry ---- ####
