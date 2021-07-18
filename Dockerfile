@@ -38,7 +38,7 @@ RUN chmod +x ${SCRIPT_DIR}/*.sh
 ########################################
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common"
 ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
-ARG LIB_TOOL_LIST="libsqlite3-dev sqlite3"
+ARG LIB_TOOL_LIST="graphviz libsqlite3-dev sqlite3 git xz-utils"
 
 #apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
 RUN apt-get update -y && \
@@ -46,7 +46,6 @@ RUN apt-get update -y && \
     apt-get install -y ${LIB_BASIC_LIST} && \
     apt-get install -y ${LIB_COMMON_LIST} && \
     apt-get install -y ${LIB_TOOL_LIST} && \
-    apt-get install -y git xz-utils && \
     apt-get install -y sudo && \
     apt-get clean -y
 
@@ -171,9 +170,9 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 ARG NODE_VERSION=${NODE_VERSION:-16}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
-    apt-get install -y sudo curl git xz-utils && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    npm install -g npm@latest
     
 RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
 

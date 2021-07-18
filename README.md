@@ -3,13 +3,13 @@
 * [`Help UNICEF’s COVID-19 Response`](https://donate.unicef.org/)
 * [`Help Red Cross`](https://www.redcross.org/donate)
 
-# OpenJDK Java 8/11 + Maven 3.6 + Python 3.6  + pip 20 + node 16 + npm 7 + Yarn + Gradle 6
+# OpenJDK Java 11 + Maven 3.6 + Python 3.6  + pip 20 + node 16 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
-# ** This build is based upon Ubuntu 18.04 + OpenJDK Java 8 **
+# `This build is based upon Ubuntu 18.04 + OpenJDK Java 11`
 
-# NOTICE: ''Change to use Non-Root implementation''
+# NOTICE: Change to use `Non-Root` implementation
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
 Here are some of the things you can do if your images requiring "Root" acccess - you `really` want to do it:
 1. For Docker build: Use "sudo" or "sudo -H" prefix to your Dockerfile's command which requiring "sudo" access to install packages.
@@ -31,13 +31,13 @@ After that, combining with other Docker security practice (see below references)
 
 # Components
 * Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
-* openjdk version "1.8.0_275"
-  OpenJDK Runtime Environment (build 1.8.0_275-8u275-b01-0ubuntu1~18.04-b01)
-  OpenJDK 64-Bit Server VM (build 25.275-b01, mixed mode)
+* openjdk version "11.0.11" 2021-04-20
+	OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
+	OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 * Apache Maven 3.6
 * Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v15 + npm 7 (from NodeSource official Node Distribution)
-* Gradle 6.6
+* Node v16 + npm 7 (from NodeSource official Node Distribution)
+* Gradle 6.7
 * Yarn 1.22
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 * [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
@@ -251,21 +251,21 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@cdec9a451c30:~$ /usr/scripts/printVersions.sh 
-+ echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+developer@56d0c902f4ae:~$ /usr/scripts/printVersions.sh 
++ echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 + whereis java
-java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-8-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
+java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-11-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 + echo
 
 + java -version
-openjdk version "1.8.0_292"
-OpenJDK Runtime Environment (build 1.8.0_292-8u292-b10-0ubuntu1~18.04-b10)
-OpenJDK 64-Bit Server VM (build 25.292-b10, mixed mode)
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 + mvn --version
 Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
-Java version: 1.8.0_292, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.8.0-59-generic", arch: "amd64", family: "unix"
 + python -V
@@ -278,6 +278,16 @@ pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
+Welcome to Gradle 6.7.1!
+
+Here are the highlights of this release:
+ - File system watching is ready for production use
+ - Declare the version of Java your build requires
+ - Java 15 support
+
+For more details see https://docs.gradle.org/6.7.1/release-notes.html
+
+
 ------------------------------------------------------------
 Gradle 6.7.1
 ------------------------------------------------------------
@@ -288,18 +298,25 @@ Revision:     2972ff02f3210d2ceed2f1ea880f026acfbab5c0
 Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
-JVM:          1.8.0_292 (Private Build 25.292-b10)
+JVM:          11.0.11 (Ubuntu 11.0.11+9-Ubuntu-0ubuntu2.18.04)
 OS:           Linux 5.8.0-59-generic amd64
 
 + npm -v
-7.18.1
+7.20.0
 + node -v
 v16.4.1
 + yarn -V
 yarn install v1.22.5
+warning package.json: No license field
+info No lockfile found.
+warning package-lock.json found. Your project contains lock files generated by tools other than Yarn. It is advised not to mix package managers in order to avoid resolution inconsistencies caused by unsynchronized lock files. To clear this warning, remove package-lock.json.
+warning No license field
 [1/4] Resolving packages...
-success Already up-to-date.
-Done in 0.05s.
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 3.58s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
