@@ -3,7 +3,7 @@
 * [`Help UNICEF’s COVID-19 Response`](https://donate.unicef.org/)
 * [`Help Red Cross`](https://www.redcross.org/donate)
 
-# OpenJDK Java 11 + Maven 3.6 + Python 3.6  + pip 20 + node 16 + npm 7 + Yarn + Gradle 6
+# OpenJDK Java 11 + Maven 3.6 + Python 3.6  + pip 21 + node 16 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
@@ -35,7 +35,7 @@ After that, combining with other Docker security practice (see below references)
 	OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
 	OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 * Apache Maven 3.6
-* Python 3.6 + pip 20.2 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
+* Python 3.6 + pip 21 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
 * Node v16 + npm 7 (from NodeSource official Node Distribution)
 * Gradle 6.7
 * Yarn 1.22
@@ -251,7 +251,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@56d0c902f4ae:~$ /usr/scripts/printVersions.sh 
+developer@6f58ad4b0ea3:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 + whereis java
@@ -267,15 +267,15 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.8.0-59-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.11.0-27-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
 Python 3.6.9
 + pip --version
-pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 21.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + pip3 --version
-pip 21.1.3 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 21.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
 Welcome to Gradle 6.7.1!
@@ -299,12 +299,12 @@ Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          11.0.11 (Ubuntu 11.0.11+9-Ubuntu-0ubuntu2.18.04)
-OS:           Linux 5.8.0-59-generic amd64
+OS:           Linux 5.11.0-27-generic amd64
 
 + npm -v
-7.20.0
+7.21.0
 + node -v
-v16.4.1
+v16.7.0
 + yarn -V
 yarn install v1.22.5
 warning package.json: No license field
@@ -316,7 +316,7 @@ warning No license field
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 success Saved lockfile.
-Done in 3.58s.
+Done in 2.82s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -338,127 +338,128 @@ UBUNTU_CODENAME=bionic
 
 ## Python3 PIP Modules
 ```
-developer@d14afe4d3b73:~$ pip freeze
-appdirs==1.4.4
+developer@6f58ad4b0ea3:~$ pip freeze
 argon2-cffi==20.1.0
 asn1crypto==0.24.0
 async-generator==1.10
-attrs==20.3.0
+attrs==21.2.0
 backcall==0.2.0
+backports.entry-points-selectable==1.1.0
 beautifulsoup4==4.6.0
-bleach==3.2.1
-certifi==2020.12.5
-cffi==1.14.4
+bleach==4.0.0
+certifi==2021.5.30
+cffi==1.14.6
 chardet==3.0.4
+charset-normalizer==2.0.4
 cloudpickle==1.6.0
 cryptography==2.1.4
 cycler==0.10.0
 decorator==4.4.2
-defusedxml==0.6.0
-distlib==0.3.1
+defusedxml==0.7.1
+distlib==0.3.2
 entrypoints==0.3
 filelock==3.0.12
-funcy==1.15
+funcy==1.16
 future==0.18.2
+greenlet==1.1.1
 html5lib==0.999999999
-httpie==2.3.0
+httpie==2.4.0
 hyperopt==0.2.5
-idna==2.10
-importlib-metadata==3.1.1
-importlib-resources==3.3.0
-iniconfig==1.1.1
+idna==3.2
+importlib-metadata==4.6.4
+importlib-resources==5.2.2
 ipaddress==1.0.23
-ipykernel==5.4.2
+ipykernel==5.5.5
 ipython==7.16.1
 ipython-genutils==0.2.0
-ipywidgets==7.5.1
+ipywidgets==7.6.3
 j2cli==0.3.10
-jedi==0.17.2
-Jinja2==2.11.2
-joblib==0.17.0
+jedi==0.18.0
+Jinja2==3.0.1
+joblib==1.0.1
 json-lines==0.5.0
 jsonschema==3.2.0
 jupyter==1.0.0
-jupyter-client==6.1.7
-jupyter-console==6.2.0
-jupyter-core==4.7.0
+jupyter-client==7.0.1
+jupyter-console==6.4.0
+jupyter-core==4.7.1
 jupyterlab-pygments==0.1.2
+jupyterlab-widgets==1.0.0
 keyring==10.6.0
 keyrings.alt==3.0
 kiwisolver==1.3.1
 lxml==4.2.1
-MarkupSafe==1.1.1
-matplotlib==3.3.3
+MarkupSafe==2.0.1
+matplotlib==3.3.4
 mistune==0.8.4
-nbclient==0.5.1
+nbclient==0.5.4
 nbconvert==6.0.7
-nbformat==5.0.8
-nest-asyncio==1.4.3
-networkx==2.5
-notebook==6.1.5
-numexpr==2.7.1
-numpy==1.19.4
+nbformat==5.1.3
+nest-asyncio==1.5.1
+networkx==2.5.1
+notebook==6.4.3
+numexpr==2.7.3
+numpy==1.19.5
 olefile==0.45.1
-packaging==20.7
+packaging==21.0
 panda==0.3.1
-pandas==1.1.5
+pandas==0.24.2
 pandasql==0.7.3
 pandocfilters==1.4.3
-parso==0.7.1
-pbr==5.5.1
+parso==0.8.2
+pbr==5.6.0
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==8.0.1
-pkgconfig==1.5.1
-pluggy==0.13.1
-prometheus-client==0.9.0
-prompt-toolkit==3.0.8
-ptyprocess==0.6.0
-py==1.9.0
+Pillow==8.3.1
+pkgconfig==1.5.5
+platformdirs==2.2.0
+prometheus-client==0.11.0
+prompt-toolkit==3.0.20
+ptyprocess==0.7.0
 pycparser==2.20
 pycrypto==2.6.1
-Pygments==2.7.3
-pygobject==3.26.1
-pyLDAvis==2.1.2
+pydot==1.4.2
+Pygments==2.10.0
+PyGObject==3.26.1
+pyLDAvis==3.2.2
 pyparsing==2.4.7
-pyrsistent==0.17.3
+pyrsistent==0.18.0
 PySocks==1.7.1
-pytest==6.1.2
-python-apt==1.6.5+ubuntu0.5
-python-dateutil==2.8.1
+python-apt==1.6.5+ubuntu0.6
+python-dateutil==2.5.2
 python-git==2018.2.1
-pytz==2020.4
+pytz==2021.1
 pyxdg==0.25
 PyYAML==3.11
-pyzmq==20.0.0
-qtconsole==5.0.1
-QtPy==1.9.0
-requests==2.25.0
+pyzmq==22.2.1
+qtconsole==5.1.1
+QtPy==1.10.0
+requests==2.26.0
 requests-toolbelt==0.9.1
-scikit-learn==0.23.2
+scikit-learn==0.24.2
 scipy==1.5.4
-seaborn==0.11.0
+seaborn==0.11.2
 SecretStorage==2.3.1
-Send2Trash==1.5.0
-six==1.15.0
-SQLAlchemy==1.3.20
-stevedore==3.3.0
+Send2Trash==1.8.0
+six==1.16.0
+SQLAlchemy==1.4.23
+stevedore==3.4.0
 tables==3.4.2
-terminado==0.9.1
-testpath==0.4.4
-threadpoolctl==2.1.0
-toml==0.10.2
+terminado==0.11.1
+testpath==0.5.0
+threadpoolctl==2.2.0
 tornado==6.1
-tqdm==4.54.1
+tqdm==4.62.1
 traitlets==4.3.3
+typing-extensions==3.10.0.0
 unattended-upgrades==0.1
-urllib3==1.26.2
-virtualenv==20.2.2
-virtualenv-clone==0.5.4
+urllib3==1.26.6
+virtualenv==20.7.2
+virtualenv-clone==0.5.6
 virtualenvwrapper==4.8.4
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
-yml2json==1.0.1
-zipp==3.4.0
+yml2json==1.1.3
+zipp==3.5.0
 ```

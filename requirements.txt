@@ -28,6 +28,8 @@ scipy
 matplotlib
 seaborn
 pyLDAvis
+pydot
+networkx
 
 # Virtual env
 virtualenv

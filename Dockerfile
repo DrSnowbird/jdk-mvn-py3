@@ -36,13 +36,15 @@ RUN chmod +x ${SCRIPT_DIR}/*.sh
 ########################################
 #### update ubuntu and Install Python 3
 ########################################
+ARG LIB_DEV_LIST="apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev"
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common"
+ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common apt-transport-https"
 ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="graphviz libsqlite3-dev sqlite3 git xz-utils"
 
 #apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
 RUN apt-get update -y && \
-    apt-get install -y apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && \
+    apt-get install -y ${LIB_DEV_LIST} && \
     apt-get install -y ${LIB_BASIC_LIST} && \
     apt-get install -y ${LIB_COMMON_LIST} && \
     apt-get install -y ${LIB_TOOL_LIST} && \
