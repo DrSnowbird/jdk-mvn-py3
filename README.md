@@ -1,13 +1,8 @@
-# `Please consider to donate what you can to help UNICEF, WHO, and Red Cross if you like what we provide to you for free. Thanks so much!`
-* [`World Health Organization (WHO) COVID-19 Solidarity Response Fund`](https://www.who.int/emergencies/diseases/novel-coronavirus-2019/donate)
-* [`Help UNICEF’s COVID-19 Response`](https://donate.unicef.org/)
-* [`Help Red Cross`](https://www.redcross.org/donate)
-
 # OpenJDK Java 11 + Maven 3.6 + Python 3.6  + pip 21 + node 16 + npm 7 + Yarn + Gradle 6
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
-# `This build is based upon Ubuntu 18.04 + OpenJDK Java 11`
+# ** Currently Docker Hub not allowing for free hosting for Docker images: Please run ./build.sh first by yourself locally **
 
 # NOTICE: Change to use `Non-Root` implementation
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -65,6 +60,7 @@ Yarn has now been added since few requests for supporting Yarn. However, at this
 
 # Default Run (test) - Just entering Container
 ```
+./build.sh or 'make build'
 ./run.sh
 ```
 
