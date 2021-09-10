@@ -229,7 +229,7 @@ RUN echo "Set disable_coredump false" | sudo tee -a /etc/sudo.conf
 ############################################
 ENV WORKSPACE=${HOME}/workspace
 ENV DATA=${HOME}/data
-USER ${USER}
+
 WORKDIR ${HOME}
 
 ############################################
@@ -237,7 +237,8 @@ WORKDIR ${HOME}
 ############################################
 RUN mkdir -p ${WORKSPACE} ${DATA}
 COPY ./examples ${DATA}/examples
-RUN sudo chown -R $USER:$USER ${DATA}
+RUN chown ${USER}:${USER} -R  ${DATA}
+
 VOLUME ${DATA}
 VOLUME ${WORKSPACE}
 

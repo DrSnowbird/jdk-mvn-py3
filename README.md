@@ -247,7 +247,7 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@6f58ad4b0ea3:~$ /usr/scripts/printVersions.sh 
+developer@galactica:~$ /usr/scripts/printVersions.sh 
 + echo JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 + whereis java
@@ -263,7 +263,7 @@ Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
 Maven home: /usr/apache-maven-3.6.3
 Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.11.0-27-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "5.11.0-34-generic", arch: "amd64", family: "unix"
 + python -V
 Python 2.7.17
 + python3 -V
@@ -295,12 +295,12 @@ Kotlin:       1.3.72
 Groovy:       2.5.12
 Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
 JVM:          11.0.11 (Ubuntu 11.0.11+9-Ubuntu-0ubuntu2.18.04)
-OS:           Linux 5.11.0-27-generic amd64
+OS:           Linux 5.11.0-34-generic amd64
 
 + npm -v
-7.21.0
+7.23.0
 + node -v
-v16.7.0
+v16.9.0
 + yarn -V
 yarn install v1.22.5
 warning package.json: No license field
@@ -312,7 +312,7 @@ warning No license field
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 success Saved lockfile.
-Done in 2.82s.
+Done in 1.43s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
@@ -334,15 +334,15 @@ UBUNTU_CODENAME=bionic
 
 ## Python3 PIP Modules
 ```
-developer@6f58ad4b0ea3:~$ pip freeze
-argon2-cffi==20.1.0
+developer@galactica:~$ pip freeze
+argon2-cffi==21.1.0
 asn1crypto==0.24.0
 async-generator==1.10
 attrs==21.2.0
 backcall==0.2.0
 backports.entry-points-selectable==1.1.0
 beautifulsoup4==4.6.0
-bleach==4.0.0
+bleach==4.1.0
 certifi==2021.5.30
 cffi==1.14.6
 chardet==3.0.4
@@ -359,16 +359,16 @@ funcy==1.16
 future==0.18.2
 greenlet==1.1.1
 html5lib==0.999999999
-httpie==2.4.0
+httpie==2.5.0
 hyperopt==0.2.5
 idna==3.2
-importlib-metadata==4.6.4
+importlib-metadata==4.8.1
 importlib-resources==5.2.2
 ipaddress==1.0.23
 ipykernel==5.5.5
 ipython==7.16.1
 ipython-genutils==0.2.0
-ipywidgets==7.6.3
+ipywidgets==7.6.4
 j2cli==0.3.10
 jedi==0.18.0
 Jinja2==3.0.1
@@ -376,11 +376,11 @@ joblib==1.0.1
 json-lines==0.5.0
 jsonschema==3.2.0
 jupyter==1.0.0
-jupyter-client==7.0.1
+jupyter-client==7.0.2
 jupyter-console==6.4.0
 jupyter-core==4.7.1
 jupyterlab-pygments==0.1.2
-jupyterlab-widgets==1.0.0
+jupyterlab-widgets==1.0.1
 keyring==10.6.0
 keyrings.alt==3.0
 kiwisolver==1.3.1
@@ -406,9 +406,9 @@ parso==0.8.2
 pbr==5.6.0
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==8.3.1
+Pillow==8.3.2
 pkgconfig==1.5.5
-platformdirs==2.2.0
+platformdirs==2.3.0
 prometheus-client==0.11.0
 prompt-toolkit==3.0.20
 ptyprocess==0.7.0
@@ -429,7 +429,7 @@ pyxdg==0.25
 PyYAML==3.11
 pyzmq==22.2.1
 qtconsole==5.1.1
-QtPy==1.10.0
+QtPy==1.11.0
 requests==2.26.0
 requests-toolbelt==0.9.1
 scikit-learn==0.24.2
@@ -441,17 +441,17 @@ six==1.16.0
 SQLAlchemy==1.4.23
 stevedore==3.4.0
 tables==3.4.2
-terminado==0.11.1
+terminado==0.12.1
 testpath==0.5.0
 threadpoolctl==2.2.0
 tornado==6.1
-tqdm==4.62.1
+tqdm==4.62.2
 traitlets==4.3.3
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
 unattended-upgrades==0.1
 urllib3==1.26.6
 virtualenv==20.7.2
-virtualenv-clone==0.5.6
+virtualenv-clone==0.5.7
 virtualenvwrapper==4.8.4
 wcwidth==0.2.5
 webencodings==0.5.1
