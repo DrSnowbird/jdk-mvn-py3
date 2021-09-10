@@ -11,11 +11,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV USER_ID=${USER_ID:-1000}
 ENV GROUP_ID=${GROUP_ID:-1000}
 
-#ARG JAVA_VERSION=8
-ARG JAVA_VERSION=11
-#ARG JAVA_VERSION=14
-#ENV JAVA_VERSION=${JAVA_VERSION:-8}
-ENV JAVA_VERSION=${JAVA_VERSION:-11}
+#ENV JAVA_VERSION=8
+ENV JAVA_VERSION=11
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -37,19 +34,18 @@ RUN chmod +x ${SCRIPT_DIR}/*.sh
 #### update ubuntu and Install Python 3
 ########################################
 ARG LIB_DEV_LIST="apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev"
-ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common"
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common apt-transport-https"
 ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="graphviz libsqlite3-dev sqlite3 git xz-utils"
 
-#apt-get install -y curl iputils-ping nmap net-tools build-essential software-properties-common libsqlite3-dev sqlite3 bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib && \
 RUN apt-get update -y && \
     apt-get install -y ${LIB_DEV_LIST} && \
     apt-get install -y ${LIB_BASIC_LIST} && \
     apt-get install -y ${LIB_COMMON_LIST} && \
     apt-get install -y ${LIB_TOOL_LIST} && \
     apt-get install -y sudo && \
-    apt-get clean -y
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
 
 ########################################
 #### ------- OpenJDK Installation ------
@@ -84,7 +80,6 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 # OpenJDK Java:
 # ------------------
 
-#ARG OPENJDK_PACKAGE=default-jdk
 ARG OPENJDK_PACKAGE=${OPENJDK_PACKAGE:-openjdk-${JAVA_VERSION}-jdk}
 
 # -- To install JDK Source (src.zip), uncomment the line below: --
@@ -108,7 +103,7 @@ RUN update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOM
 ###################################
 #### ---- Install Maven 3 ---- ####
 ###################################
-ARG MAVEN_VERSION=${MAVEN_VERSION:-3.6.3}
+ARG MAVEN_VERSION=${MAVEN_VERSION:-3.8.2}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
 ENV PATH=${PATH}:${MAVEN_HOME}/bin
@@ -122,15 +117,8 @@ RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
 ########################################
 COPY requirements.txt ./
 
-## -- if pkg-resources error occurs, then do this! -- ##
-## -- Warning:
-## WARNING: pip is being invoked by an old script wrapper. This will fail in a future version of pip.
-## Please see https://github.com/pypa/pip/issues/5599 for advice on fixing the underlying issue.
-## To avoid this problem you can invoke Python with '-m pip' instead of running pip directly.
-
 # pip3 uninstall pkg-resources==0.0.0
 RUN python3 -m pip install --upgrade pip && \
-    python3 -m pip  --no-cache-dir install --upgrade pip && \
     python3 -m pip --no-cache-dir install --ignore-installed -U -r requirements.txt
 
 ## -- added Local PIP installation bin to PATH
@@ -149,7 +137,7 @@ RUN mvn --version && \
 # Ref: https://gradle.org/releases/
 
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-6.7.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-7.1}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
@@ -209,20 +197,16 @@ RUN groupadd ${USER} && useradd ${USER} -m -d ${HOME} -s /bin/bash -g ${USER} &&
     echo "${USER} ALL=NOPASSWD:ALL" | tee -a /etc/sudoers && \
     echo "USER =======> ${USER}" && ls -al ${HOME}
 
-#############################################
-#### ---- entrypoint script setup   ---- ####
-#############################################
-RUN ln -s ${INSTALL_DIR}/scripts/docker-entrypoint.sh /docker-entrypoint.sh
+###########################################
+#### ---- entrypoint script setup ---- ####
+###########################################
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 #############################################
 #### ---- USER as Owner for scripts ---- ####
 #############################################
 RUN chown ${USER}:${USER} -R ${INSTALL_DIR}/scripts /docker-entrypoint.sh
-
-#############################################################################
-#### ---- Fix sudo: setrlimit(RLIMIT_CORE): Operation not permitted ---- ####
-#############################################################################
-RUN echo "Set disable_coredump false" | sudo tee -a /etc/sudo.conf
 
 ############################################
 #### ---- Set up user environments ---- ####

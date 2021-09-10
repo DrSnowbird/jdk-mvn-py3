@@ -259,8 +259,8 @@ openjdk version "11.0.11" 2021-04-20
 OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
 OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 + mvn --version
-Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
-Maven home: /usr/apache-maven-3.6.3
+Apache Maven 3.8.2 (ea98e05a04480131370aa0c110b8c54cf726c06f)
+Maven home: /usr/apache-maven-3.8.2
 Java version: 11.0.11, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
 OS name: "linux", version: "5.11.0-34-generic", arch: "amd64", family: "unix"
@@ -274,26 +274,25 @@ pip 21.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 pip 21.2.4 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
 + gradle --version
 
-Welcome to Gradle 6.7.1!
+Welcome to Gradle 7.1!
 
 Here are the highlights of this release:
- - File system watching is ready for production use
- - Declare the version of Java your build requires
- - Java 15 support
+ - Faster incremental Java compilation
+ - Easier source set configuration in the Kotlin DSL
 
-For more details see https://docs.gradle.org/6.7.1/release-notes.html
+For more details see https://docs.gradle.org/7.1/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 6.7.1
+Gradle 7.1
 ------------------------------------------------------------
 
-Build time:   2020-11-16 17:09:24 UTC
-Revision:     2972ff02f3210d2ceed2f1ea880f026acfbab5c0
+Build time:   2021-06-14 14:47:26 UTC
+Revision:     989ccc9952b140ee6ab88870e8a12f1b2998369e
 
-Kotlin:       1.3.72
-Groovy:       2.5.12
-Ant:          Apache Ant(TM) version 1.10.8 compiled on May 10 2020
+Kotlin:       1.4.31
+Groovy:       3.0.7
+Ant:          Apache Ant(TM) version 1.10.9 compiled on September 27 2020
 JVM:          11.0.11 (Ubuntu 11.0.11+9-Ubuntu-0ubuntu2.18.04)
 OS:           Linux 5.11.0-34-generic amd64
 
@@ -312,7 +311,7 @@ warning No license field
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 success Saved lockfile.
-Done in 1.43s.
+Done in 2.02s.
 + cat /etc/lsb-release /etc/os-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=18.04
