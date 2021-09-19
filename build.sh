@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -e
 
@@ -9,36 +9,52 @@ set -e
 if [ $# -lt 1 ]; then
     echo "-------------------------------------------------------------------------------------------"
     echo "Usage: "
-    echo "  ${0} [<Dockerfile> <imageTag> [<some more optional arguments...>] ] "
+    echo "  ${0} [-i <imageTag>] [<more Docker build arguments ...>] ] "
     echo "e.g."
-    echo "  ./build.sh ./Dockerfile-openjdk11 openkbs/jdk11-mvn-py3 --no-cache "
-    echo "  ./build.sh ./centos/Dockerfile.centos.xfce.vnc openkbs/centos-xfce-vnc --no-cache  --build-arg OS_TYPE=centos'"
-    echo "  ./build.sh ./Dockerfile.ubuntu.xfce.vnc openkbs/ubuntu-xfce-vnc --no-cache  --build-arg OS_TYPE=centos'"
+    echo "  ./build.sh"
+    echo "  ./build.sh -i my-container-image --no-cache "
+    echo "  ./build.sh --no-cache  --build-arg OS_TYPE=centos'"
     echo "-------------------------------------------------------------------------------------------"
 fi
 
-DOCKERFILE=${1:-./Dockerfile}
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # Linux
-    MY_DIR=$(dirname "$(readlink -f "$0")")
-    DOCKERFILE=$(realpath $DOCKERFILE)
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # Mac OSX
-    MY_DIR=`pwd`
-else
-    MY_DIR=`pwd`
-fi
-
+DOCKERFILE=./Dockerfile
 BUILD_CONTEXT=$(dirname ${DOCKERFILE})
 
-imageTag=${2}
+imageTag=
 
-if [ $# -gt 2 ]; then
-    shift 2
-    options="$*"
-else 
-    options=""
-fi
+###################################################
+#### ---- Parse Command Line Arguments:  ---- #####
+###################################################
+
+PARAMS=""
+while (( "$#" )); do
+  case "$1" in
+    -i|--imageTag)
+      imageTag=$2
+      shift 2
+      ;;
+    ## -- allowing docker's command options to go through without exiting
+    ## e.g., 
+    #-*|--*=) # unsupported flags
+    #  echo "Error: Unsupported flag $1" >&2
+    #  exit 1
+    #  ;;
+    *) # preserve positional arguments
+      PARAMS="$PARAMS $1"
+      shift
+      ;;
+  esac
+done
+# set positional arguments in their proper place
+eval set -- "$PARAMS"
+
+echo "imageTag: $imageTag"
+
+echo "remiaing args:"
+
+echo $@
+
+options=$@
 
 ##########################################################
 #### ---- Whether to remove previous build cache ---- ####
@@ -174,7 +190,7 @@ set -x
 sudo docker build ${REMOVE_CACHE_OPTION} -t ${imageTag} \
     ${BUILD_ARGS} \
     ${options} \
-    -f $(basename ${DOCKERFILE}) .
+    -f $(basename ${DOCKERFILE}) ${BUILD_CONTEXT}
 set +x
 cd -
 
