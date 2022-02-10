@@ -103,14 +103,14 @@ RUN update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOM
 ###################################
 #### ---- Install Maven 3 ---- ####
 ###################################
-ARG MAVEN_VERSION=${MAVEN_VERSION:-3.8.2}
+ARG MAVEN_VERSION=${MAVEN_VERSION:-3.8.4}
 ENV MAVEN_VERSION=${MAVEN_VERSION}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
 ENV PATH=${PATH}:${MAVEN_HOME}/bin
-RUN curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-  | gunzip \
-  | tar x -C /usr/ \
-  && ln -s ${MAVEN_HOME} /usr/maven
+# curl -sL http://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+RUN MAVEN_PACKAGE_URL=$(curl -s https://maven.apache.org/download.cgi | grep -e "apache-maven.*bin.tar.gz" | head -1|cut -d'"' -f2) && \
+    curl -sL ${MAVEN_PACKAGE_URL} | gunzip | tar x -C /usr/ && \
+    ln -s ${MAVEN_HOME} /usr/maven
 
 ########################################
 #### ---- PIP install packages ---- ####
@@ -137,7 +137,7 @@ RUN mvn --version && \
 # Ref: https://gradle.org/releases/
 
 ARG GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ARG GRADLE_VERSION=${GRADLE_VERSION:-7.1}
+ARG GRADLE_VERSION=${GRADLE_VERSION:-7.4}
 
 ARG GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
 ENV GRADLE_HOME=${GRADLE_HOME}
@@ -146,6 +146,7 @@ ARG GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAG
 
 RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
     cd ${GRADLE_INSTALL_BASE} && \
+    GRADLE_PACKAGE_URL=$(curl -s https://gradle.org/releases/ | grep "Download: " | cut -d'"' -f4 | sort -u | tail -1) && \
     wget -q --no-check-certificate -c ${GRADLE_PACKAGE_URL} && \
     unzip -d ${GRADLE_INSTALL_BASE} ${GRADLE_PACKAGE} && \
     ls -al ${GRADLE_HOME} && \
@@ -157,7 +158,7 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-16}
+ARG NODE_VERSION=${NODE_VERSION:-current}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
