@@ -2,6 +2,8 @@
 
 echo "####################### Components: $(basename $0) ###########################"
 
+sudo = `which sudo`
+
 cat /etc/*rel*
 
 find . -name "ca-certificates"
@@ -175,31 +177,32 @@ function setupSystemCertificates() {
     echo "================= Setup System Certificates ===================="
     if [ ! -s ${TARGET_CERTIFICATES_DIR} ]; then
         echo -e "*** TARGET_CERTIFICATES_DIR: ${TARGET_CERTIFICATES_DIR}: Not Found!"
+        $sudo mkdir -p ${TARGET_CERTIFICATES_DIR}
         exit 9
     fi
     if [ -s /etc/ca-certificates/update.d/docker-openjdk ]; then
         cat /etc/ca-certificates/update.d/docker-openjdk
         echo ">> JAVA PATH=`which java`"
-        sudo sed -i "s#\$JAVA_HOME#$JAVA_HOME#g" /etc/ca-certificates/update.d/docker-openjdk
+        $sudo sed -i "s#\$JAVA_HOME#$JAVA_HOME#g" /etc/ca-certificates/update.d/docker-openjdk
         env | grep -i java
         cat /etc/ca-certificates/update.d/docker-openjdk
     fi
-    for cert in `ls ${SOURCE_CERTIFICATES_DIR}/*`; do
+    for cert in `cd ${SOURCE_CERTIFICATES_DIR} && ls * | grep -v dummy`; do
         ## -- Converting from PEM to CRT: -- ##
         ## openssl x509 -ouform der -in Some-Certificate.pem -out Some-Certificate.crt
         if [[ "${cert}" == *"pem" ]]; then
-            openssl x509 -ouform der -in ${cert} -out ${cert//pem/crt}
+            openssl x509 -ouform der -in ${SOURCE_CERTIFICATES_DIR}/${cert} -out ${cert//pem/crt}
         fi
         if [[ "${cert}" == *"crt" ]]; then
-            #sudo cp root.cert.pem /usr/local/share/ca-certificates/root.cert.crt
+            #$sudo cp root.cert.pem /usr/local/share/ca-certificates/root.cert.crt
             cert_basename=$(basename $cert)
-            sudo cp ${cert} ${TARGET_CERTIFICATES_DIR}/${cert}
+            $sudo cp ${SOURCE_CERTIFICATES_DIR}/${cert} ${TARGET_CERTIFICATES_DIR}/$(basename ${cert})
         else
             echo "... ignore non-certificate file: $cert"
         fi
     done
-    #sudo update-ca-certificates
-    sudo ${CERT_COMMAND} ${CMD_OPT}
+    #$sudo update-ca-certificates
+    $sudo ${CERT_COMMAND} ${CMD_OPT}
 }
 setupSystemCertificates 
 
