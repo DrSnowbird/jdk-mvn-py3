@@ -1,12 +1,11 @@
-#!/bin/bash
+#!/bin/bash -x
 
 echo "####################### Components: $(basename $0) ###########################"
 
-which sudo
-if [ $? -gt 0 ]; then
-    sudo=""
-else
+if [ -s "/usr/bin/sudo" ]; then
     sudo=sudo
+else
+    sudo=""
 fi
 
 cat /etc/*rel*
