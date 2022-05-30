@@ -84,7 +84,6 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 # ------------------
 # OpenJDK Java:
 # ------------------
-
 ARG OPENJDK_PACKAGE=${OPENJDK_PACKAGE:-openjdk-${JAVA_VERSION}-jdk}
 
 # -- To install JDK Source (src.zip), uncomment the line below: --
@@ -174,10 +173,13 @@ RUN mkdir -p ${GRADLE_INSTALL_BASE} && \
 #### ---- Node from NODESOURCES ---- ####
 #########################################
 # Ref: https://github.com/nodesource/distributions
-ARG NODE_VERSION=${NODE_VERSION:-current}
+#ARG NODE_VERSION=${NODE_VERSION:-current}
+# Ubuntu 18.04 missing GLC lib 2.28 needed by latest Node v18
+# Hence stick to v17
+ARG NODE_VERSION=${NODE_VERSION:-17}
 ENV NODE_VERSION=${NODE_VERSION}
 RUN apt-get update -y && \
-    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
+    curl -sL -k https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g npm@latest
     
