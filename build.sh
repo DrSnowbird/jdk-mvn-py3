@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 set -e
 
@@ -11,13 +11,23 @@ if [ $# -lt 1 ]; then
     echo "Usage: "
     echo "  ${0} [-i <imageTag>] [<more Docker build arguments ...>] ] "
     echo "e.g."
-    echo "  ./build.sh"
     echo "  ./build.sh -i my-container-image --no-cache "
     echo "  ./build.sh --no-cache  --build-arg OS_TYPE=centos'"
     echo "-------------------------------------------------------------------------------------------"
 fi
 
-DOCKERFILE=./Dockerfile
+DOCKERFILE=${1:-./Dockerfile}
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Linux
+    MY_DIR=$(dirname "$(readlink -f "$0")")
+    DOCKERFILE=$(realpath $DOCKERFILE)
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # Mac OSX
+    MY_DIR=`pwd`
+else
+    MY_DIR=`pwd`
+fi
+
 BUILD_CONTEXT=$(dirname ${DOCKERFILE})
 
 imageTag=
