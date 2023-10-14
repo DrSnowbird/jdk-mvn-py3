@@ -17,10 +17,10 @@ python-dateutil
 
 # Math / Algebra Libs
 numpy
-panda
-pandas
-pandasql
-Pillow
+#panda
+#pandas
+#pandasql
+#Pillow
 scikit_learn
 scipy
 
