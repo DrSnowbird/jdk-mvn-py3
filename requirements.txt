@@ -16,7 +16,7 @@ yml2json
 python-dateutil
 
 # Math / Algebra Libs
-numpy
+#numpy
 #panda
 #pandas
 #pandasql
@@ -25,9 +25,9 @@ scikit_learn
 scipy
 
 # Plots
-matplotlib
-seaborn
-pyLDAvis
+#matplotlib
+#seaborn
+#pyLDAvis
 pydot
 networkx
 
@@ -36,6 +36,6 @@ virtualenv
 virtualenvwrapper
 
 # Jypyter
-ipykernel
-jupyter
+#ipykernel
+#jupyter
 

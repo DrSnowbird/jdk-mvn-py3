@@ -1,5 +1,5 @@
-#FROM ${BASE_IMAGE:-ubuntu:22.04}
-FROM ${BASE_IMAGE:-ubuntu:18.04}
+FROM ${BASE_IMAGE:-ubuntu:22.04}
+#FROM ${BASE_IMAGE:-ubuntu:18.04}
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
 
@@ -40,17 +40,19 @@ RUN ${SCRIPT_DIR}/setup_system_proxy.sh
 ########################################
 ARG LIB_DEV_LIST="apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev"
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common apt-transport-https"
-ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
+ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim sudo"
+#ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="graphviz libsqlite3-dev sqlite3 git xz-utils"
 
-RUN apt-get update -y && \
+RUN apt update -y && apt upgrade -y && \
     apt-get install -y ${LIB_DEV_LIST} && \
     apt-get install -y ${LIB_BASIC_LIST} && \
-    apt-get install -y ${LIB_COMMON_LIST} && \
     apt-get install -y ${LIB_TOOL_LIST} && \
-    apt-get install -y sudo && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y ${LIB_COMMON_LIST} && \
+    apt-get install python3.10 -y && \
+    apt-get clean -y 
+
+RUN apt-get install python3-pip -y
 
 ########################################
 #### ------- OpenJDK Installation ------
@@ -69,11 +71,6 @@ ENV LANG en_US.utf8
 #     For some sample build times, see Debian's buildd logs:
 #       https://buildd.debian.org/status/logs.php?pkg=openjdk-8
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-		bzip2 \
-		unzip \
-		xz-utils \
-	&& rm -rf /var/lib/apt/lists/*
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
@@ -189,13 +186,12 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y ca-certificates curl gnupg
 RUN sudo mkdir -p /etc/apt/keyrings
 RUN curl -fsSL -k https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-#ARG NODE_MAJOR=20
-ARG NODE_MAJOR=16
+ARG NODE_MAJOR=20
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 RUN sudo apt-get update
 RUN sudo apt-get install nodejs -y
  
-RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
+#RUN cd ${SCRIPT_DIR}; ${SCRIPT_DIR}/setup_npm_proxy.sh
 
 ########################
 #### ---- Yarn ---- ####

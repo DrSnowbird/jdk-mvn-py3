@@ -247,201 +247,69 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-developer@aurora:~$ /usr/scripts/printVersions.sh 
+/usr/scripts/printVersions.sh
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-11-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 
 /usr/lib/jvm/java-11-openjdk-amd64/bin/java
-openjdk version "11.0.15" 2022-04-19
-OpenJDK Runtime Environment (build 11.0.15+10-Ubuntu-0ubuntu0.18.04.1)
-OpenJDK 64-Bit Server VM (build 11.0.15+10-Ubuntu-0ubuntu0.18.04.1, mixed mode, sharing)
+openjdk version "11.0.20.1" 2023-08-24
+OpenJDK Runtime Environment (build 11.0.20.1+1-post-Ubuntu-0ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.20.1+1-post-Ubuntu-0ubuntu122.04, mixed mode, sharing)
 /usr/bin/mvn
-Apache Maven 3.8.5 (3599d3414f046de2324203b78ddcf9b5e4388aa0)
-Maven home: /usr/apache-maven-3.8.5
-Java version: 11.0.15, vendor: Private Build, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
+Maven home: /usr/apache-maven-3.9.5
+Java version: 11.0.20.1, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "5.11.0-34-generic", arch: "amd64", family: "unix"
-/usr/bin/python
-Python 2.7.17
+OS name: "linux", version: "6.2.0-32-generic", arch: "amd64", family: "unix"
 /usr/bin/python3
-Python 3.6.9
+Python 3.10.12
 /usr/local/bin/pip
-pip 21.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 23.2.1 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)
 /usr/local/bin/pip3
-pip 21.3.1 from /usr/local/lib/python3.6/dist-packages/pip (python 3.6)
+pip 23.2.1 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)
 /usr/bin/gradle
 
-Welcome to Gradle 7.4.2!
+Welcome to Gradle 8.4!
 
 Here are the highlights of this release:
- - Aggregated test and JaCoCo reports
- - Marking additional test source directories as tests in IntelliJ
- - Support for Adoptium JDKs in Java toolchains
+ - Compiling and testing with Java 21
+ - Faster Java compilation on Windows
+ - Role focused dependency configurations creation
 
-For more details see https://docs.gradle.org/7.4.2/release-notes.html
+For more details see https://docs.gradle.org/8.4/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 7.4.2
+Gradle 8.4
 ------------------------------------------------------------
 
-Build time:   2022-03-31 15:25:29 UTC
-Revision:     540473b8118064efcc264694cbcaa4b677f61041
+Build time:   2023-10-04 20:52:13 UTC
+Revision:     e9251e572c9bd1d01e503a0dfdf43aedaeecdc3f
 
-Kotlin:       1.5.31
-Groovy:       3.0.9
-Ant:          Apache Ant(TM) version 1.10.11 compiled on July 10 2021
-JVM:          11.0.15 (Private Build 11.0.15+10-Ubuntu-0ubuntu0.18.04.1)
-OS:           Linux 5.11.0-34-generic amd64
+Kotlin:       1.9.10
+Groovy:       3.0.17
+Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+JVM:          11.0.20.1 (Ubuntu 11.0.20.1+1-post-Ubuntu-0ubuntu122.04)
+OS:           Linux 6.2.0-32-generic amd64
 
 /usr/bin/npm
-8.11.0
+10.1.0
 /usr/bin/node
-v17.9.0
+v20.8.1
 DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=18.04
-DISTRIB_CODENAME=bionic
-DISTRIB_DESCRIPTION="Ubuntu 18.04.6 LTS"
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.3 LTS"
+PRETTY_NAME="Ubuntu 22.04.3 LTS"
 NAME="Ubuntu"
-VERSION="18.04.6 LTS (Bionic Beaver)"
+VERSION_ID="22.04"
+VERSION="22.04.3 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
 ID=ubuntu
 ID_LIKE=debian
-PRETTY_NAME="Ubuntu 18.04.6 LTS"
-VERSION_ID="18.04"
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-VERSION_CODENAME=bionic
-UBUNTU_CODENAME=bionic
-```
-
-## Python3 PIP Modules
-```
-developer@aurora:~$ pip freeze
-argon2-cffi==21.3.0
-argon2-cffi-bindings==21.2.0
-asn1crypto==0.24.0
-async-generator==1.10
-attrs==21.4.0
-backcall==0.2.0
-beautifulsoup4==4.6.0
-bleach==4.1.0
-certifi==2022.5.18.1
-cffi==1.15.0
-chardet==3.0.4
-charset-normalizer==2.0.12
-cloudpickle==2.1.0
-cryptography==2.1.4
-cycler==0.11.0
-dataclasses==0.8
-decorator==4.4.2
-defusedxml==0.7.1
-distlib==0.3.4
-entrypoints==0.4
-filelock==3.4.1
-funcy==1.17
-future==0.18.2
-greenlet==1.1.2
-html5lib==0.999999999
-httpie==2.6.0
-hyperopt==0.2.7
-idna==3.3
-importlib-metadata==4.8.3
-importlib-resources==5.4.0
-ipaddress==1.0.23
-ipykernel==5.5.6
-ipython==7.16.3
-ipython-genutils==0.2.0
-ipywidgets==7.7.0
-j2cli==0.3.10
-jedi==0.17.2
-Jinja2==3.0.3
-joblib==1.1.0
-json-lines==0.5.0
-jsonschema==3.2.0
-jupyter==1.0.0
-jupyter-client==7.1.2
-jupyter-console==6.4.3
-jupyter-core==4.9.2
-jupyterlab-pygments==0.1.2
-jupyterlab-widgets==1.1.0
-keyring==10.6.0
-keyrings.alt==3.0
-kiwisolver==1.3.1
-lxml==4.2.1
-MarkupSafe==2.0.1
-matplotlib==3.3.4
-mistune==0.8.4
-nbclient==0.5.9
-nbconvert==6.0.7
-nbformat==5.1.3
-nest-asyncio==1.5.5
-networkx==2.5.1
-notebook==6.4.10
-numexpr==2.8.1
-numpy==1.19.5
-olefile==0.45.1
-packaging==21.3
-panda==0.3.1
-pandas==0.24.2
-pandasql==0.7.3
-pandocfilters==1.5.0
-parso==0.7.1
-pbr==5.9.0
-pexpect==4.8.0
-pickleshare==0.7.5
-Pillow==8.4.0
-pkgconfig==1.5.5
-platformdirs==2.4.0
-prometheus-client==0.14.1
-prompt-toolkit==3.0.29
-ptyprocess==0.7.0
-py4j==0.10.9.5
-pycparser==2.21
-pycrypto==2.6.1
-pydot==1.4.2
-Pygments==2.12.0
-PyGObject==3.26.1
-pyLDAvis==3.2.2
-pyparsing==3.0.9
-pyrsistent==0.18.0
-PySocks==1.7.1
-python-apt==1.6.5+ubuntu0.7
-python-dateutil==2.5.2
-python-git==2018.2.1
-pytz==2022.1
-pyxdg==0.25
-PyYAML==3.11
-pyzmq==23.0.0
-qtconsole==5.2.2
-QtPy==2.0.1
-requests==2.27.1
-requests-toolbelt==0.9.1
-scikit-learn==0.24.2
-scipy==1.5.4
-seaborn==0.11.2
-SecretStorage==2.3.1
-Send2Trash==1.8.0
-six==1.16.0
-SQLAlchemy==1.4.36
-stevedore==3.5.0
-tables==3.4.2
-terminado==0.12.1
-testpath==0.6.0
-threadpoolctl==3.1.0
-tornado==6.1
-tqdm==4.64.0
-traitlets==4.3.3
-typing_extensions==4.1.1
-unattended-upgrades==0.1
-urllib3==1.26.9
-virtualenv==20.14.1
-virtualenv-clone==0.5.7
-virtualenvwrapper==4.8.4
-wcwidth==0.2.5
-webencodings==0.5.1
-widgetsnbextension==3.6.0
-yml2json==1.1.3
-zipp==3.6.0
+UBUNTU_CODENAME=jammy
 ```
