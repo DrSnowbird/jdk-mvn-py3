@@ -1,8 +1,10 @@
-# OpenJDK Java 11 + Maven 3.6 + Python 3.6  + pip 21 + node 16 + npm 7 + Yarn + Gradle 6
+# OpenJDK Java 23 + Maven 3.9 + Python 3.12  + pip 23 + node 21 + npm 10 + Yarn + Gradle 7
 
 [![](https://images.microbadger.com/badges/image/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/openkbs/jdk-mvn-py3.svg)](https://microbadger.com/images/openkbs/jdk-mvn-py3 "Get your own version badge on microbadger.com")
 
-# ** Currently Docker Hub not allowing for free hosting for Docker images: Please run ./build.sh first by yourself locally **
+# ** Currently Docker Hub not allowing free hosting for Docker images: Please run ./build.sh first by yourself locally **
+
+`(**NEW**) Updated to latest Ubuntu 24.04 and related latest tools, e.g., pip, Maven, Python, Java, etc.`
 
 # NOTICE: Change to use `Non-Root` implementation
 This new release is designed to support the deployment for Non-Root child images implementations and deployments to platform such as OpenShift or RedHat host operating system which requiring special policy to deploy. And, for better security practice, we decided to migrate (eventaully) our Docker containers to use Non-Root implementation. 
@@ -25,20 +27,17 @@ After that, combining with other Docker security practice (see below references)
 * [Five Docker Security Best Practices - The New Stack](https://thenewstack.io/5-docker-security-best-practices/)
 
 # Components
-* Ubuntu 18.04 LTS now and we will use Ubuntu 20.04 soon as LTS Docker base image.
-* openjdk version "11.0.11" 2021-04-20
-	OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
-	OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
-* Apache Maven 3.6
-* Python 3.6 + pip 21 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
-* Node v16 + npm 7 (from NodeSource official Node Distribution)
-* Gradle 6.7
-* Yarn 1.22
+* Ubuntu 24.04 now.
+* openjdk version "23-ea" 2024-09-17
+  OpenJDK Runtime Environment (build 23-ea+10-Ubuntu-1)
+  OpenJDK 64-Bit Server VM (build 23-ea+10-Ubuntu-1, mixed mode, sharing)
+* Apache Maven 3.9
+* Python 3.12 + pip 23 + Python 3 virtual environments (venv, virtualenv, virtualenvwrapper, mkvirtualenv, ..., etc.)
+* Node v21 + npm 10 (from NodeSource official Node Distribution)
+* Gradle 7
 * Other tools: git wget unzip vim python python-setuptools python-dev python-numpy, ..., etc.
 * [See Releases Information](https://github.com/DrSnowbird/jdk-mvn-py3/blob/master/README.md#Releases-information)
-
-## Note about "Yarn"
-Yarn has now been added since few requests for supporting Yarn. However, at this point, the impact to all child Containers is not assured yet. Please report any issue for child Containers or derivative Containers based upon this base Container image.
+* Note: 'yarn' is removed from this latest build -- if needed, it will be put back later releases.
 
 # Quick commands
 * build.sh - build local image.
@@ -71,6 +70,8 @@ Yarn has now been added since few requests for supporting Yarn. However, at this
 ./tryPython.sh
 ./tryWebSockerServer.sh
 ```
+* Issue: the `./tryJava.sh` encouters some permission to write share folder in Container. To fix later!
+
 # Default Build (locally)
 ```
 ./build.sh
@@ -247,69 +248,71 @@ If you want to map to different directory for certificates, e.g., /home/develope
 
 # Releases information
 ```
-/usr/scripts/printVersions.sh
-JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-11-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
+~$ /usr/scripts/printVersions.sh 
+JAVA_HOME=/usr/lib/jvm/java-23-openjdk-amd64
+java: /usr/bin/java /usr/share/java /usr/lib/jvm/java-23-openjdk-amd64/bin/java /usr/share/man/man1/java.1.gz
 
-/usr/lib/jvm/java-11-openjdk-amd64/bin/java
-openjdk version "11.0.20.1" 2023-08-24
-OpenJDK Runtime Environment (build 11.0.20.1+1-post-Ubuntu-0ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.20.1+1-post-Ubuntu-0ubuntu122.04, mixed mode, sharing)
+/usr/lib/jvm/java-23-openjdk-amd64/bin/java
+openjdk version "23-ea" 2024-09-17
+OpenJDK Runtime Environment (build 23-ea+10-Ubuntu-1)
+OpenJDK 64-Bit Server VM (build 23-ea+10-Ubuntu-1, mixed mode, sharing)
 /usr/bin/mvn
-Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
-Maven home: /usr/apache-maven-3.9.5
-Java version: 11.0.20.1, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Apache Maven 3.9.6 (bc0240f3c744dd6b6ec2920b3cd08dcc295161ae)
+Maven home: /usr/apache-maven-3.9.6
+Java version: 23-ea, vendor: Private Build, runtime: /usr/lib/jvm/java-23-openjdk-amd64
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "6.2.0-32-generic", arch: "amd64", family: "unix"
+OS name: "linux", version: "6.5.0-21-generic", arch: "amd64", family: "unix"
 /usr/bin/python3
-Python 3.10.12
-/usr/local/bin/pip
-pip 23.2.1 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)
-/usr/local/bin/pip3
-pip 23.2.1 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)
+Python 3.12.2
+/usr/bin/pip
+pip 23.3 from /usr/lib/python3/dist-packages/pip (python 3.12)
+/usr/bin/pip3
+pip 23.3 from /usr/lib/python3/dist-packages/pip (python 3.12)
 /usr/bin/gradle
 
-Welcome to Gradle 8.4!
+Welcome to Gradle 7.6.4!
 
 Here are the highlights of this release:
- - Compiling and testing with Java 21
- - Faster Java compilation on Windows
- - Role focused dependency configurations creation
+ - Added support for Java 19.
+ - Introduced `--rerun` flag for individual task rerun.
+ - Improved dependency block for test suites to be strongly typed.
+ - Added a pluggable system for Java toolchains provisioning.
 
-For more details see https://docs.gradle.org/8.4/release-notes.html
+For more details see https://docs.gradle.org/7.6.4/release-notes.html
 
 
 ------------------------------------------------------------
-Gradle 8.4
+Gradle 7.6.4
 ------------------------------------------------------------
 
-Build time:   2023-10-04 20:52:13 UTC
-Revision:     e9251e572c9bd1d01e503a0dfdf43aedaeecdc3f
+Build time:   2024-02-05 14:29:18 UTC
+Revision:     e0bb3fc8cefad8432c9033cdfb12dc14facc9dd9
 
-Kotlin:       1.9.10
-Groovy:       3.0.17
+Kotlin:       1.7.10
+Groovy:       3.0.13
 Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
-JVM:          11.0.20.1 (Ubuntu 11.0.20.1+1-post-Ubuntu-0ubuntu122.04)
-OS:           Linux 6.2.0-32-generic amd64
+JVM:          23-ea (Private Build 23-ea+10-Ubuntu-1)
+OS:           Linux 6.5.0-21-generic amd64
 
 /usr/bin/npm
-10.1.0
+10.2.4
 /usr/bin/node
-v20.8.1
+v21.6.2
 DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=22.04
-DISTRIB_CODENAME=jammy
-DISTRIB_DESCRIPTION="Ubuntu 22.04.3 LTS"
-PRETTY_NAME="Ubuntu 22.04.3 LTS"
+DISTRIB_RELEASE=24.04
+DISTRIB_CODENAME=noble
+DISTRIB_DESCRIPTION="Ubuntu Noble Numbat (development branch)"
+PRETTY_NAME="Ubuntu Noble Numbat (development branch)"
 NAME="Ubuntu"
-VERSION_ID="22.04"
-VERSION="22.04.3 LTS (Jammy Jellyfish)"
-VERSION_CODENAME=jammy
+VERSION_ID="24.04"
+VERSION="24.04 (Noble Numbat)"
+VERSION_CODENAME=noble
 ID=ubuntu
 ID_LIKE=debian
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-UBUNTU_CODENAME=jammy
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
 ```

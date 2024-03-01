@@ -1,4 +1,5 @@
-FROM ${BASE_IMAGE:-ubuntu:22.04}
+FROM ${BASE_IMAGE:-ubuntu:24.04}
+#FROM ${BASE_IMAGE:-ubuntu:22.04}
 #FROM ${BASE_IMAGE:-ubuntu:18.04}
 
 MAINTAINER DrSnowbird "DrSnowbird@openkbs.org"
@@ -12,7 +13,7 @@ ENV USER_ID=${USER_ID:-1000}
 ENV GROUP_ID=${GROUP_ID:-1000}
 
 #ENV JAVA_VERSION=8
-ENV JAVA_VERSION=11
+ENV JAVA_VERSION=23
 
 ##############################################
 #### ---- Installation Directories   ---- ####
@@ -41,15 +42,15 @@ RUN ${SCRIPT_DIR}/setup_system_proxy.sh
 ARG LIB_DEV_LIST="apt-utils automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev"
 ARG LIB_BASIC_LIST="curl iputils-ping nmap net-tools build-essential software-properties-common apt-transport-https"
 ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim sudo"
-#ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
+# ARG LIB_COMMON_LIST="bzip2 libbz2-dev git wget unzip vim python3-pip python3-setuptools python3-dev python3-venv python3-numpy python3-scipy python3-pandas python3-matplotlib"
 ARG LIB_TOOL_LIST="graphviz libsqlite3-dev sqlite3 git xz-utils"
 
+#ARG PYTHON_VERSION=3.11
 RUN apt update -y && apt upgrade -y && \
     apt-get install -y ${LIB_DEV_LIST} && \
     apt-get install -y ${LIB_BASIC_LIST} && \
     apt-get install -y ${LIB_TOOL_LIST} && \
     apt-get install -y ${LIB_COMMON_LIST} && \
-    apt-get install python3.10 -y && \
     apt-get clean -y 
 
 RUN apt-get install python3-pip -y
@@ -104,7 +105,7 @@ RUN update-alternatives --get-selections | awk -v home="$(readlink -f "$JAVA_HOM
 ###################################
 #### ---- Install Maven 3 ---- ####
 ###################################
-ENV MAVEN_VERSION=${MAVEN_VERSION:-3.8.5}
+ENV MAVEN_VERSION=${MAVEN_VERSION:-3.9.6}
 ENV MAVEN_HOME=/usr/apache-maven-${MAVEN_VERSION}
 ENV MAVEN_PACKAGE=apache-maven-${MAVEN_VERSION}-bin.tar.gz
 ENV PATH=${PATH}:${MAVEN_HOME}/bin
@@ -126,8 +127,8 @@ RUN export MAVEN_PACKAGE_URL=$(curl -s https://maven.apache.org/download.cgi | g
 COPY requirements.txt ./
 
 # pip3 uninstall pkg-resources==0.0.0
-RUN python3 -m pip install --upgrade pip && \
-    python3 -m pip --no-cache-dir install --ignore-installed -U -r requirements.txt
+#RUN python3 -m pip install --upgrade pip && \
+#    python3 -m pip --no-cache-dir install --ignore-installed -U -r requirements.txt
 
 ## -- added Local PIP installation bin to PATH
 ENV PATH=${PATH}:${HOME}/.local/bin
@@ -145,7 +146,7 @@ RUN mvn --version && \
 # Ref: https://gradle.org/releases/
 
 ENV GRADLE_INSTALL_BASE=${GRADLE_INSTALL_BASE:-/opt/gradle}
-ENV GRADLE_VERSION=${GRADLE_VERSION:-7.4}
+ENV GRADLE_VERSION=${GRADLE_VERSION:-8.6}
 ENV GRADLE_PACKAGE=gradle-${GRADLE_VERSION}-bin.zip
 ENV GRADLE_PACKAGE_URL=https://services.gradle.org/distributions/${GRADLE_PACKAGE}
 ENV GRADLE_HOME=${GRADLE_INSTALL_BASE}/gradle-${GRADLE_VERSION}
@@ -186,7 +187,7 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y ca-certificates curl gnupg
 RUN sudo mkdir -p /etc/apt/keyrings
 RUN curl -fsSL -k https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-ARG NODE_MAJOR=20
+ARG NODE_MAJOR=21
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 RUN sudo apt-get update
 RUN sudo apt-get install nodejs -y
